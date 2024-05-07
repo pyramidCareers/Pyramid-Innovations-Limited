@@ -1,0 +1,231 @@
+<div
+    *ngIf="userTypeMentor"
+    class="px-3 py-4 xl:p-10 rounded shadow-md my-7 bg-white container"
+>
+    <div class="py-6">
+        <a [routerLink]="['dashboard']">
+            <div
+                class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                [ngClass]="{
+                    active: isActiveRelativeRoute('dashboard') == true
+                }"
+            >
+                <h1 class="flex items-center gap-2">
+                    <mat-icon>dashboard</mat-icon>Dashboard
+                </h1>
+            </div>
+        </a>
+
+        <a [routerLink]="['profile']">
+            <div
+                class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                [ngClass]="{
+                    active: isActiveRelativeRoute('profile') == true
+                }"
+            >
+                <h1 class="flex items-center gap-2">
+                    <mat-icon>person</mat-icon>Profile
+                </h1>
+            </div>
+        </a>
+
+        <a (click)="goToCalendar()">
+            <div
+                class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                [ngClass]="{
+                    active: isActiveRelativeRoute('calendar') == true
+                }"
+            >
+                <h1 class="flex items-center gap-2">
+                    <mat-icon>calendar_today</mat-icon>Calendar
+                </h1>
+            </div>
+        </a>
+
+        <a [routerLink]="['webinars']">
+            <div
+                class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                [ngClass]="{
+                    active: isActiveRelativeRoute('webinars') == true
+                }"
+            >
+                <h1 class="flex items-center gap-2">
+                    <mat-icon>class</mat-icon>Webinars
+                </h1>
+            </div>
+        </a>
+    </div>
+</div>
+
+<mat-drawer-container
+    *ngIf="userTypeJobseeker"
+    class="p-2 inner-container rounded shadow-md my-7 mx-3 bg-white"
+>
+    <mat-nav-list>
+        <mat-list-item
+            *ngFor="let i of navList; let id = index"
+            [routerLink]="i.route"
+            (click)="goTo(i)"
+            class="min-w-10"
+            routerLinkActive="active"
+            [ngClass]="{ active: i.selected }"
+        >
+            <button mat-button class="flex items-center gap-x-1.5">
+                <mat-icon>{{ i.icon }}</mat-icon>
+                <span>{{ i.name }}</span>
+            </button>
+        </mat-list-item>
+    </mat-nav-list>
+</mat-drawer-container>
+
+<div *ngIf="userTypeAdmin">
+    <div class="px-3 py-4 xl:p-10 rounded shadow-md my-7 bg-white container">
+        <div class="py-6">
+            <a (click)="gotoURL('dashboard')">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{
+                        active: isActiveRoute('/admin/dashboard') == true
+                    }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon>dashboard</mat-icon>Dashboard
+                    </h1>
+                </div>
+            </a>
+
+            <a (click)="gotoURL('employers')">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{
+                        active: isActiveRoute('/admin/employers') == true
+                    }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon>account_balance</mat-icon>Employers
+                    </h1>
+                </div>
+            </a>
+
+            <a (click)="gotoURL('jobs')">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{ active: isActiveRoute('/admin/jobs') == true }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon>business_center</mat-icon>Jobs
+                    </h1>
+                </div>
+            </a>
+
+            <a (click)="gotoURL('create-admin')">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{
+                        active: isActiveRoute('/admin/create-admin') == true
+                    }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon>supervisor_account</mat-icon>Admins
+                    </h1>
+                </div>
+            </a>
+
+            <a (click)="gotoURL('create-mentor')">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{
+                        active: isActiveRoute('/admin/create-mentor') == true
+                    }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon>supervisor_account</mat-icon>Mentors
+                    </h1>
+                </div>
+            </a>
+
+            <a (click)="gotoURL('jobseeker-reports')">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{
+                        active:
+                            isActiveRoute('/admin/jobseeker-reports') == true
+                    }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon>supervisor_account</mat-icon>Jobseekers
+                    </h1>
+                </div>
+            </a>
+
+            <a (click)="gotoURL('cv-bank')">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{
+                        active: isActiveRoute('/admin/cv-bank') == true
+                    }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon> insert_drive_file</mat-icon>CV Bank Requests
+                    </h1>
+                </div>
+            </a>
+
+            <!-- <a [routerLink]="['cv-template']">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{
+                        active: isActiveRoute('/admin/cv-template') == true
+                    }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon> insert_drive_file</mat-icon>Resume Templates
+                    </h1>
+                </div>
+            </a> -->
+
+            <a (click)="gotoURL('mentor-session')">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{
+                        active: isActiveRoute('/admin/mentor-session') == true
+                    }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon>calendar_today</mat-icon>Webinars
+                    </h1>
+                </div>
+            </a>
+
+            <a (click)="gotoURL('certified-exams')">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{
+                        active: isActiveRoute('/admin/certified-exams') == true
+                    }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon>insert_drive_file</mat-icon>Certification
+                        Exams
+                    </h1>
+                </div>
+            </a>
+
+            <a (click)="gotoURL('mentor-profile/update')">
+                <div
+                    class="py-3 pr-10 pl-4 cursor-pointer hover:bg-[#f5f2f1]"
+                    [ngClass]="{
+                        active:
+                            isActiveRoute('/admin/mentor-profile/update') ==
+                            true
+                    }"
+                >
+                    <h1 class="flex items-center gap-2">
+                        <mat-icon>verified_user</mat-icon>Profile Update
+                        Requests
+                    </h1>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

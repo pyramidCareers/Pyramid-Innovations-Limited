@@ -1,0 +1,45 @@
+<div>
+    <div *ngIf="this.courses.length > 0"  class="text-lg font-medium uppercase mb-3">JOB READY COURSES</div>
+
+    
+    <div
+        *ngFor="let course of courses; let i = index"
+        class="flex justify-between w-full gap-x-4  main-container md:pr-3"
+    >
+       
+        <div class="contents">
+            <h2
+                class="text-pyramid-blue py-1.5 cursor-pointer"
+                (click)="gotoCourse(course?.course_id)"
+            >
+                {{ course?.course_name }}
+            </h2>
+        </div>
+
+        <div *ngIf="editAccess" class="flex actions">
+            
+            <mat-icon class="cursor-pointer" (click)="deleteCourse(course.job_id, course.course_id)"
+                >delete</mat-icon
+            >
+        </div>
+
+        <!-- <div *ngIf="!editAccess && isJobseeker && isLoggedin" class="flex actions course-status  py-1.5 sm:mr-5">
+            <span 
+                *ngIf="  courseStatus[i] == '*'  "
+                class=" text-red-600 h-2  font-[500] my-auto text-sm  rounded dark:bg-red-900 dark:text-red-300">
+                    Incomplete
+            </span>
+
+
+            <span 
+                *ngIf=" courseStatus[i] == '1' "
+                class=" text-green-600 h-2  font-[500] my-auto text-sm  rounded dark:bg-green-900 dark:text-green-300">
+                    Complete
+            </span>
+
+
+
+
+        </div> -->
+    </div>
+</div>

@@ -1,0 +1,39 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+/* You can add global styles to this file, and also import other style files */
+
+// @import "../../node_modules/@syncfusion/ej2-base/styles/material.css";
+// @import "../../node_modules/@syncfusion/ej2-icons/styles/material.css";
+// @import "../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+// @import "../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+// @import "../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+// @import "../../node_modules/@syncfusion/ej2-lists/styles/material.css";
+// @import "../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+// @import "../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+// @import "../../node_modules/@syncfusion/ej2-richtexteditor/styles/material.css";
+// @import "../../node_modules/quill/dist/quill.bubble.css";
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    // border-radius: 0px !important;
+    padding: 24px;
+    border-radius: 0.25rem !important;
+   
+}
+
+.cdk-overlay-pane {
+    overflow-y: auto;
+    border-radius: 0.25rem !important;
+}
+
+#dummy {
+    background-color: rgb(255,255,255);
+}
+.fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }

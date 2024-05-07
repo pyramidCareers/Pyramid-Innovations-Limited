@@ -1,0 +1,67 @@
+<div class="p-5">
+    <div class="flex justify-between">
+        <h1 class="text-2xl mb-2"><b>Extra Curricular Activities</b></h1>
+        <button *ngIf="isOwnProfile"  mat-mini-fab class="mb-2">
+            <mat-icon (click)="addActivity()">add</mat-icon>
+        </button>
+    </div>
+    <div class="profile p-5 bg-white rounded shadow-md">
+        <div *ngFor="let act of extraCurriCularActivities" class="bg-gray-50 mb-7 mt-4 rounded shadow-md mx-auto">
+            <div  *ngIf="isOwnProfile" class="flex flex-row-reverse  p-3 gap-x-2">
+                <mat-icon (click)="removeExtraCurricular(act)" class="cursor-pointer">delete</mat-icon>
+                <mat-icon (click)="editExtraCurricularActivity(act)" class="cursor-pointer">edit</mat-icon>
+            </div>
+    
+            <div class=" p-3" [class.-mt-7]="isOwnProfile">
+                <h1 class="font-bold mt-2">
+                    Organization Name:
+                </h1>
+                <div class="text-gray-500 font-[500]" >
+                    {{ act.organization_name }}
+                </div>
+                  
+                  
+                <h1   *ngIf=" act.role &&  act.role !== 'undefined'  && act.role !== 'null' "      class="font-bold mt-5">
+                    Role
+                </h1>
+                <div   *ngIf=" act.role &&  act.role !== 'undefined'  && act.role !== 'null' "    class="text-gray-500 font-[500]">
+                    {{ act.role }}
+                </div>
+    
+
+                <h1   *ngIf="  act.category &&  act.category!== 'undefined'  && act.category!== 'null' "    class="font-bold mt-5">
+                     Categaory
+                </h1>
+                <div   *ngIf="  act.category &&  act.category!== 'undefined'  && act.category!== 'null' "   class="text-gray-500 font-[500]">
+                    {{ act.category }}
+                </div>
+
+
+                <h1 class="font-bold mt-5">
+                   Start Date:
+                </h1>
+                <div class="text-gray-500 font-[500]">
+                     {{ act.start_date |date}}
+                </div>
+
+                <h1 class="font-bold mt-5">
+                    End Date:
+                 </h1>
+                 <div class="text-gray-500 font-[500]">
+                      {{ act.end_date |date}}
+                 </div>
+
+
+                 <h1   *ngIf="  act.description &&  act.description !== 'undefined'  && act.description !== 'null'  "   class="font-bold mt-5">
+                     Description
+               </h1>
+               <div   *ngIf=" act.description &&  act.description !== 'undefined'  && act.description !== 'null' "  class="text-gray-500 font-[500]">
+                   {{ act.description}}
+               </div>
+
+            </div>
+        </div>
+    </div>
+    
+    
+</div>

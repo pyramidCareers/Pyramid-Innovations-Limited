@@ -1,0 +1,22 @@
+
+@media only screen and (min-width: 767px) and (max-width: 1023px) {
+        .course-status{
+            margin-right: 6px !important;
+        }
+}
+
+
+@media only screen and (min-width: 1024px) {
+    .main-container{
+        min-width: 22rem !important;
+    }
+
+    .contents{
+        width: 83% !important;
+    }
+
+    .actions{
+        width: 17% !important;
+    }
+
+}

@@ -1,0 +1,52 @@
+.top-message {
+    font-size: 20px;
+    font-weight: 500;
+    color: #a7a9aa !important;
+    font-style: italic;
+}
+
+.intro {
+    font-weight: 600;
+    font-size: 32px;
+    min-width: 100px;
+    color: #040708;
+}
+
+.direction {
+    font-size: 14px;
+    font-weight: 400;
+    color: #040708;
+}
+
+input:focus,
+input:hover {
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
+    border-bottom: 2px solid #86de8cc4 !important;
+}
+
+.highlighted {
+    color: #338f3a !important;
+}
+
+.continue-btn {
+    background-color: #338f3a !important;
+}
+.continue-btn:hover {
+    background-color: #256a2a !important;
+}
+
+::ng-deep .input-style::placeholder {
+    font-size: 2xl !important; /* Adjust the font size as needed */
+}
+
+@media only screen and (max-width: 599px) {
+    .input-style::placeholder {
+        font-size: 15px !important; /* Adjust the font size as needed */
+    }
+}
+
+body,
+.parent-container {
+    overflow-x: hidden !important;
+}

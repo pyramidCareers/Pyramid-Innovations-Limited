@@ -1,0 +1,52 @@
+<div *ngIf="isShowOpenJobs">
+    <div class="flex items-center mt-14 mb-6 infxs:gap-x-2 md:gap-x-5">
+        <div>
+            <i
+                class="material-icons px-3 py-3 bg-gray-200 rounded"
+                [ngStyle]="{ color: employer_data?.brandcolor }"
+                >work</i
+            >
+        </div>
+        <div>
+            <h1 class="text-3xl font-bold">Open Job Positions</h1>
+        </div>
+    </div>
+    <div>
+        <div
+            class="infxs:p-6 md:p-10 flex flex-wrap items-center justify-between bg-white rounded mb-4"
+            *ngFor="let jobs of openJobsData"
+        >
+            <div class="infxs:mb-5 md:mb-2">
+                <h1 class="font-bold text-xl">{{ jobs.title }}</h1>
+                <div>
+                    <div
+                        class="flex flex-wrap items-center text-sm infxs:mt-1 md:mt-2"
+                    >
+                        <i class="material-icons text-md infxs:mr-0 md:mr-1"
+                            >work</i
+                        >
+                        <button class="infxs:mr-2 md:mr-6">
+                            {{ jobs?.companyinfo?.org_name }}
+                        </button>
+                        <i class="material-icons text-md infxs:mr-0 md:mr-1"
+                            >place</i
+                        >
+                        <p>{{ jobs?.companyinfo?.org_address1 }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button
+                    class="px-3 py-2 rounded hover:text-white uppercase"
+                    [ngStyle]="{
+                        'background-color': employer_data?.brandcolor
+                    }"
+                    (click)="displayJobDetails(jobs?.id)"
+                >
+                    View Job
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

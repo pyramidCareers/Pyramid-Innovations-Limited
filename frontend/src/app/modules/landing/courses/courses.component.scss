@@ -1,0 +1,27 @@
+.parent-container {
+    width: 80% !important;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+}
+
+.card {
+    width: 300px;
+    margin: 10px;
+    border: 1px solid #c7c5c5;
+    border-radius: 5px;
+}
+
+.card-container {
+    display: flex;
+    column-gap: 18px !important;
+    row-gap: 18px !important;
+    flex-wrap: wrap;
+    justify-content: center !important;
+    min-height: 442px !important;
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+    .card {
+        width: 270px !important;
+    }
+}

@@ -1,0 +1,94 @@
+<div class=" flex-col items-center justify-center md:min-w-120">
+    <div class="text-center">
+        <h1 class="heading font-bold text-2xl"> Please Edit Certification Info </h1>
+    </div>
+
+    <div   class="flex flex-col text-center   mx-auto">
+        
+        <form   class="flex flex-col  mx-auto mt-3" style="width:90% !important;">
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Name*</h1>
+                <input type="text" 
+                        required
+                        [(ngModel)]="certificate_name"
+                        name="certificate_name"
+                        maxlength="48"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Organization*</h1>
+                <input type="text" 
+                        required
+                        [(ngModel)]="issuing_organization"
+                        name="issuing_organization"
+                        maxlength="48"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Issue Date*</h1>
+                <input type="date"
+                         required=""
+                        [(ngModel)]="issue_date"
+                        name="issue_date"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Expiration Date*</h1>
+                <input type="date"
+                        required
+                        [(ngModel)]="expiration_date"
+                        name="expiration_date"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Credential ID</h1>
+                <input type="text"
+                        
+                        [(ngModel)]="credential_id"
+                        name="credential_id"
+                        class="mt-2 mb-4 border  border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Credential URL</h1>
+                <input type="text"
+                        
+                        [(ngModel)]="credential_url"
+                        name="credential_url"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex justify-center items-center">
+                <button *ngIf="!loading && isValidated() == true"
+                    class="mt-5 w-28 mr-4 rounded sigin text-white font-semibold py-2 px-4 bg-pyramid-default-primary" 
+                    (click)="submit()"
+                 >
+                      SUBMIT
+                 </button>
+
+                 <button *ngIf="!loading && isValidated() ==false"
+                     class="mt-5 w-28 mr-4 rounded sigin text-white font-semibold py-2 px-4 bg-gray-300 cursor-not-allowed" 
+                 >
+                       SUBMIT
+                 </button>
+
+                 <div  *ngIf="loading"  class="flex justify-center items-center">
+                      <app-loader></app-loader>
+                 </div>
+
+            </div>
+            
+        </form>
+    </div>
+</div>
+

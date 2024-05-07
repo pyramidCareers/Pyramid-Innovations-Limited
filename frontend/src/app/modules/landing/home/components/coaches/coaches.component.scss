@@ -1,0 +1,50 @@
+.buttonColor {
+    color: white !important;
+}
+
+button.disabled {
+    background-color: #f1f1f1;
+    border-color: #c4c4c4;
+    color: #999999;
+    cursor: not-allowed;
+}
+
+@media only screen and (min-width: 600px) {
+    .pagination {
+        display: flex !important;
+        max-width: 100% !important;
+        flex-wrap: wrap !important;
+    }
+}
+
+@media only screen and (max-width: 759px) {
+    .text-sec {
+        width: 40% !important;
+    }
+}
+
+@media only screen and (min-width: 760px) {
+    .parent-container {
+        display: flex !important;
+    }
+    .main-container {
+        width: 100% !important;
+        margin-left: 2% !important;
+        margin-right: 2% !important;
+    }
+    .card-content {
+        width: 100% !important;
+        justify-content: left !important;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .parent-container {
+        display: flex !important;
+    }
+    .main-container {
+        width: 100% !important;
+        margin-left: 18% !important;
+        margin-right: 18% !important;
+    }
+}

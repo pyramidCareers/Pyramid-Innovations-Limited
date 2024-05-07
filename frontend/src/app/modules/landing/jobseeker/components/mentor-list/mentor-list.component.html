@@ -1,0 +1,151 @@
+<div class="parent-container mx-auto min-h-screen my-4">
+    <div class="sidebar">
+        <app-profile-sidebar class="sticky top-6"></app-profile-sidebar>
+    </div>
+
+    <div *ngIf="loading" class="absolute top-1/2 left-1/2">
+        <app-loader></app-loader>
+    </div>
+
+    <div class="main-container my-7 infxs:px-6 sm:px-2 md:px-0">
+        <div>
+            <h1 class="text-center mb-3 font-bold text-3xl">Career Coaches</h1>
+        </div>
+
+        <!-- Mentor Filter -->
+        <div
+            class="flex filterButtonSec flex-wrap gap-2 py-6 px-4 justify-center"
+        >
+            <div
+                class="flex items-center px-2 infxs:py-2 sm:py-0 bg-pyramid-white rounded border border-[#86de8cc4]"
+            >
+                <div class="mr-2">
+                    <svg viewBox="0 0 18 18" width="1em" height="1em">
+                        <path
+                            fill="#ADADAD"
+                            d="M7.885.19a7.695 7.695 0 016.124 12.355l3.623 3.86a.81.81 0 01-1.101 1.183l-.08-.075-3.556-3.787A7.695 7.695 0 117.885.19zm0 1.62a6.075 6.075 0 100 12.15 6.075 6.075 0 000-12.15z"
+                        ></path>
+                    </svg>
+                </div>
+                <input
+                    matInput
+                    type="text"
+                    placeholder="Career Coach Name, Specialty, Industry"
+                    class="text-lg fld min-h-8 md:min-w-100"
+                    [(ngModel)]="SeachTerm"
+                    (input)="is_Empty(SeachTerm)"
+                    name="keyword"
+                />
+            </div>
+
+            <div
+                class="sm:flex px-6 py-2 bg-[#338f3a] hover:bg-[#256a2a] rounded text-white cursor-pointer searchBtn"
+                (click)="SearchMentor()"
+            >
+                SEARCH
+            </div>
+        </div>
+        <div *ngIf="notFound" class="">
+            <h1 class="text-red-600 font-semibold text-4xl text-center">
+                No Mentor Found!
+            </h1>
+        </div>
+        <div *ngIf="!loading" class="">
+            <div *ngIf="!notFound">
+                <div
+                    class="bg-[#fff] hover:shadow-md mb-4"
+                    *ngFor="let mentor of mentors; let i = index"
+                >
+                    <div
+                        class="sm:flex justify-between items-center p-4 gap-x-56 xl:gap-x-90"
+                    >
+                        <div class="flex items-center justify-around">
+                            <div class="inline-flex items-center">
+                                <img
+                                    *ngIf="
+                                        mentor?.user?.profile_pic === null &&
+                                        mentor?.user?.gender === 'male'
+                                    "
+                                    [src]="male_avater"
+                                    class="h-16 w-16 rounded-full"
+                                />
+                                <img
+                                    *ngIf="
+                                        mentor?.user?.profile_pic === null &&
+                                        mentor?.user?.gender === 'female'
+                                    "
+                                    [src]="female_avater"
+                                    class="h-16 w-16 rounded-full"
+                                />
+                                <img
+                                    *ngIf="mentor?.user?.profile_pic != null"
+                                    src="{{ mentor?.user?.profile_pic }}"
+                                    class="h-16 w-16 rounded-full"
+                                />
+                            </div>
+                            <div class="ml-5 -mt-1">
+                                <h1 class="text-2xl font-medium">
+                                    {{ mentor?.user?.firstname }}
+                                    {{ mentor?.user?.lastname }}
+                                </h1>
+                                <p>{{ mentor?.profession }}</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex justify-end gap-x-2 infxs:mt-6 sm:mt-0"
+                        >
+                            <btn
+                                (click)="goto(mentor?.user?.id)"
+                                class="cursor-pointer px-6 py-3 text-md hover:bg-[#86de8cc4] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-pyramid-black text-[#338f3a] uppercase"
+                            >
+                                View Calendar
+                            </btn>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="md:max-w-4xl mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+            >
+                <div
+                    class="flex items-center justify-center my-4"
+                    *ngIf="!notFound"
+                >
+                    <button
+                        class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                        (click)="previousPage()"
+                        [disabled]="currentPage === 1"
+                    >
+                        Prev
+                    </button>
+                    <ng-container
+                        *ngFor="let page of getPageRange(); let i = index"
+                    >
+                        <button
+                            class="inline-flex items-center px-4 py-2 mr-3 text-white"
+                            [ngClass]="{
+                                'hover:bg-[#28243efc] hover:text-white':
+                                    currentPage !== page,
+                                'bg-[#28243efc] !text-white buttonColor':
+                                    currentPage === page,
+                                'rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#28243efc]': true
+                            }"
+                            (click)="goToPage(page)"
+                            [disabled]="currentPage === page"
+                        >
+                            {{ page }}
+                        </button>
+                    </ng-container>
+                    <button
+                        class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                        (click)="nextPage()"
+                        [disabled]="currentPage === totalPages"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

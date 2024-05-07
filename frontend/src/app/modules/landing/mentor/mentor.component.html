@@ -1,0 +1,14 @@
+<div *ngIf="isSideBarVisible" class="parent-container mx-auto min-h-screen my-8">
+        <div class="sidebar">
+            <app-mentor-sidebar class="sticky top-6"></app-mentor-sidebar>
+        </div>
+        <div class="infxs:px-4 sm:px-0 outlet content">
+            <router-outlet></router-outlet>
+        </div>
+</div>
+
+<div *ngIf="!isSideBarVisible" class="parent-container mx-auto min-h-screen my-8">
+        <div class="infxs:px-4 sm:px-0 outlet admin-panel">
+            <router-outlet></router-outlet>
+        </div>
+</div>

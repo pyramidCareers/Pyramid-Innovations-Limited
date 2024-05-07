@@ -1,0 +1,51 @@
+textarea {
+    resize: none;
+    overflow-y: hidden;
+    min-height: 30px;
+    max-height: 200px;
+    width: 80%;
+    height: 27px;
+}
+
+.chat-typing-section {
+    display: flex;
+    align-items: flex-end;
+}
+
+//phone view
+@media only screen and (max-width: 759px) {
+    .left-sidebar-chat-list {
+        height: 80vh !important;
+        overflow-y: scroll !important;
+    }
+
+    .chat-item {
+        width: 80px !important;
+        height: 10px !important;
+    }
+}
+
+//tablet & laptop view
+@media only screen and (min-width: 760px) {
+    .parent-container {
+        display: flex !important;
+    }
+    .left-sidebar-chat-list {
+        width: 25% !important;
+        height: 90vh !important;
+        overflow-y: scroll !important;
+    }
+
+    .main-container {
+        width: 75% !important;
+    }
+}
+
+//monitor view
+@media only screen and (min-width: 1920px) {
+    .left-sidebar-chat-list {
+        width: 22% !important;
+        height: 94vh !important;
+        overflow-y: scroll !important;
+    }
+}

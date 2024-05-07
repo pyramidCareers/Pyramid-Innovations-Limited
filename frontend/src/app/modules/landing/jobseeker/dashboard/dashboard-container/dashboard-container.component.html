@@ -1,0 +1,17 @@
+<div  class="parent-container mx-auto min-h-screen my-8">
+    <div class="sidebar">
+        <app-profile-sidebar class="sticky top-6"></app-profile-sidebar>
+    </div>
+
+    <div class="main-container py-7">
+       
+        <div *ngIf="loading" class="h-screen flex justify-center items-center">
+            <app-loader></app-loader>
+        </div>
+
+        <div *ngIf="!loading">
+            <app-statistics></app-statistics>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,137 @@
+<div *ngIf="!chatItem">
+    <div class="chat-section">
+        <div>
+            <div class="flex justify-center items-center">
+                <div class="text-3xl font-semibold mt-32 xl:mt-64">
+                    Welcome to the Pyramid!
+                </div>
+            </div>
+            <div class="flex justify-center items-center">
+                <div class="text-2xl font-normal text-gray-500">
+                    Search people to start a coversation..
+                </div>
+            </div>
+            <div class="flex justify-center items-center mt-8">
+                <img
+                    class="h-40 w-40"
+                    src="assets/images/chat-module/image-1.png"
+                />
+                <img
+                    class="h-40 w-40"
+                    src="assets/images/chat-module/image-2.png"
+                />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="chatItem">
+    <div class="overflow-hidden parent-div">
+        <div *ngIf="isSmallScreen()">
+            <mat-icon class="text-3xl ml-3 mt-2" (click)="goToMenu()"
+                >arrow_back</mat-icon
+            >
+        </div>
+
+        <div class="max-h-full">
+            <!-- Name Section  -->
+            <div class="p-4 shadow-md">
+                <div class="flex items-center space-x-2">
+                    <span class="text-black font-[600] text-2xl">{{
+                        chatItem.firstname
+                    }}</span>
+                    <span class="text-black font-[600] text-2xl">{{
+                        chatItem.lastname
+                    }}</span>
+                </div>
+            </div>
+
+            <!-- Message Section  -->
+            <div
+                class="chat-section overflow-y-scroll"
+                id="chatSection"
+                #chatSection
+            >
+                <div class="px-6 pb-4 pt-1 overflow-y-auto">
+                    <div class="flex flex-col">
+                        <div
+                            *ngFor="let chat of chatRecords"
+                            [ngClass]="
+                                chat.from_id == user_id
+                                    ? ['self-end', 'bg-[#dde9fd]', 'text-black']
+                                    : ['self-start', 'bg-white', 'text-black']
+                            "
+                            class="py-2 rounded-lg relative my-[20px]"
+                        >
+                            <div
+                                [ngClass]="
+                                    chat.from_id !== user_id
+                                        ? [
+                                              'flex',
+                                              'justify-start',
+                                              'w-full',
+                                              'text-gray-600',
+                                              'text-xs',
+                                              'text-right',
+                                              'xl:text-sm',
+                                              'absolute',
+                                              'top-[-18px]'
+                                          ]
+                                        : [
+                                              'flex',
+                                              'justify-end',
+                                              'w-full',
+                                              'text-gray-600',
+                                              'text-xs',
+                                              'text-right',
+                                              'xl:text-sm',
+                                              'absolute',
+                                              'top-[-18px]'
+                                          ]
+                                "
+                                style="white-space: nowrap"
+                            >
+                                <span *ngIf="chat.from_id !== user_id">
+                                    {{ chatItem.firstname }}
+                                    {{ chatItem.lastname }}
+                                </span>
+                                <span
+                                    class="text-gray-600 text-xs xl:text-sm ml-2"
+                                    style="white-space: nowrap"
+                                >
+                                    {{ formatTime(chat.created_at) }}</span
+                                >
+                            </div>
+                            <span class="px-4" [innerHTML]="chat.message">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button Section  -->
+            <div
+                class="px-6 infxs:mb-4 md:mb-2 chat-typing-section flex items-center justify-center"
+            >
+                <textarea
+                    [(ngModel)]="msgInut"
+                    id="chatInput"
+                    style="
+                        height: unset;
+                        height: 40px;
+                        padding: 8px;
+                        background-color: white;
+                    "
+                    placeholder="Type a new message"
+                    class="border rounded-sm border-gray-300 px-3 w-full"
+                    (keydown.enter)="sendMsg($event)"
+                ></textarea>
+                <span
+                    class="material-icons text-blue-500 ml-3 text-2xl mb-1 cursor-pointer"
+                    (click)="sendMsg()"
+                    >send</span
+                >
+            </div>
+        </div>
+    </div>
+</div>

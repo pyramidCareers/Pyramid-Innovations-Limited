@@ -1,0 +1,55 @@
+<div class="my-16">
+    <div class="flex items-center mb-6 infxs:gap-x-2 md:gap-x-5">
+        <div>
+            <i
+                class="material-icons px-3 py-3 bg-gray-200 rounded"
+                [ngStyle]="{ color: employer_data?.brandcolor }"
+                >local_cafe</i
+            >
+        </div>
+        <div class="flex">
+            <h1 class="text-3xl font-bold">Life at</h1>
+            <h1 class="text-3xl font-bold ml-1">
+                {{ employer_data?.employer?.org_name }}
+            </h1>
+        </div>
+    </div>
+    <div class="flex items-center justify-between">
+        <div>
+            <img
+                class="md:h-90 xl:h-120 sm:w-full md:w-140 xl:w-180 rounded"
+                [src]="employer_data?.galleryimage1"
+            />
+        </div>
+        <div class="infxs:hidden md:block">
+            <div class="flex gap-x-8 mb-8">
+                <div>
+                    <img
+                        class="h-40 xl:h-56 w-64 xl:w-80 rounded"
+                        [src]="employer_data?.galleryimage2"
+                    />
+                </div>
+                <div>
+                    <img
+                        class="h-40 xl:h-56 w-64 xl:w-80 rounded"
+                        [src]="employer_data?.galleryimage3"
+                    />
+                </div>
+            </div>
+            <div class="flex gap-x-8">
+                <div>
+                    <img
+                        class="h-40 xl:h-56 w-64 xl:w-80 rounded"
+                        [src]="employer_data?.galleryimage4"
+                    />
+                </div>
+                <div>
+                    <img
+                        class="h-40 xl:h-56 w-64 xl:w-80 rounded"
+                        [src]="employer_data?.galleryimage5"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

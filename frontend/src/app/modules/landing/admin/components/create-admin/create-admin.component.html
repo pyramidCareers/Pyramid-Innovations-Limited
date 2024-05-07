@@ -1,0 +1,83 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div *ngIf="!loading">
+    <div class="py-6 flex justify-center">
+        <button
+            (click)="createAdmin()"
+            class="uppercase px-6 py-2 xl:py-3 bg-[#363154fc] hover:bg-[#28243efc] border rounded text-white font-medium"
+        >
+            Create Admin
+        </button>
+    </div>
+
+    <div>
+        <div
+            class="bg-[#fff] hover:shadow-md mb-4"
+            *ngFor="let admin of admins; let i = index"
+        >
+            <div
+                class="sm:flex justify-between items-center p-4 gap-x-56 xl:gap-x-90"
+            >
+                <div class="flex items-start">
+                    <div class="ml-5 -mt-1">
+                        <h1 class="text-2xl font-medium">
+                            Name: {{ admin.firstname }} {{ admin.lastname }}
+                        </h1>
+
+                        <h3 class="py-2 text-sm">Phone: {{ admin.phone }}</h3>
+
+                        <h2 class="text-sm font-semibold">
+                            Email: {{ admin.email }}
+                        </h2>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-x-5 infxs:mt-3 sm:mt-0">
+                    <i
+                        title="Edit"
+                        class="fas fa-edit"
+                        style="cursor: pointer"
+                        (click)="goToEdit(admin.id, i)"
+                    ></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="md:max-w-4xl mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+    >
+        <div class="flex items-center justify-center my-4">
+            <button
+                class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                (click)="previousPage()"
+                [disabled]="currentPage === 1"
+            >
+                Prev
+            </button>
+            <ng-container *ngFor="let page of getPageRange(); let i = index">
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 text-white"
+                    [ngClass]="{
+                        'hover:bg-[#28243efc] hover:text-white':
+                            currentPage !== page,
+                        'bg-[#28243efc] !text-white buttonColor':
+                            currentPage === page,
+                        'rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#28243efc]': true
+                    }"
+                    (click)="goToPage(page)"
+                    [disabled]="currentPage === page"
+                >
+                    {{ page }}
+                </button>
+            </ng-container>
+            <button
+                class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                (click)="nextPage()"
+                [disabled]="currentPage === totalPages"
+            >
+                Next
+            </button>
+        </div>
+    </div>
+</div>

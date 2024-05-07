@@ -1,0 +1,66 @@
+<div class="p-5">
+    <div class="flex justify-between">
+        <h1 class="text-2xl mb-2"><b>Certifications</b></h1>
+        <button *ngIf="isOwnProfile"  mat-mini-fab class="mb-2">
+            <mat-icon (click)="addCertification()">add</mat-icon>
+        </button>
+    </div>
+    <div class="profile p-5 bg-white rounded shadow-md">
+        <div *ngFor="let cert of certificates" class="bg-gray-50 mb-7 mt-4 rounded shadow-md mx-auto">
+            <div  *ngIf="isOwnProfile" class="flex flex-row-reverse  p-3 gap-x-2">
+                <mat-icon (click)="removeCertification(cert)" class="cursor-pointer">delete</mat-icon>
+                <mat-icon (click)="editCertification(cert)" class="cursor-pointer">edit</mat-icon>
+            </div>
+    
+            <div class=" p-3" [class.-mt-7]="isOwnProfile">
+                <h1 class="font-bold mt-2">
+                    Name:
+                </h1>
+
+                <a  *ngIf="isUrlAvailable(cert) == true"   class="text-gray-500 font-[500] underline" [href]="fixUrl(cert.credential_url)" target="_blank">
+                    {{ cert.certificate_name }}
+                </a>
+                <div  *ngIf="isUrlAvailable(cert) == false" class="text-gray-500 font-[500]">
+                    {{ cert.certificate_name }}
+                </div>
+                  
+                  
+    
+
+                <h1 class="font-bold mt-5">
+                    Organization:
+                </h1>
+                <div class="text-gray-500 font-[500]">
+                    {{ cert.issuing_organization }}
+                </div>
+    
+
+                <h1 class="font-bold mt-5">
+                   Issue Date:
+                </h1>
+                <div class="text-gray-500 font-[500]">
+                    {{ cert.issue_date |date}}
+                </div>
+
+
+                <h1 class="font-bold mt-5">
+                    Expiration Date:
+                </h1>
+                <div class="text-gray-500 font-[500]">
+                     {{ cert.expiration_date |date}}
+                </div>
+
+
+                <h1   *ngIf=" cert.credential_id &&  cert.credential_id !== 'undefined'  && cert.credential_id !== 'null'  "         class="font-bold mt-5">
+                    Credential ID:
+                </h1>
+                <div  *ngIf=" cert.credential_id && cert.credential_id !== 'undefined'  && cert.credential_id !== 'null' "    class="text-gray-500 font-[500]">
+                     {{ cert.credential_id}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    
+</div>

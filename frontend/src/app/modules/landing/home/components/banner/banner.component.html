@@ -1,0 +1,98 @@
+<div class="bg-[#d7fafc] mx-auto">
+    <div class="flex justify-between">
+        <div class="infxs:pt-4 sm:pt-14 md:pt-26 infxs:ml-8 md:ml-18 xl:ml-64">
+            <h1 class="infxs:text-5xl sm:text-8xl font-bold">Find work</h1>
+            <div
+                class="flex flex-row flex-wrap md:gap-x-4 infxs:text-6xl sm:text-8xl font-bold -mt-4"
+            >
+                <h2>
+                    that's
+                    <span class="text-[#3e5aab] italic infxs:-mt-4 sm:-mt-0"
+                        >worth it.</span
+                    ></h2>
+            </div>
+            <div>
+                <p
+                    class="infxs:text-lg sm:text-xl font-medium infxs:pr-4 sm:pr-8 md:pr-0 md:w-128 md:-mt-2 infxs:mt-2"
+                >
+                    Make a career match where the people, perks and values align
+                    with your needs.
+                </p>
+            </div>
+            <!-- Below div render start from medium screen view -->
+            <div
+                class="flex infxs:hidden md:flex sm:py-12 md:py-0 sm:pr-12 md:pr-0"
+            >
+                <div
+                    class="search sm:mt-2 md:mt-6 w-128 h-15 relative rounded-full border-2 bg-pyramid-white flex"
+                >
+                    <div
+                        class="search-icon ml-1 mt-1 mb-1 px-[17px] py-4 bg-[#1e293b] rounded-full"
+                    >
+                        <svg viewBox="0 0 18 18" width="1em" height="1em">
+                            <path
+                                fill="#ADADAD"
+                                d="M7.885.19a7.695 7.695 0 016.124 12.355l3.623 3.86a.81.81 0 01-1.101 1.183l-.08-.075-3.556-3.787A7.695 7.695 0 117.885.19zm0 1.62a6.075 6.075 0 100 12.15 6.075 6.075 0 000-12.15z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="Search jobs"
+                        class="text-md py-4 px-2 w-128"
+                        (keyup.enter)="searchJobs($event.target.value)"
+                    />
+                </div>
+
+                <!-- <div
+                    class="star-icon mt-7 md:ml-[10px] xl:ml-[237px] flex z-30 infxs:hidden md:flex"
+                >
+                    <img src="assets/images/home/star-icon.png" class="!h-14" />
+                    <img src="assets/images/home/star-icon.png" class="!h-14" />
+                    <img src="assets/images/home/star-icon.png" class="!h-14" />
+                </div> -->
+            </div>
+        </div>
+        <!-- Below div render start from tab screen view -->
+        <div class="infxs:hidden sm:block">
+            <img
+                src="assets/images/home/hero-section-image.webp"
+                style="border-bottom-left-radius: 200px"
+                class="sm:w-[600px] sm:h-150 md:w-[700px] xl:w-[900px] xl:h-180"
+            />
+        </div>
+        <!-- Below div only render in mobile view -->
+        <div class="infxs:block sm:hidden">
+            <img
+                src="assets/images/home/hero-section-image.webp"
+                style="border-bottom-left-radius: 90px"
+                class="w-[480px] h-[170px]"
+            />
+        </div>
+    </div>
+    <!-- Below div only render in mobile & tab view -->
+    <div class="flex infxs:block md:hidden px-6 infxs:pb-8 sm:pb-20">
+        <div
+            class="search mt-6 sm:w-120 h-15 relative rounded-full border-2 bg-pyramid-white flex"
+        >
+            <div
+                class="search-icon ml-1 mt-1 mb-1 px-[17px] py-4 bg-[#1e293b] rounded-full"
+            >
+                <svg viewBox="0 0 18 18" width="1em" height="1em">
+                    <path
+                        fill="#ADADAD"
+                        d="M7.885.19a7.695 7.695 0 016.124 12.355l3.623 3.86a.81.81 0 01-1.101 1.183l-.08-.075-3.556-3.787A7.695 7.695 0 117.885.19zm0 1.62a6.075 6.075 0 100 12.15 6.075 6.075 0 000-12.15z"
+                    ></path>
+                </svg>
+            </div>
+            <input
+                matInput
+                type="text"
+                placeholder="Search jobs"
+                class="text-md py-4 px-2 w-128"
+                (keyup.enter)="searchJobs($event.target.value)"
+            />
+        </div>
+    </div>
+</div>

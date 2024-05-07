@@ -1,0 +1,113 @@
+.alternative {
+    background-color: #b5eadb !important;
+    margin-top: 2rem !important;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rich-text-editor {
+    width: 36rem !important;
+}
+
+:host ::ng-deep .e-rte-content {
+    height: 250px !important;
+}
+
+.placeholder-italic::placeholder {
+    font-style: italic;
+}
+
+.placeholder-italic:focus {
+    border: 2px solid #6ec9de !important;
+}
+
+input {
+    height: 46px !important;
+}
+
+.submit-btn {
+    height: 44px !important;
+}
+
+.alt-option {
+    font-weight: 500 !important;
+    //padding: 12px 18px !important;
+    color: #333 !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+}
+
+.alert-section {
+    width: 250px !important;
+    text-align: center !important;
+    color: rgb(236, 92, 92) !important;
+    font-size: 14px !important;
+    border: 1px solid rgb(228, 82, 82) !important;
+    position: relative;
+    padding-left: 18px !important;
+}
+
+.cross-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(247, 11, 11);
+}
+
+input {
+    height: 46px !important;
+    border: 1px solid rgb(74, 72, 72) !important;
+}
+
+.input-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    margin-bottom: 24px !important;
+}
+
+.label-cls {
+    font-weight: bold !important;
+    margin-bottom: 10px !important;
+}
+
+.text-red {
+    color: red !important;
+}
+
+.btn-disabled {
+    background-color: #cceff6 !important;
+}
+
+:host ::ng-deep .ck-content {
+    height: 200px !important;
+}
+@media only screen and (min-width: 600px) {
+    .ck {
+        width: 100% !important;
+    }
+}
+
+.dropdown {
+    width: 225px !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.dropdown-item {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 5px 4px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.dropdown-item:hover {
+    background-color: #363154fc;
+    color: white !important;
+}

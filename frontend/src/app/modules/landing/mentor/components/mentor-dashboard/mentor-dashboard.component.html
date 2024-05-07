@@ -1,0 +1,102 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div
+    *ngIf="!loading"
+    class="mx-auto pb-4 infxs:px-2 sm:px-11 md:px-0 parent-container mt-7"
+>
+    <div class="bg-[#fff]">
+        <div class="p-4">
+            <div class="card-container flex mt-5 items-center justify-center">
+                <div
+                    class="flex flex-wrap items-center justify-center gap-6 mx-auto"
+                >
+                    <div
+                        class="flex flex-col justify-center card p-6 text-center items-center infxs:min-w-60 sm:min-w-80 md:min-w-50 xl:min-w-[332px] xl:min-h-44"
+                    >
+                        <h1 class="font-[500] text-gray-600">Past Webinars</h1>
+                        <h1 class="font-bold text-gray-600 text-2xl my-1">
+                            {{ resData?.totalPastEvents }}
+                        </h1>
+                    </div>
+
+                    <div
+                        class="flex flex-col justify-center card p-6 text-center items-center infxs:min-w-60 sm:min-w-80 md:min-w-50 xl:min-w-[332px] xl:min-h-44"
+                    >
+                        <h1 class="font-[500] text-gray-600">
+                            Upcoming Webinars
+                        </h1>
+                        <h1 class="font-bold text-gray-600 text-2xl my-1">
+                            {{ resData?.totalFutureEvents }}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center items-center mt-10">
+            <div style="width: 90%">
+                <div>
+                    <h1 class="text-2xl font-[700] text-center mb-4">
+                        Upcoming Webinars
+                    </h1>
+                </div>
+
+                <div
+                    class="mx-auto w-full pb-4 infxs:px-2"
+                    *ngFor="let webinar of upcomingWebinars"
+                >
+                    <div class="bg-gray-100 hover:shadow-md job-card">
+                        <div
+                            class="sm:flex justify-between items-center p-4 px-auto"
+                        >
+                            <div
+                                class="flex items-center justify-between cursor-pointer"
+                                (click)="goToWebinar(webinar.id)"
+                            >
+                                <div class="ml-5 -mt-1">
+                                    <h1 class="text-3xl font-medium mb-3">
+                                        {{ webinar?.title }}
+                                    </h1>
+                                    <span class="font-[700]"
+                                        >Date:
+                                        <span class="font-normal">{{
+                                            webinar?.date
+                                        }}</span> </span
+                                    ><br />
+                                    <span class="font-[700]">
+                                        Time:
+                                        <span class="font-normal">
+                                            {{
+                                                convertTo12HourFormat(
+                                                    webinar?.start_time
+                                                )
+                                            }}
+                                            -
+                                            {{
+                                                convertTo12HourFormat(
+                                                    webinar?.end_time
+                                                )
+                                            }}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex justify-end gap-x-2 infxs:mt-6 sm:mt-0"
+                            >
+                                <div
+                                    (click)="goToWebinar(webinar.id)"
+                                    class="cursor-pointer view-btn px-6 py-3 text-md hover:bg-pyramid-default-primary rounded border border-pyramid-default-primary hover:border-pyramid-default-primary hover:text-pyramid-white text-pyramid-default-primary uppercase"
+                                >
+                                    View Webinar
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

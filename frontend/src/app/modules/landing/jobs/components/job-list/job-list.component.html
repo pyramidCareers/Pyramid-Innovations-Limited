@@ -1,0 +1,496 @@
+<div class="min-h-screen parent-container">
+    <div class="md:flex md:gap-x-6 md:px-12 justify-center main-container">
+        <div class="py-6 sidebar px-2 sm:px-0">
+            <mat-accordion *ngIf="isMobileView() == true">
+                <mat-expansion-panel expanded="false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="ml-3">Job Type</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-radio-group
+                        [(ngModel)]="filteredJob.job_type"
+                        name="job_type"
+                        class="radio-group"
+                        (change)="filterJobs()"
+                    >
+                        <mat-radio-button
+                            *ngFor="let type of jobTypes"
+                            [value]="type"
+                            [value]="type"
+                            (click)="
+                                toggleSelection(type, 'filteredJob.job_type')
+                            "
+                        >
+                            {{ type }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <mat-accordion *ngIf="isMobileView() == false">
+                <mat-expansion-panel expanded="true" class="job-type-accr">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="ml-3">Job Type</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-radio-group
+                        [(ngModel)]="filteredJob.job_type"
+                        name="job_type"
+                        class="radio-group"
+                        (change)="filterJobs()"
+                    >
+                        <mat-radio-button
+                            *ngFor="let type of jobTypes"
+                            [value]="type"
+                            [value]="type"
+                            (click)="
+                                toggleSelection(type, 'filteredJob.job_type')
+                            "
+                        >
+                            {{ type }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <div class="mt-4" *ngIf="isMobileView() == true">
+                <mat-accordion>
+                    <mat-expansion-panel expanded="false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="ml-3"
+                                >Industry</mat-panel-title
+                            >
+                        </mat-expansion-panel-header>
+                        <mat-radio-group
+                            [(ngModel)]="filteredJob.industry"
+                            name="industry"
+                            class="radio-group"
+                            (change)="filterJobs()"
+                        >
+                            <mat-radio-button
+                                *ngFor="let industry of industries"
+                                [value]="industry"
+                                (click)="
+                                    toggleSelection(
+                                        industry,
+                                        'filteredJob.industry'
+                                    )
+                                "
+                            >
+                                {{ industry }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+            <div class="mt-4" *ngIf="isMobileView() == false">
+                <mat-accordion>
+                    <mat-expansion-panel expanded="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="ml-3"
+                                >Industry</mat-panel-title
+                            >
+                        </mat-expansion-panel-header>
+                        <mat-radio-group
+                            [(ngModel)]="filteredJob.industry"
+                            name="industry"
+                            class="radio-group"
+                            (change)="filterJobs()"
+                        >
+                            <mat-radio-button
+                                *ngFor="let industry of industries"
+                                [value]="industry"
+                                (click)="
+                                    toggleSelection(
+                                        industry,
+                                        'filteredJob.industry'
+                                    )
+                                "
+                            >
+                                {{ industry }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+            <div class="mt-4" *ngIf="isMobileView() == true">
+                <mat-accordion>
+                    <mat-expansion-panel expanded="false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="ml-3"
+                                >Posted At</mat-panel-title
+                            >
+                        </mat-expansion-panel-header>
+                        <mat-radio-group
+                            [(ngModel)]="jobPostingDateRange"
+                            name="jobPostingDateRange"
+                            class="radio-group"
+                            (change)="filterJobs()"
+                        >
+                            <mat-radio-button
+                                *ngFor="let timeRange of datesPosted"
+                                [value]="timeRange"
+                                (click)="
+                                    toggleSelection(
+                                        timeRange,
+                                        'jobPostingDateRange'
+                                    )
+                                "
+                            >
+                                {{ timeRange }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+            <div class="mt-4" *ngIf="isMobileView() == false">
+                <mat-accordion>
+                    <mat-expansion-panel expanded="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="ml-3"
+                                >Posted At</mat-panel-title
+                            >
+                        </mat-expansion-panel-header>
+                        <mat-radio-group
+                            [(ngModel)]="jobPostingDateRange"
+                            name="jobPostingDateRange"
+                            class="radio-group"
+                            (change)="filterJobs()"
+                        >
+                            <mat-radio-button
+                                *ngFor="let timeRange of datesPosted"
+                                [value]="timeRange"
+                                (click)="
+                                    toggleSelection(
+                                        timeRange,
+                                        'jobPostingDateRange'
+                                    )
+                                "
+                            >
+                                {{ timeRange }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+            <div class="mt-4" *ngIf="isMobileView() == true">
+                <mat-accordion>
+                    <mat-expansion-panel expanded="false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="ml-3"
+                                >Experience Level</mat-panel-title
+                            >
+                        </mat-expansion-panel-header>
+                        <mat-radio-group
+                            [(ngModel)]="filteredJob.experience_level"
+                            name="experience_level"
+                            class="radio-group"
+                            (change)="filterJobs()"
+                        >
+                            <mat-radio-button
+                                *ngFor="let level of experienceLevels"
+                                [value]="level"
+                                (click)="
+                                    toggleSelection(
+                                        level,
+                                        'filteredJob.experience_level'
+                                    )
+                                "
+                            >
+                                {{ level }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+            <div class="mt-4" *ngIf="isMobileView() == false">
+                <mat-accordion>
+                    <mat-expansion-panel expanded="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="ml-3"
+                                >Experience Level</mat-panel-title
+                            >
+                        </mat-expansion-panel-header>
+                        <mat-radio-group
+                            [(ngModel)]="filteredJob.experience_level"
+                            name="experience_level"
+                            class="radio-group"
+                            (change)="filterJobs()"
+                        >
+                            <mat-radio-button
+                                *ngFor="let level of experienceLevels"
+                                [value]="level"
+                                (click)="
+                                    toggleSelection(
+                                        level,
+                                        'filteredJob.experience_level'
+                                    )
+                                "
+                            >
+                                {{ level }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+            <div class="mt-4" *ngIf="isMobileView() == true">
+                <mat-accordion>
+                    <mat-expansion-panel expanded="false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="ml-3"
+                                >Experience Limit (year)</mat-panel-title
+                            >
+                        </mat-expansion-panel-header>
+                        <ngx-slider
+                            [(value)]="exp_lower_limit"
+                            [(highValue)]="exp_upper_limit"
+                            [options]="options"
+                            (userChangeEnd)="filterJobs()"
+                        ></ngx-slider>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+            <div class="mt-4" *ngIf="isMobileView() == false">
+                <mat-accordion>
+                    <mat-expansion-panel expanded="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="ml-3"
+                                >Experience Limit (year)</mat-panel-title
+                            >
+                        </mat-expansion-panel-header>
+                        <ngx-slider
+                            [(value)]="exp_lower_limit"
+                            [(highValue)]="exp_upper_limit"
+                            [options]="options"
+                            (userChangeEnd)="filterJobs()"
+                        ></ngx-slider>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+
+        <div
+            *ngIf="loading"
+            class="h-screen flex justify-center items-center jobs-container"
+        >
+            <app-loader></app-loader>
+        </div>
+
+        <div *ngIf="!loading" class="jobs-container">
+            <div
+                class="flex filterButtonSec flex-wrap gap-2 py-6 px-4 justify-center"
+            >
+                <div
+                    class="flex items-center px-2 infxs:py-2 sm:py-0 bg-pyramid-white rounded border border-[#86de8cc4]"
+                >
+                    <div class="mr-2">
+                        <svg viewBox="0 0 18 18" width="1em" height="1em">
+                            <path
+                                fill="#ADADAD"
+                                d="M7.885.19a7.695 7.695 0 016.124 12.355l3.623 3.86a.81.81 0 01-1.101 1.183l-.08-.075-3.556-3.787A7.695 7.695 0 117.885.19zm0 1.62a6.075 6.075 0 100 12.15 6.075 6.075 0 000-12.15z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="Job title"
+                        class="text-lg fld min-h-8"
+                        [(ngModel)]="filteredJob.title"
+                        name="title"
+                    />
+                </div>
+
+                <div
+                    class="flex items-center px-2 infxs:py-2 sm:py-0 bg-pyramid-white rounded border border-[#86de8cc4]"
+                >
+                    <div class="mr-2">
+                        <svg
+                            class="SearchDropdown_inputIcon__ImeFH SearchInput_inputIcon__NNp1D"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 9 13"
+                            aria-hidden="true"
+                            height="1em"
+                            width="1em"
+                            role=""
+                            aria-labelledby="tm-icon-IconCompany"
+                        >
+                            <g
+                                fill="none"
+                                fill-rule="evenodd"
+                                transform="translate(-2)"
+                            >
+                                <path
+                                    fill="#666"
+                                    d="M2.2.733H11v11.734H7.333v-1.834H5.867v1.834H2.2V.733zm7.843 6.318v2.257H8.13V7.05h1.913zm-4.973 0v2.257H3.157V7.05H5.07zm2.487 0v2.257H5.643V7.05h1.914zM5.07 4.344V6.6H3.157V4.344H5.07zm2.487 0V6.6H5.643V4.344h1.914zm2.486 0V6.6H8.13V4.344h1.913zM5.07 1.636v2.256H3.157V1.636H5.07zm2.487 0v2.256H5.643V1.636h1.914zm2.486 0v2.256H8.13V1.636h1.913z"
+                                ></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="Companies"
+                        class="text-lg fld"
+                        [(ngModel)]="filteredJob.org_name"
+                        name="org_name"
+                    />
+                </div>
+
+                <div
+                    class="flex items-center px-2 infxs:py-2 sm:py-0 bg-pyramid-white rounded border border-[#86de8cc4]"
+                >
+                    <div class="mr-2">
+                        <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 12 16"
+                            class="SearchDropdown_inputIcon__ImeFH SearchInput_inputIcon__NNp1D"
+                        >
+                            <path
+                                d="M6 16L1.2 9.538c-1.792-2.226-1.554-5.932.557-7.9 2.344-2.184 6.143-2.184 8.486 0 2.11 1.968 2.348 5.674.557 7.9L6 16zM8 5.5a2 2 0 10-4 0 2 2 0 004 0z"
+                                fill="#000"
+                                fill-rule="evenodd"
+                            ></path>
+                        </svg>
+                    </div>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="Location"
+                        class="text-lg fld"
+                        [(ngModel)]="filteredJob.location"
+                        name="location"
+                    />
+                </div>
+
+                <div
+                    class="sm:flex px-6 py-2 bg-[#338f3a] hover:bg-[#256a2a] rounded text-white cursor-pointer searchBtn"
+                    (click)="filterJobs()"
+                >
+                    SEARCH
+                </div>
+            </div>
+
+            <div
+                *ngFor="let job of allJobs"
+                class="mx-auto pb-4 infxs:px-2 sm:px-11 md:px-0"
+            >
+                <div class="bg-[#fff] hover:shadow-md job-card">
+                    <div class="sm:flex justify-between items-center p-4">
+                        <div
+                            (click)="displayJobDetails(job.id)"
+                            class="flex items-center infxs:justify-start justify-between cursor-pointer"
+                        >
+                            <div
+                                class="border flex items-center justify-center border-[#338f3a] rounded min-h-20 min-w-20 h-20 w-20"
+                            >
+                                <img
+                                    [src]="job?.companyinfo?.logo"
+                                    class="h-auto max-w-full object-contain"
+                                />
+                            </div>
+
+                            <div class="ml-5 -mt-1 job-info-sec">
+                                <h1 class="text-2xl font-medium">
+                                    {{ job.title }}
+                                </h1>
+                                <h3
+                                    *ngIf="job.location !== null"
+                                    class="py-2 text-sm"
+                                >
+                                    At {{ job?.companyinfo?.org_name }} -
+                                    {{ job.location }}
+                                </h3>
+                                <h2 class="text-sm">
+                                    Posted on {{ job.created_at | date }}
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex justify-end gap-x-2 infxs:mt-6 sm:mt-0"
+                        >
+                            <div
+                                *ngIf="!isLogin && !job.company_site_link"
+                                (click)="applyNow(job.id)"
+                                class="cursor-pointer px-6 py-3 text-md hover:bg-[#86de8cc4] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-pyramid-black text-[#338f3a] uppercase"
+                            >
+                                Quick Apply
+                            </div>
+                            <div
+                                *ngIf="!isLogin && job.company_site_link"
+                                (click)="applyOnCompany(job.company_site_link)"
+                                class="cursor-pointer px-6 py-3 text-md hover:bg-[#86de8cc4] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-pyramid-black text-[#338f3a] uppercase"
+                            >
+                                Apply On Company Site
+                            </div>
+                            <div
+                                (click)="displayJobDetails(job.id)"
+                                class="view-job-btn cursor-pointer px-6 py-3 text-md hover:bg-[#86de8cc4] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-pyramid-black text-[#338f3a] uppercase"
+                            >
+                                View Job
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="md:max-w-4xl mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+                *ngIf="allJobs.length > 0"
+            >
+                <div class="flex items-center justify-center my-4">
+                    <button
+                        class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-white text-[#338f3a]"
+                        (click)="previousPage()"
+                        [disabled]="currentPage === 1"
+                    >
+                        Prev
+                    </button>
+                    <div *ngIf="!isMobileView()">
+                        <ng-container
+                            *ngFor="let page of getPageRange(); let i = index"
+                        >
+                            <button
+                                class="inline-flex items-center px-4 py-2 mr-3 rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                                [ngClass]="{
+                                    'hover:bg-[#338f3a] hover:text-white':
+                                        currentPage !== page,
+                                    'bg-[#338f3a] !text-white buttonColor':
+                                        currentPage === page
+                                }"
+                                (click)="goToPage(page)"
+                                [disabled]="currentPage === page"
+                            >
+                                {{ page }}
+                            </button>
+                        </ng-container>
+                    </div>
+
+                    <button
+                        class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                        (click)="nextPage()"
+                        [disabled]="currentPage === totalPages"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
+
+            <div
+                *ngIf="!loading && allJobs.length === 0"
+                class="flex justify-center items-center"
+            >
+                <h1 class="font-bold text-4xl text-red-600 mt-8 mb-16">
+                    No Job Found
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>

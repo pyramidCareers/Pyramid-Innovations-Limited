@@ -1,0 +1,250 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+
+<div *ngIf="!loading">
+    <div class="py-6 flex justify-center">
+        <h1 class="text-center font-bold text-2xl md:text-3xl">
+            JOBSEEKER REPORTS
+        </h1>
+    </div>
+    <!-- filter card -->
+    <div class="bg-white shadow-md pt-5 pb-2 px-4 mb-4">
+        <div class="flex flex-wrap -mx-2 nes-hub">
+            <div class="w-full sm:w-1/2 md:w-1/4 px-2 mb-4">
+                <input
+                    type="text"
+                    placeholder="Institution"
+                    class="block pla w-full rounded py-2 px-3 border border-black"
+                    [(ngModel)]="jobseekerFilter.institution"
+                    name="institution"
+                />
+            </div>
+
+            <div class="w-full sm:w-1/2 md:w-1/4 px-2 mb-4">
+                <input
+                    type="text"
+                    placeholder="Specialty"
+                    class="block w-full rounded py-2 px-3 border border-black"
+                    [(ngModel)]="jobseekerFilter.speciality"
+                    name="specialty"
+                />
+            </div>
+
+            <div class="w-full sm:w-1/2 md:w-1/4 px-2 mb-4">
+                <input
+                    type="text"
+                    placeholder="Field of Study"
+                    class="block w-full rounded py-2 px-3 border border-black"
+                    [(ngModel)]="jobseekerFilter.field_of_study"
+                    name="field_of_study"
+                />
+            </div>
+
+            <div class="w-full sm:w-1/2 md:w-1/4 px-2 mb-4">
+                <input
+                    type="text"
+                    placeholder="Certificate Name"
+                    class="block w-full rounded py-2 px-3 border border-black"
+                    [(ngModel)]="jobseekerFilter.certificate_name"
+                    name="certificate_name"
+                />
+            </div>
+
+            <div class="w-full sm:w-1/2 md:w-1/4 px-2 mb-4 g1 min-w-1/4">
+                <div class="w-full flex">
+                    <div class="w-full border border-black rounded px-1">
+                        <mat-radio-group
+                            aria-labelledby="example-radio-group-label"
+                            class="flex"
+                            [(ngModel)]="jobseekerFilter.gender"
+                            (click)="changeGenderState()"
+                        >
+                            <mat-radio-button class="g3" value="male">
+                                Male
+                            </mat-radio-button>
+                            <mat-radio-button class="g2" value="female">
+                                Female
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/4 px-2 mb-4">
+                <input
+                    type="text"
+                    placeholder="Experience"
+                    class="block w-full rounded py-2 px-3 border border-black"
+                    [(ngModel)]="jobseekerFilter.years_of_experience"
+                    name="experience"
+                />
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/4 px-2 mb-4">
+                <input
+                    type="text"
+                    placeholder="Issue Organization"
+                    class="block w-full rounded py-2 px-3 border border-black"
+                    [(ngModel)]="jobseekerFilter.issuing_organization"
+                    name="issuing_organization"
+                />
+            </div>
+        </div>
+
+        <div class="text-center mt-1 mb-2.5">
+            <button
+                class="px-3 py-1 bg-[#338f3a] hover:bg-[#256a2a] rounded text-white cursor-pointer"
+                (click)="filterCandidates()"
+            >
+                Search
+            </button>
+
+            <button
+                *ngIf="isFiltered"
+                class="px-3 py-1 bg-[#338f3a] hover:bg-[#256a2a] rounded text-white cursor-pointer mx-2"
+                (click)="clearFilter()"
+            >
+                Clear Filter
+            </button>
+        </div>
+    </div>
+    <div *ngIf="isData" class="text-center text-red-500">
+        <p class="font-bold text-3xl">No JobSeeker data Found!</p>
+    </div>
+</div>
+
+<div *ngIf="!loading">
+    <button
+        *ngIf="!isData"
+        (click)="exportToXLSX()"
+        class="mt-5 bg-[#338f3a] hover:bg-[#256a2a] text-white font-bold py-2 px-4 rounded"
+    >
+        Export as XLSX
+    </button>
+    <div class="hover:shadow-md mb-4" *ngIf="!isData">
+        <div class="overflow-x-auto">
+            <table class="w-full table-auto mt-5">
+                <thead>
+                    <tr class="bg-gray-300">
+                        <th class="px-2 py-2">Name</th>
+                        <th class="px-2 py-2">Email</th>
+                        <th class="px-2 py-2">Phone</th>
+                        <!-- <th class=" px-2 py-2">Notice Period</th> -->
+                        <th class="px-2 py-2">Profession</th>
+                        <th class="px-2 py-2">Industry</th>
+                        <th class="px-2 py-2">Speciality</th>
+                        <!-- <th class=" px-2 py-2">Study Field</th> -->
+                        <th *ngIf="!isFiltered" class="px-2 py-2">Resume</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="!isFiltered">
+                    <!-- Replace this static data with dynamic data from your backend or state management -->
+                    <tr
+                        *ngFor="let item of jobseekers; index as i"
+                        [class.odd:bg-gray-100]="i % 2 === 0"
+                    >
+                        <td class="border px-2 py-2">
+                            {{
+                                item?.user?.firstname +
+                                    "_" +
+                                    item?.user?.lastname
+                            }}
+                        </td>
+                        <td class="border px-2 py-2">
+                            {{ item?.user?.email }}
+                        </td>
+                        <td class="border px-2 py-2">
+                            {{ item?.user?.phone }}
+                        </td>
+                        <!-- <td class="border px-2 py-2">{{ item?.current_notice_period }}</td> -->
+                        <td class="border px-2 py-2">
+                            {{ item?.current_profession }}
+                        </td>
+                        <td class="border px-2 py-2">{{ item?.industry }}</td>
+                        <td class="border px-2 py-2">{{ item?.speciality }}</td>
+                        <!-- <td class="border px-2 py-2">{{ item?.field_of_study }}</td> -->
+                        <td class="border px-2 py-2 text-center">
+                            <!-- You can provide a download link for the resume or any other way you want to display it -->
+                            <button
+                                type="submit"
+                                class="bg-[#338f3a] hover:bg-[#256a2a] text-white px-2 py-2 rounded"
+                                (click)="downloadResume(item?.resume)"
+                            >
+                                Download
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="isFiltered">
+                    <!-- Replace this static data with dynamic data from your backend or state management -->
+                    <tr
+                        *ngFor="let i of jobseekers; index as in"
+                        [class.odd:bg-gray-100]="i % 2 === 0"
+                    >
+                        <td class="border px-2 py-2">
+                            {{ i?.firstname + "_" + i?.lastname }}
+                        </td>
+                        <td class="border px-2 py-2">
+                            {{ i?.email }}
+                        </td>
+                        <td class="border px-2 py-2">
+                            {{ i?.phone }}
+                        </td>
+                        <!-- <td class="border px-2 py-2">{{ item?.current_notice_period }}</td> -->
+                        <td class="border px-2 py-2">
+                            {{ i?.job_seeker?.current_profession }}
+                        </td>
+                        <td class="border px-2 py-2">
+                            {{ i?.job_seeker?.industry }}
+                        </td>
+                        <td class="border px-2 py-2">
+                            {{ i?.job_seeker?.speciality }}
+                        </td>
+                        <!-- <td class="border px-2 py-2">{{ item?.field_of_study }}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div
+        *ngIf="jobseekers.length > 0"
+        class="md:max-w-4xl mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+    >
+        <div class="flex items-center justify-center my-4">
+            <button
+                class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-white text-[#338f3a]"
+                (click)="previousPage()"
+                [disabled]="currentPage === 1"
+            >
+                Prev
+            </button>
+            <div *ngIf="!isMobileView()">
+                <ng-container
+                    *ngFor="let page of getPageRange(); let i = index"
+                >
+                    <button
+                        class="inline-flex items-center px-4 py-2 mr-3 rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                        [ngClass]="{
+                            'hover:bg-[#338f3a] hover:text-white':
+                                currentPage !== page,
+                            'bg-[#338f3a] !text-white buttonColor':
+                                currentPage === page
+                        }"
+                        (click)="goToPage(page)"
+                        [disabled]="currentPage === page"
+                    >
+                        {{ page }}
+                    </button>
+                </ng-container>
+            </div>
+
+            <button
+                class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                (click)="nextPage()"
+                [disabled]="currentPage === totalPages"
+            >
+                Next
+            </button>
+        </div>
+    </div>
+</div>

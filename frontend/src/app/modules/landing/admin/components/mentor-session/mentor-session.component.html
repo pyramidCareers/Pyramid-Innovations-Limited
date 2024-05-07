@@ -1,0 +1,122 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div *ngIf="!loading">
+    <div class="py-4 flex justify-center">
+        <h1 class="text-4xl font-bold">Webinars</h1>
+    </div>
+
+    <div class="mb-12 text-center">
+                
+        <select id="webinarType" 
+                [(ngModel)]="selectedWebinarType" name="selectedWebinarType" (ngModelChange)="onWebinarTypeChange()"
+                class=" px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+        >
+                <option value="2" selected>All Webinars</option>
+                <option value="1">Approved Webinars</option>
+                <option value="0">Pending Webinars</option>
+                
+        </select>
+    </div>
+
+    <div>
+        <div
+            class="bg-[#fff] hover:shadow-md mb-4"
+            *ngFor="let webinar of webinars; let i = index"
+        >
+            <div class="card-container">
+
+                <div *ngIf="isMobileView() == true" class="edit-sec flex  flex-row-reverse ">
+                    <i
+                        title="Edit"
+                        class="fas fa-edit"
+                        style="cursor: pointer"
+                        (click)="goToEdit(webinar.id, webinar.approved)"
+                    ></i>
+                   
+                </div>
+
+                  <div class="content-sec">
+
+                           <div class="name">
+                               <h1 class="text-xl font-[700]">Mentor's Name</h1>
+                               <p class="text-lg name-val mt-3">{{webinar?.user?.firstname + " " + webinar?.user?.lastname}}</p>
+                           </div>
+
+                           <div class="series">
+                                <div>
+                                    <h1 class="text-xl font-[700]">Webinar Details</h1>
+                                    <div class="mt-3"> <span class="font-[600]">Name: </span> <span>{{webinar?.title}}</span>  </div>
+                                    <div> <span class="font-[600]">Date: </span> <span>{{webinar?.date | date}}</span>  </div>
+                                    <div> <span class="font-[600]">Start Time: </span> <span>{{ convertTo12HourFormat(webinar?.start_time)}}</span>  </div>
+                                    <div> <span class="font-[600]">End Time: </span> <span>{{ convertTo12HourFormat(webinar?.end_time) }}</span>  </div>
+                                    <div *ngIf="webinar.registration_fee">
+                                            <span class="font-[600]">Registratioon Fee: </span> 
+                                            <span>{{webinar.registration_fee}}</span> 
+                                     </div>
+                                   
+                                </div>
+                                
+                           </div>
+
+                           <div class="status">
+                                <h1 class="text-xl font-[700]">Status</h1>
+                                <p *ngIf="!webinar.approved"  class="text-lg text-red-600 font-bold mt-3 status-val">Pending</p>
+                                <p *ngIf="webinar.approved" class="text-lg text-green-600 font-bold mt-3 status-val">Approved</p>
+                           </div>
+
+
+                  </div>
+              
+                <div *ngIf="isMobileView() == false" class="edit-sec flex  flex-row-reverse ">
+                    <i
+                        title="Edit"
+                        class="fas fa-edit"
+                        style="cursor: pointer"
+                        (click)="goToEdit(webinar.id, webinar.approved, webinar.registration_fee)"
+                    ></i>
+                   
+                </div>
+
+            
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="md:max-w-4xl mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+    >
+        <div class="flex items-center justify-center my-4">
+            <button
+                class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                (click)="previousPage()"
+                [disabled]="currentPage === 1"
+            >
+                Prev
+            </button>
+            <ng-container *ngFor="let page of getPageRange(); let i = index">
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 text-white"
+                    [ngClass]="{
+                        'hover:bg-[#28243efc] hover:text-white':
+                            currentPage !== page,
+                        'bg-[#28243efc] !text-white buttonColor':
+                            currentPage === page,
+                        'rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#28243efc]': true
+                    }"
+                    (click)="goToPage(page)"
+                    [disabled]="currentPage === page"
+                >
+                    {{ page }}
+                </button>
+            </ng-container>
+            <button
+                class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                (click)="nextPage()"
+                [disabled]="currentPage === totalPages"
+            >
+                Next
+            </button>
+        </div>
+    </div>
+</div>

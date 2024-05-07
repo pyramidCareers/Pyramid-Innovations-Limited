@@ -1,0 +1,616 @@
+<div class="min-h-screen">
+    <div
+        *ngIf="isErrorOccured"
+        class="flex justify-center items-center min-h-screen"
+    >
+        <h1 class="font-semibold text-2xl text-red-600">
+            *This job is no longer available
+        </h1>
+    </div>
+    <div *ngIf="!isErrorOccured">
+        <div
+            *ngIf="loadingRes"
+            class="min-h-screen flex justify-center items-center"
+        >
+            <app-loader></app-loader>
+        </div>
+        <div class="main-container my-6 md:flex gap-x-1" *ngIf="!loadingRes">
+            <div class="left-side-contect">
+                <div>
+                    <button
+                        *ngIf="details?.companyinfo.org_url !== null"
+                        class="uppercase text-sm text-pyramid-blue"
+                    >
+                        {{ details?.companyinfo.org_name }}
+                    </button>
+                    <h1 class="pt-2 pb-1 font-bold infxs:text-3xl md:text-4xl">
+                        {{ details?.title }}
+                    </h1>
+                    <h3 class="flex">
+                        {{ details?.created_at | date }}
+                        <li *ngIf="details?.location !== null" class="ml-3">
+                            {{ details?.location }}
+                        </li>
+                    </h3>
+                </div>
+                <div
+                    class="md:flex rounded bg-[#fff] px-4 pt-8 pb-6 shadow-md mt-8 flex justify-between about-us"
+                >
+                    <div>
+                        <h2 class="text-md mb-1 text-pyramid-grey">ABOUT US</h2>
+                        <p class="text-base mb-3">
+                            {{
+                                details?.companyinfo.org_details
+                                    | slice : 0 : 240
+                            }}
+                        </p>
+                        <ul class="size_industry">
+                            <li>
+                                <svg
+                                    class="inline"
+                                    width="20px"
+                                    height="20px"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <g
+                                        stroke="none"
+                                        stroke-width="1"
+                                        fill="none"
+                                        fill-rule="evenodd"
+                                    >
+                                        <g
+                                            transform="translate(-250.000000, -377.000000)"
+                                            fill-rule="nonzero"
+                                        >
+                                            <g
+                                                transform="translate(228.000000, 232.000000)"
+                                            >
+                                                <g
+                                                    transform="translate(20.000000, 143.000000)"
+                                                >
+                                                    <g
+                                                        transform="translate(2.000000, 2.000000)"
+                                                    >
+                                                        <path
+                                                            d="M14.1298213,7.81811542 C14.9860301,7.329114 15.6416275,6.54476184 15.9779398,5.60709493 C16.3142521,4.66942802 16.308984,3.64043177 15.9631703,2.70633488 C15.6173565,1.7722571 14.95381,0.994849024 14.0926623,0.51485628 C13.2314675,0.0348635361 12.2296331,-0.115989961 11.2684854,0.0896037849 C10.3073377,0.29520231 9.45037629,0.843656208 8.8528222,1.63567888 C8.25522107,2.42770634 7.95649106,3.41093756 8.01067733,4.40743566 C8.06486359,5.40388597 8.46839135,6.34771797 9.14821261,7.06802968 C9.82803387,7.7882936 10.7392286,8.23753259 11.7168391,8.33426234 L12.5258702,8.33426234 C13.4159454,8.33550492 14.2970837,8.51491377 15.1189558,8.86216595 C15.9408278,9.20941813 16.6873471,9.71772727 17.3158984,10.358084 C17.9444026,10.9984885 18.4426152,11.7583715 18.7821261,12.5943861 C19.1215898,13.4304008 19.2956726,14.3262024 19.2944497,15.2305588 C19.2944497,15.2445138 19.2889934,15.2578954 19.2793039,15.2677404 C19.2696143,15.2775855 19.256444,15.2831293 19.2427093,15.2831293 L5,15.2831293 L5,16 L19.2427093,16 C19.443556,16 19.6361712,15.9189458 19.778175,15.7746636 C19.9202258,15.6303337 20,15.434628 20,15.2305588 C19.9972248,13.5008931 19.414111,11.8238457 18.3468956,10.4762243 C17.2796802,9.12865069 15.7921449,8.19103157 14.1298213,7.81811542 L14.1298213,7.81811542 Z M8.71119473,4.17163298 C8.71119473,3.48635236 8.91119473,2.816451 9.28588899,2.24665347 C9.66063029,1.67686072 10.1932267,1.2327593 10.8163217,0.970508873 C11.4394638,0.708263223 12.1251176,0.639644357 12.7866416,0.773335969 C13.4481656,0.90703236 14.0557855,1.23702707 14.5326905,1.72159823 C15.0096425,2.20616939 15.3344309,2.8235528 15.4659925,3.49567168 C15.5975541,4.16780967 15.5300564,4.86446465 15.2719191,5.49760487 C15.0138288,6.13069731 14.5767168,6.67183913 14.0159454,7.05259307 C13.455127,7.43329921 12.7958137,7.63650817 12.1213547,7.63650817 C11.2173095,7.63526559 10.3506585,7.2698049 9.71138288,6.62027222 C9.07210724,5.97073955 8.71241769,5.09018334 8.71119473,4.17163298 L8.71119473,4.17163298 Z"
+                                                            fill="#666666"
+                                                        ></path>
+                                                        <path
+                                                            d="M7.57,12 L8.43,12 C10.4377,12 12.36315,12.6978562 13.7828,13.94005 C15.20245,15.1822437 16,16.8670125 16,18.62375 C16,18.7235437 15.9547,18.819225 15.87405,18.8897938 C15.7934,18.9603625 15.68405,19 15.57,19 L0.43,19 C0.315955,19 0.206585,18.9603625 0.125945,18.8897938 C0.045305,18.819225 0,18.7235437 0,18.62375 C0,16.8670125 0.79755,15.1822437 2.2172,13.94005 C3.63685,12.6978562 5.5623,12 7.57,12 L7.57,12 Z"
+                                                            fill="#D8D8D8"
+                                                        ></path>
+                                                        <path
+                                                            d="M8,12 C10.20915,12 12,10.20915 12,8 C12,5.79085 10.20915,4 8,4 C5.79085,4 4,5.79085 4,8 C4,10.20915 5.79085,12 8,12 Z"
+                                                            fill="#D8D8D8"
+                                                        ></path>
+                                                        <path
+                                                            d="M10.039403,11.8250894 C10.8467104,11.3738458 11.4814567,10.667566 11.8442507,9.81698371 C12.206997,8.96640145 12.2773015,8.01950614 12.0440836,7.12465903 C11.8108657,6.22985967 11.2873075,5.43767645 10.5555104,4.8722133 C9.82366567,4.30675015 8.92489552,4 8,4 C7.07510448,4 6.17633433,4.30675015 5.44448955,4.8722133 C4.71269254,5.43767645 4.18913433,6.22985967 3.95591642,7.12465903 C3.72269851,8.01950614 3.79300299,8.96640145 4.15574925,9.81698371 C4.51854328,10.667566 5.15328955,11.3738458 5.96059701,11.8250894 C4.27266866,12.1976877 2.76220657,13.1345076 1.67855284,14.4809326 C0.594903881,15.8274053 0.00281313433,17.5030232 0,19.2312146 C0,19.4351099 0.0810125373,19.6306488 0.225222687,19.774808 C0.296625672,19.8461952 0.381397015,19.9028274 0.474688955,19.9414577 C0.567980896,19.9801357 0.667973731,20 0.768955224,20 L15.2310448,20 C15.4349851,20 15.6305672,19.9190149 15.7747582,19.774808 C15.918997,19.6306488 16,19.4351099 16,19.2312146 C15.9971821,17.5030232 15.4050866,15.8274053 14.3214328,14.4809326 C13.2377791,13.1345076 11.7273313,12.1976877 10.039403,11.8250894 L10.039403,11.8250894 Z M4.53731343,8.18171508 C4.53731343,7.49701857 4.74039403,6.82769776 5.1208597,6.25836681 C5.50137313,5.68908361 6.04217313,5.24533685 6.67486567,4.98332906 C7.30760597,4.72127351 8.0038209,4.65275133 8.67553433,4.78630989 C9.34724776,4.91986845 9.96422687,5.24958666 10.4484776,5.73377821 C10.9327761,6.21792201 11.2625672,6.83476486 11.3961552,7.50632995 C11.5297433,8.17789503 11.461206,8.8739562 11.1990925,9.50655676 C10.9370269,10.1391096 10.4931821,10.6797901 9.92377313,11.0602195 C9.35431642,11.4406012 8.68484776,11.6436369 8,11.6436369 C7.08202985,11.6423954 6.20202985,11.2772462 5.55290746,10.6282672 C4.90378507,9.97928816 4.53855522,9.0994825 4.53731343,8.18171508 L4.53731343,8.18171508 Z M15.2310448,19.2837403 L0.768955224,19.2837403 C0.755023284,19.2837403 0.741659701,19.2782012 0.731806567,19.2683646 C0.721953433,19.2584802 0.71641791,19.2451578 0.71641791,19.2312146 C0.718944478,17.4096229 1.44385433,15.6633341 2.73221731,14.3752604 C4.02058507,13.0871867 5.7672597,12.3624274 7.58925373,12.3598966 L8.41074627,12.3598966 C10.2327403,12.3624274 11.9794149,13.0871867 13.2677731,14.3752604 C14.5561313,15.6633341 15.2810507,17.4096229 15.2835821,19.2312146 C15.2835821,19.2451578 15.2780418,19.2584802 15.268203,19.2683646 C15.2583642,19.2782012 15.244991,19.2837403 15.2310448,19.2837403 Z"
+                                                            fill="#666666"
+                                                        ></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <span class="ml-2 pt-1">
+                                    <strong>Size:</strong>
+                                    {{
+                                        details?.companyinfo
+                                            .org_size_lower_limit
+                                    }}
+                                    -
+                                    {{
+                                        details?.companyinfo
+                                            .org_size_upper_limit
+                                    }}
+                                    employees
+                                </span>
+                            </li>
+                            <li>
+                                <div
+                                    class="flex mt-1"
+                                    *ngIf="
+                                        details?.companyinfo?.industry !== null
+                                    "
+                                >
+                                    <svg
+                                        width="20px"
+                                        height="20px"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <g
+                                            stroke="none"
+                                            stroke-width="1"
+                                            fill="none"
+                                            fill-rule="evenodd"
+                                        >
+                                            <g
+                                                transform="translate(-250.000000, -406.000000)"
+                                                fill-rule="nonzero"
+                                            >
+                                                <g
+                                                    transform="translate(228.000000, 232.000000)"
+                                                >
+                                                    <g
+                                                        transform="translate(20.000000, 143.000000)"
+                                                    >
+                                                        <g
+                                                            transform="translate(0.000000, 29.000000)"
+                                                        >
+                                                            <g
+                                                                transform="translate(2.000000, 2.000000)"
+                                                            >
+                                                                <path
+                                                                    d="M17.3555556,4.16666667 L3.75555556,4.16666667 C3.30468581,4.16666667 2.87228656,4.36419792 2.55347281,4.71585417 C2.23466331,5.06746354 2.05555556,5.54436979 2.05555556,6.04166667 L2.05555556,17.2916667 C2.05555556,17.7889635 2.23466331,18.2658698 2.55347281,18.6174792 C2.87228656,18.9691354 3.30468581,19.1666667 3.75555556,19.1666667 L17.3555556,19.1666667 C17.8064381,19.1666667 18.2388331,18.9691354 18.5576256,18.6174792 C18.8764606,18.2658698 19.0555556,17.7889635 19.0555556,17.2916667 L19.0555556,6.04166667 C19.0555556,5.54436979 18.8764606,5.06746354 18.5576256,4.71585417 C18.2388331,4.36419792 17.8064381,4.16666667 17.3555556,4.16666667 L17.3555556,4.16666667 Z M13.1055556,9.66510417 C13.1055556,10.0256198 12.9757181,10.3714167 12.7445606,10.6263229 C12.5134456,10.881276 12.1999231,11.0244792 11.8730556,11.0244792 L9.23805556,11.0244792 C8.91118806,11.0244792 8.59766556,10.881276 8.36655056,10.6263229 C8.13539306,10.3714167 8.00555556,10.0256198 8.00555556,9.66510417 L8.00555556,8.63385417 C8.00555556,8.27333854 8.13539306,7.92754167 8.36655056,7.67263542 C8.59766556,7.41768229 8.91118806,7.27447917 9.23805556,7.27447917 L11.8730556,7.27447917 C12.1999231,7.27447917 12.5134456,7.41768229 12.7445606,7.67263542 C12.9757181,7.92754167 13.1055556,8.27333854 13.1055556,8.63385417 L13.1055556,9.66510417 Z"
+                                                                    fill="#D8D8D8"
+                                                                ></path>
+                                                                <path
+                                                                    d="M16.9397517,4.46987952 L12.9277075,4.46987952 L12.9277075,2.62650602 C12.9254521,2.19583325 12.7533462,1.78344675 12.4487778,1.47890843 C12.1442528,1.17437446 11.7318581,1.00227711 11.3012031,1 L8.69879602,1 C8.26814102,1.00227711 7.85574625,1.17437446 7.55122125,1.47890843 C7.24665288,1.78344675 7.0745904,2.19583325 7.07229161,2.62650602 L7.07229161,4.46554217 L3.06024741,4.46554217 C2.78932816,4.46554217 2.52106771,4.51897831 2.27082458,4.62277108 C2.02058146,4.72660723 1.79326988,4.87871807 1.60190621,5.07051566 C1.41053821,5.26226988 1.25886993,5.48989398 1.15558906,5.7403759 C1.0523082,5.99081446 0.999440304,6.25920964 1.00000396,6.53012048 L1.00000396,16.939759 C1.00000396,17.4861783 1.21707093,18.0102169 1.60344163,18.396588 C1.98980799,18.782959 2.51383735,19 3.06024741,19 L16.9397517,19 C17.4861704,19 18.0102084,18.782959 18.3965791,18.396588 C18.7829498,18.0102169 18.9999906,17.4861783 18.9999906,16.939759 L18.9999906,6.53012048 C18.9999906,5.9837012 18.7829498,5.45966265 18.3965791,5.07329157 C18.0102084,4.68692048 17.4861704,4.46987952 16.9397517,4.46987952 L16.9397517,4.46987952 Z M7.72289337,2.62650602 C7.72402108,2.36803036 7.82720652,2.12046747 8.00998224,1.93770024 C8.19275797,1.75492867 8.44033362,1.65174313 8.69879602,1.65060241 L11.3012031,1.65060241 C11.5596655,1.65174313 11.8072411,1.75492867 11.9900168,1.93770024 C12.1727926,2.12046747 12.275978,2.36803036 12.2771057,2.62650602 L12.2771057,4.46554217 L7.72289337,4.46554217 L7.72289337,2.62650602 Z M3.06024741,5.12048193 L16.9397517,5.12048193 C17.3132405,5.12160964 17.6711582,5.27051084 17.9352591,5.53461205 C18.1993601,5.79871325 18.3482611,6.15663133 18.3493888,6.53012048 L18.3493888,9.21060241 L12.9277075,9.21060241 L12.9277075,8.9286747 C12.9265798,8.50916627 12.7594185,8.10713735 12.4627441,7.81050602 C12.166113,7.51383133 11.7640845,7.34666988 11.3445765,7.34554217 L8.65542256,7.34554217 C8.23591455,7.34666988 7.83388603,7.51383133 7.537255,7.81050602 C7.2405806,8.10713735 7.07341932,8.50916627 7.07229161,8.9286747 L7.07229161,9.21060241 L1.65061026,9.21060241 L1.65061026,6.53012048 C1.65175532,6.15663133 1.80063902,5.79871325 2.06474864,5.53461205 C2.32885826,5.27051084 2.68674128,5.12160964 3.06024741,5.12048193 L3.06024741,5.12048193 Z M12.2771057,8.9286747 L12.2771057,9.88289157 C12.275978,10.1298602 12.1773468,10.3663759 12.0027253,10.541041 C11.8280604,10.7156627 11.5915449,10.814294 11.3445765,10.8154217 L8.65542256,10.8154217 C8.40845414,10.814294 8.17193871,10.7156627 7.99727382,10.541041 C7.82265231,10.3663759 7.72402108,10.1298602 7.72289337,9.88289157 L7.72289337,8.9286747 C7.72289337,8.68135904 7.82113424,8.4441494 7.99601599,8.26926747 C8.17089775,8.09438554 8.40810715,7.99614458 8.65542256,7.99614458 L11.3445765,7.99614458 C11.5918919,7.99614458 11.8291013,8.09438554 12.0039831,8.26926747 C12.1788648,8.4441494 12.2771057,8.68135904 12.2771057,8.9286747 L12.2771057,8.9286747 Z M16.9397517,18.3493976 L3.06024741,18.3493976 C2.68674128,18.3482699 2.32885826,18.1993687 2.06474864,17.9352675 C1.80063902,17.6711663 1.65175532,17.3132482 1.65061026,16.939759 L1.65061026,9.86120482 L7.07229161,9.86120482 L7.07229161,9.88289157 C7.07341932,10.3024 7.2405806,10.7044289 7.537255,11.0010602 C7.83388603,11.2977349 8.23591455,11.4648964 8.65542256,11.4660241 L11.3445765,11.4660241 C11.7640845,11.4648964 12.166113,11.2977349 12.4627441,11.0010602 C12.7594185,10.7044289 12.9265798,10.3024 12.9277075,9.88289157 L12.9277075,9.86120482 L18.3493888,9.86120482 L18.3493888,16.939759 C18.3482611,17.3132482 18.1993601,17.6711663 17.9352591,17.9352675 C17.6711582,18.1993687 17.3132405,18.3482699 16.9397517,18.3493976 L16.9397517,18.3493976 Z"
+                                                                    fill="#666666"
+                                                                ></path>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <span class="ml-2">
+                                        <strong>Industry:</strong>
+                                        {{ details?.companyinfo?.industry }}
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="flex items-center infxs:mx-10 md:mx-12 xl:mx-22"
+                    >
+                        <img
+                            [src]="details?.companyinfo.logo"
+                            class="h-16 w-40 object-contain"
+                        />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mt-10" *ngIf="details?.description !== null">
+                        <h1 class="font-bold text-xl">Description</h1>
+                        <p [innerHTML]="details?.description"></p>
+                    </div>
+
+                    <div
+                        class="mt-10"
+                        *ngIf="details?.requirement_details !== null"
+                    >
+                        <h1 class="font-bold text-xl">Requirement Details</h1>
+                        <p [innerHTML]="details?.requirement_details"></p>
+                    </div>
+
+                    <div
+                        class="mt-10"
+                        *ngIf="details?.additional_requirements !== null"
+                    >
+                        <h1 class="font-bold text-xl">
+                            Additional Requirements
+                        </h1>
+                        <p [innerHTML]="details?.additional_requirements"></p>
+                    </div>
+
+                    <div
+                        class="mt-10"
+                        *ngIf="details?.responsibilities !== null"
+                    >
+                        <h1 class="font-bold text-xl pb-2">Responsibilities</h1>
+                        <p [innerHTML]="details?.responsibilities"></p>
+                    </div>
+
+                    <div class="mt-10" *ngIf="details?.other_benefits !== null">
+                        <h1 class="font-bold text-xl pb-2">Other Benifits</h1>
+                        <p [innerHTML]="details?.other_benefits"></p>
+                    </div>
+                    <div class="mt-10 flex" *ngIf="details?.category !== null">
+                        <h1 class="font-bold text-xl">Category :</h1>
+                        <p
+                            class="mt-1 ml-1"
+                            [innerHTML]="details?.category"
+                        ></p>
+                    </div>
+                    <div class="mt-4 flex" *ngIf="details?.job_type !== null">
+                        <h1 class="font-bold text-xl">Job Type :</h1>
+                        <p
+                            class="mt-1 ml-1"
+                            [innerHTML]="details?.job_type"
+                        ></p>
+                    </div>
+
+                    <div
+                        class="mt-4 flex"
+                        *ngIf="details?.application_deadline !== null"
+                    >
+                        <h1 class="font-bold text-xl">
+                            Application Deadline :
+                        </h1>
+                        <p class="mt-1 ml-1">
+                            {{ details?.application_deadline | Date }}
+                        </p>
+                    </div>
+
+                    <div
+                        class="mt-4 flex"
+                        *ngIf="details?.number_of_vacancies !== null"
+                    >
+                        <h1 class="font-bold text-xl">Number of Vacancies :</h1>
+                        <p
+                            class="mt-1 ml-1"
+                            [innerHTML]="details?.number_of_vacancies"
+                        ></p>
+                    </div>
+
+                    <div
+                        class="mt-4 flex"
+                        *ngIf="details?.experience_level !== null"
+                    >
+                        <h1 class="font-bold text-xl">Experience Level :</h1>
+                        <p
+                            class="mt-1 ml-1"
+                            [innerHTML]="details?.experience_level"
+                        ></p>
+                    </div>
+                    <div
+                        class="mt-4 mb-6 flex"
+                        *ngIf="
+                            details?.experience_lower_limit !== null &&
+                            details?.experience_upper_limit !== null
+                        "
+                    >
+                        <h1 class="font-bold text-xl">
+                            Experience Requirement :
+                        </h1>
+                        <p class="mt-1 ml-1">
+                            <span
+                                [innerHTML]="details?.experience_lower_limit"
+                            ></span>
+                            -
+                            <span
+                                [innerHTML]="details?.experience_upper_limit"
+                            ></span>
+                            year(s)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-side-content mt-4 sm:mt-2">
+                <div class="sticky top-6 w-full text-center min-w-full">
+                    <div
+                        *ngIf="isJobseekerOrLoggedOut() == true"
+                        class="w-full rounded bg-[#fff] text-center px-4 py-6 shadow-md"
+                    >
+                        <div
+                            *ngIf="loading"
+                            class="flex justify-center items-center"
+                        >
+                            <app-loader></app-loader>
+                        </div>
+                        <div class="mb-4">
+                            <button
+                                *ngIf="applybtn != 'Applied' && !loading"
+                                (click)="applyNow()"
+                                [ngClass]="{
+                                    'uppercase px-24 py-2 bg-[#338f3a] hover:bg-[#256a2a] text-white rounded':
+                                        applybtn === 'Apply' ||
+                                        applybtn === 'Apply On Company Site',
+                                    'font-bold': applybtn !== 'Apply',
+                                    '!px-10':
+                                        applybtn === 'Apply On Company Site'
+                                }"
+                                [disabled]="details?.status === 1"
+                            >
+                                {{ applybtn }}
+                            </button>
+                            <div
+                                *ngIf="applybtn == 'Applied' && !loading"
+                                class="font-bold"
+                            >
+                                <h1>Applied</h1>
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <button
+                                *ngIf="!loading"
+                                (click)="setFavouriteStatus()"
+                                class="cursor-pointer uppercase px-4 min-w-48 py-2 bg-[#338f3a] hover:bg-[#256a2a] text-white rounded text-sm"
+                            >
+                                {{ favouriteBtn }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="
+                            !loading &&
+                            isItJobSeeker() == true &&
+                            applybtn == 'Applied' &&
+                            isStatusPending
+                        "
+                        class="w-full rounded bg-[#fff] text-center px-4 py-6 my-2 shadow-md"
+                    >
+                        <div
+                            class="px-auto font-[700] text-base rounded text-red-600"
+                        >
+                            Status: Pending
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="
+                            isAllowedToCRUD() == true || isVisiblePET() == true
+                        "
+                        class="w-full px-4 py-3 rounded bg-[#fff] text-start pt-6 mt-2 shadow-md"
+                    >
+                        <app-course-list
+                            *ngIf="isVisiblePET() == true"
+                            [courses]="courses"
+                            [jobID]="jobId"
+                            [editAccess]="isAllowedToCRUD()"
+                            [courseStatus]="courseStatusArr"
+                        ></app-course-list>
+
+                        <div
+                            *ngIf="isAllowedToCRUD() == true"
+                            class="flex justify-center items-center mb-6 mt-3"
+                        >
+                            <button
+                                class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-4 py-2 text-sm mt-1"
+                                (click)="addPET()"
+                            >
+                                ADD PRE EMPLOYMENT TEST
+                                <span *ngIf="cntApplicants > 0" class="ml-2">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="
+                            (isItJobSeeker() == true || !isLogin) &&
+                            applyFee > 0
+                        "
+                        class="w-full rounded bg-[#fff] text-center py-6 my-2 shadow-md"
+                    >
+                        <div
+                            *ngIf="loading"
+                            class="flex justify-center items-center"
+                        >
+                            <app-loader></app-loader>
+                        </div>
+
+                        <div
+                            *ngIf="!loading && applyFee > 0"
+                            class="px-auto font-[700] text-base rounded"
+                            [innerHTML]="
+                                applyFeeText + applyFee + '  ' + currency
+                            "
+                        ></div>
+
+                        <button
+                            *ngIf="
+                                !isPaymentComplete &&
+                                isLogin &&
+                                applyFee > 0 &&
+                                applybtn == 'Applied'
+                            "
+                            class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-4 py-2 mt-3 text-sm"
+                            (click)="makePayment()"
+                        >
+                            PAY NOW
+                        </button>
+
+                        <div
+                            *ngIf="isPaymentComplete && isLogin"
+                            class="text-center"
+                        >
+                            <div
+                                class="px-auto font-[700] text-base rounded text-green-600 mt-2"
+                            >
+                                Payment Complete
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="
+                            isItEmployer() == true &&
+                            isAllowedToCRUD() == false &&
+                            applyFee > 0
+                        "
+                        class="w-full rounded bg-[#fff] text-center py-6 my-2 shadow-md"
+                    >
+                        <div
+                            *ngIf="loading"
+                            class="flex justify-center items-center"
+                        >
+                            <app-loader></app-loader>
+                        </div>
+
+                        <div
+                            *ngIf="!loading"
+                            class="px-auto font-[700] text-base rounded"
+                            [innerHTML]="
+                                applyFeeText + applyFee + '  ' + currency
+                            "
+                        ></div>
+                    </div>
+
+                    <div
+                        *ngIf="isAllowedToCRUD() == true"
+                        class="w-full rounded bg-[#fff] flex px-4 py-3 my-2 shadow-md"
+                        [ngStyle]="{
+                            'justify-content': 'applyFee > 0'
+                                ? 'space-between'
+                                : 'center'
+                        }"
+                    >
+                        <div
+                            *ngIf="loading"
+                            class="flex justify-center items-center"
+                        >
+                            <app-loader></app-loader>
+                        </div>
+
+                        <button
+                            *ngIf="applyFee == 0"
+                            class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-4 py-2 mx-auto text-sm"
+                            (click)="addApplyFee()"
+                        >
+                            ADD APPLICATION FEE
+                        </button>
+
+                        <div
+                            *ngIf="!loading && applyFee > 0"
+                            class="px-auto py-2 font-[700] text-base rounded"
+                            [innerHTML]="
+                                applyFeeText + applyFee + '  ' + currency
+                            "
+                        ></div>
+
+                        <div
+                            *ngIf="!loading && applyFee > 0"
+                            class="flex actions"
+                        >
+                            <mat-icon
+                                class="cursor-pointer"
+                                (click)="updateApplyFee()"
+                                >edit</mat-icon
+                            >
+                            <mat-icon
+                                class="cursor-pointer"
+                                (click)="deleteApplyFee()"
+                                >delete</mat-icon
+                            >
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="isAllowedToCRUD() == true"
+                        class="w-full rounded bg-[#fff] shadow-md my-2 py-3 text-center"
+                    >
+                        <button
+                            class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-4 py-2 text-sm"
+                            (click)="goToJobEditPage()"
+                        >
+                            EDIT JOB DETAILS
+                        </button>
+                    </div>
+
+                    <div
+                        *ngIf="isAllowedToCRUD() == true"
+                        class="w-full rounded bg-[#fff] shadow-md my-2 py-3 text-center"
+                    >
+                        <button
+                            class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-4 py-2 text-sm"
+                            (click)="viewApplicants()"
+                        >
+                            VIEW APPLICANTS
+                        </button>
+                    </div>
+
+                    <div
+                        *ngIf="isAllowedToCRUD() == true && !isJobReady"
+                        class="w-full rounded bg-[#fff] shadow-md my-2 py-3 text-center"
+                    >
+                        <button
+                            class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-4 py-2 text-sm"
+                            (click)="openJobReadyConfirmModal()"
+                        >
+                            ADD JOB READY PROGRAMME
+                        </button>
+                    </div>
+
+                    <div
+                        *ngIf="isLogin && isJobReady"
+                        class="w-full px-4 py-2 rounded bg-[#fff] text-start mt-2 shadow-md"
+                    >
+                        <div
+                            *ngIf="
+                                isItJobSeeker() == true &&
+                                !nominatedForJobReadyProgramme
+                            "
+                            class="text-center py-3"
+                        >
+                            <h1 class="font-[700] text-base">
+                                Job Ready Programme Available
+                            </h1>
+                        </div>
+
+                        <div
+                            *ngIf="
+                                !(
+                                    isItJobSeeker() == true &&
+                                    !nominatedForJobReadyProgramme
+                                )
+                            "
+                        >
+                            <div
+                                *ngIf="
+                                    jobReadyCourses.length == 0 &&
+                                    isAllowedToCRUD() == true
+                                "
+                                class="flex justify-end"
+                            >
+                                <mat-icon
+                                    class="cursor-pointer"
+                                    (click)="removeJobReadyProgramme()"
+                                    >cancel</mat-icon
+                                >
+                            </div>
+
+                            <div
+                                *ngIf="jobReadyCourses.length > 0"
+                                class="mb-2"
+                            >
+                                <app-job-ready-courses
+                                    [courses]="jobReadyCourses"
+                                    [jobID]="jobId"
+                                    [editAccess]="isAllowedToCRUD()"
+                                ></app-job-ready-courses>
+                            </div>
+
+                            <div
+                                *ngIf="isAllowedToCRUD() == true"
+                                class="text-center"
+                            >
+                                <button
+                                    class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-4 py-2 mb-2 text-sm mx-auto"
+                                    (click)="goToJobReady()"
+                                >
+                                    ADD JOB READY COURSE
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="isAllowedToCRUD() == true"
+                        class="w-full rounded bg-[#fff] text-start px-4 mt-2 shadow-md"
+                    >
+                        <div class="flex justify-center items-center h-14">
+                            <label class="switch">
+                                <input
+                                    type="checkbox"
+                                    [(ngModel)]="isPublished"
+                                    (ngModelChange)="toggleJobStatus()"
+                                />
+                                <span class="slider"></span>
+                            </label>
+                            <div class="ml-4 font-[500] text-lg">Published</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="min-h-screen flex justify-center items-center bg-[#fff] px-2">
+    <div class="w-full text-center mx-auto">
+        <p *ngIf="!skillSection" class="top-message mb-5">
+            Hello, {{ firstName }}! Help us get to know you better by sharing
+            with us your educational background.
+        </p>
+
+        <div
+            *ngIf="!skillSection"
+            class="md:flex md:flex-row justify-center mt-6"
+        >
+            <h1 class="intro">My field of study is</h1>
+            <div class="relative" *ngIf="!showSecondPart">
+                <input
+                    [(ngModel)]="fieldOfStudy"
+                    (keyup.enter)="toggleSecondPart()"
+                    type="text"
+                    class="w-full ml-3 bg-transparent border-b border-gray-300 py-3 text-2xl placeholder-gray-700 input-style"
+                    placeholder="Insert Field of Study Here..."
+                />
+                <div
+                    class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                ></div>
+            </div>
+            <div *ngIf="showSecondPart" class="md:flex md:flex-row">
+                <span class="font-bold text-4xl highlighted ml-2"
+                    >{{ fieldOfStudy }}.</span
+                >
+            </div>
+        </div>
+
+        <button
+            *ngIf="!skillSection && showSecondPart"
+            class="continue-btn text-white text-lg font-bold mt-8 mb-8 py-2 px-8"
+            (click)="displaySkillSection()"
+        >
+            Continue
+        </button>
+
+        <p *ngIf="skillSection" class="top-message mb-5">
+            Fantastic! Let’s make your account stand out to potential employers
+            by letting us know what you’re skilled in.
+            <span
+                class="cursor-pointer text-pyramid-jobs-primary"
+                (click)="goTo('jobseeker/uploading-cv')"
+                >Not now</span
+            >
+        </p>
+        <div
+            *ngIf="skillSection"
+            class="md:flex md:flex-row justify-center mt-4"
+        >
+            <h1 class="intro">I am skilled in</h1>
+            <div class="relative" *ngIf="!showSkill1">
+                <input
+                    [(ngModel)]="skill1"
+                    (keyup.enter)="toggleSkill1()"
+                    type="text"
+                    class="w-full ml-3 bg-transparent border-b border-gray-300 py-3 text-2xl placeholder-gray-700 input-style"
+                    placeholder="Insert Skill Here..."
+                />
+                <div
+                    class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                ></div>
+            </div>
+            <div *ngIf="showSkill1" class="md:flex md:flex-row">
+                <span class="font-bold text-4xl highlighted ml-3 mr-2"
+                    >{{ skill1 }},</span
+                >
+                <input
+                    *ngIf="!showSkill2"
+                    [(ngModel)]="skill2"
+                    (keyup.enter)="toggleSkill2()"
+                    type="text"
+                    class="ml-3 bg-transparent border-b border-gray-300 py-3 text-2xl placeholder-gray-700 w-90 input-style"
+                    placeholder="Insert Another Skill  Here..."
+                />
+                <span
+                    *ngIf="showSkill2"
+                    class="font-bold text-4xl highlighted ml-3"
+                    >{{ skill2 }}</span
+                >
+                <div
+                    class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                ></div>
+            </div>
+        </div>
+        <button
+            *ngIf="showSkill2"
+            class="continue-btn mt-8 text-white text-lg font-bold mb-8 py-2 px-8"
+            (click)="goTo('jobseeker/uploading-cv')"
+        >
+            Continue
+        </button>
+    </div>
+</div>

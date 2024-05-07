@@ -1,0 +1,106 @@
+<div class=" flex-col items-center justify-center md:min-w-120">
+    <div class="text-center">
+        <h1 class="heading font-bold text-2xl">Please Edit Webinar Info</h1>
+    </div>
+    <div class="flex flex-col text-center  mx-auto">
+        
+        <form class="flex flex-col mx-auto mt-3" style="width:90% !important;">
+                
+                <div class="flex flex-col">
+                    <h1 class="text-left font-bold">Webinar Title:</h1>
+                    <input type="text"
+                        required
+                        [(ngModel)]="wbTitle"
+                        name="wbTitle"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                </div>
+
+                <div class="flex flex-col">
+                    <h1 class="text-left font-bold">Registration Description:</h1>
+                    <textarea
+                        required
+                        [(ngModel)]="wbDesc"
+                        name="wbDesc"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 h-36 placeholder-italic"
+                    >
+                    </textarea>
+                </div>
+
+                <div class="flex flex-col">
+                    <h1 class="text-left font-bold">Webinar Date:</h1>
+                    <input type="date"
+                        required
+                        [(ngModel)]="wbDate"
+                        name="wbDate"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                </div>
+
+                <div class="flex flex-col">
+                    <h1 class="text-left font-bold">Webinar Start Time:</h1>
+                    <input type="time"
+                        required
+                        [(ngModel)]="wbSt"
+                        name="wbSt"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                </div>
+
+                <div class="flex flex-col">
+                    <h1 class="text-left font-bold">Webinar End Time:</h1>
+                    <input type="time"
+                        required
+                        [(ngModel)]="wbEn"
+                        name="wbEn"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                </div>
+
+
+
+
+        
+                <div class="flex flex-col">
+                    <h1 class="text-left font-bold">Registration Fee:</h1>
+                    <input type="number"
+                        required
+                        [(ngModel)]="webinarFee"
+                        name="price_per_slot"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="webinarStatus" class="block  font-bold mb-2 text-left">Webinar Status</label>
+                    <select id="webinarStatus" class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                      [(ngModel)]="webinarStatus"
+                      name="webinarStatus" 
+                    >
+                      <!-- Add your dropdown options here -->
+                      <option value=1>Approve</option>
+                      <option value=0>Pending</option>
+                      <!-- Add more options as needed -->
+                    </select>
+                </div>
+            
+               
+            
+                <div class="flex justify-center items-center">
+                    <button *ngIf="!loading "
+                            class="mt-5 w-28 mr-4 rounded sigin text-white font-semibold py-2 px-4 bg-pyramid-default-primary"
+                            (click)=" editWebinar()">
+                         SUBMIT
+                    </button>
+            
+                   
+            
+                    <div *ngIf="loading" class="flex justify-center items-center">
+                        <app-loader></app-loader>
+                    </div>
+                </div>
+        </form>
+        
+    </div>
+</div>
+

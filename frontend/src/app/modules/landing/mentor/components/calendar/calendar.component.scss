@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    text-align: center;
+    // padding: 15px;
+}
+
+th {
+    background-color: #4caf50;
+    color: white;
+}
+
+td {
+    height: 90px;
+    vertical-align: top;
+}

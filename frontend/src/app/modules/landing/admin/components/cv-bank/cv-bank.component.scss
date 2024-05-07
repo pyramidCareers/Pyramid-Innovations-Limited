@@ -1,0 +1,54 @@
+.buttonColor {
+    color: white !important;
+}
+
+
+  
+
+@media only screen and (max-width: 600px) {
+    .cv-req-info{
+        margin-top: 20px !important;
+     }
+}
+
+@media only screen and (min-width: 768px) {
+   .cv-req-card{
+      display: flex !important;
+      justify-content: space-between !important;
+      column-gap: 40px !important;
+     
+   }     
+
+   .cv-filteres{
+       width: 60% !important;
+       margin-right: 5% !important;
+   }
+
+   .cv-action{
+       width: 35% !important;
+       text-align: end !important;
+   } 
+}
+::ng-deep .mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix {
+    position: static;
+    display: flex;
+    align-items: center;
+    width: 88px;
+    min-height: 30px;
+    padding: 0;
+    border: 0;
+}
+@media only screen and (min-width: 1280px) {
+    .cv-req-card{
+        padding-left: 2% !important;
+        padding-right: 2% !important;
+    }
+    .cv-filteres{
+        width: 70% !important;
+        margin-right: 10% !important;
+    }
+ 
+    .cv-action{
+        width: 20% !important;
+    } 
+}

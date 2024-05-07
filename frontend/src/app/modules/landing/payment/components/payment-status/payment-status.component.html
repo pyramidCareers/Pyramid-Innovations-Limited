@@ -1,0 +1,60 @@
+<div class="flex justify-center  container">
+
+    <div class="bg-white p-5 payment-card mx-auto min-w-60   shadow-lg">
+        <div *ngIf="status == 'success' " >
+            <div class="text-center">
+                <i class="far fa-check-circle mt-4 icon status-pic" style="color: #07c336;"></i>
+            </div>
+           
+             <div class="text-center">
+                   <h1 class="text-2xl  font-bold mb-10 mt-3 status" style="color: #07c336 !important;">Payment Successful</h1>
+             </div>
+        </div>
+
+        <div *ngIf="status == 'failed' " >
+            <div class="text-center">
+                <i class="far fa-window-close  mt-4 icon status-pic text-red-600"></i>
+            </div>
+           
+             <div class="text-center">
+                   <h1 class="text-2xl  font-bold mb-10 mt-3 status text-red-600">Payment Failed</h1>
+             </div>
+        </div>
+
+        <div  class="payment-info-container">
+
+           <div class="payment-info mb-3">
+                <h2 class="font-semibold text-lg">Biller Name:</h2>
+                <h2>{{ paymentInfo?.firstname + " " + paymentInfo?.lastname }}</h2>
+           </div>
+
+           <div class="payment-info mb-3">
+                <h2 class="font-semibold text-lg">Mobile:</h2>
+                <h2>{{ paymentInfo?.phone }}</h2>
+           </div>
+
+           <div class="payment-info mb-3">
+                    <h2 class="font-semibold text-lg">Email:</h2>
+                    <h2>{{ paymentInfo?.email }}</h2>
+           </div>
+
+           <div  *ngIf="status == 'success' "  class="payment-info mb-3">
+                <h2 class="font-semibold text-lg">Amount paid:</h2>
+                <h2>{{   paymentInfo?.payments?.amount  }}</h2>
+           </div>
+
+           <div  *ngIf="status == 'success' "  class="payment-info mb-3">
+                <h2 class="font-semibold text-lg">Transaction id:</h2>
+                <h2>{{   paymentInfo?.payments?.transaction_id  }}</h2>
+           </div>
+        </div>
+
+        <div class="flex justify-center my-7">
+             <button (click)="goToJobDetails()" class="inline-flex items-center bg-pyramid-jobs-secondary px-4 py-2 mr-3  rounded border   hover:text-white ">
+                    Back To Job Details
+             </button>
+        </div>
+    </div>
+
+
+</div>

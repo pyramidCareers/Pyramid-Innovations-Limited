@@ -1,0 +1,59 @@
+.placeholder-italic::placeholder {
+    font-style: italic;
+}
+
+.placeholder-italic:focus {
+    border: 2px solid #000000 !important;
+}
+
+input {
+    height: 46px !important;
+    border: 1px solid #64748b !important;
+}
+
+.signup {
+    height: 44px !important;
+}
+
+.signup-disabled {
+    background-color: #00000045 !important;
+    height: 44px !important;
+}
+
+.social-link-text {
+    margin-left: 10px !important;
+}
+
+.heading {
+    font-weight: 600 !important;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    text-align: center;
+    border-bottom: none;
+    font-size: 28px;
+    line-height: 34px;
+    padding: 0 0 15px;
+}
+
+.signup-disabled {
+    background-color: #00000045 !important;
+}
+
+.role-label {
+    color: #333 !important;
+    font-weight: bold !important;
+    margin-top: 26px !important;
+}
+
+.text-red {
+    color: red !important;
+}
+
+.loader {
+    border: 14px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #6ec9de; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 0.8s linear infinite;
+}

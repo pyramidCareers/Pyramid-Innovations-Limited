@@ -1,0 +1,20 @@
+<div class="w-60 md:pt-8 md:pb-4 lg:w-100 xl:w-120">
+    <div class="flex flex-row flex-wrap items-center justify-center">
+        <div class="text-center modal-content">
+            <h1 class="text-center text-red-600 text-3xl font-bold md:text-4xl">
+                 Error
+            </h1>
+            <p class="text-center text-xl my-3" [innerHTML]="data.errorMessage">
+               
+            </p>
+            
+            <button
+                (click)="cancelModal()"
+                class="mx-auto rounded  mt-4 submit-btn text-white font-semibold py-2 px-4 bg-[#28243efc]"
+            >
+                 Cancel
+            </button>
+        </div>
+    </div>
+</div>
+

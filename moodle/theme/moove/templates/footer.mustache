@@ -1,0 +1,177 @@
+{{!
+This file is part of Moodle - http://moodle.org/
+
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Moodle. If not, see
+<http: //www.gnu.org/licenses />.
+}}
+{{!
+@template theme_moove/footer
+
+Page footer.
+
+Example context (json):
+{
+"output": {
+"page_doc_link": "Help and documentation",
+"supportemail": "<a href=\"#\">Contact site support</a>",
+"has_popover_links": true,
+"services_support": "Services and support",
+"login_info": "You are logged in as cute kitten",
+"moodle_release": "90210"
+}
+}
+}}
+<!-- Footer start -->
+<footer id="page-footer">
+    <div class=" d-flex flex-wrap px-5 pt-4 justify-content-center">
+        <div class="p-5">
+            <h2 class="text-white fw-medium fs-5 cursor-pointer p-2">
+                Pyramid
+            </h2>
+            <div class="d-flex flex-row list-group py-2 ml-n2 social">
+
+                <a title="Facebook" class="p-2 text-white">
+                    <i class="fab fa-facebook text-[16px] text-pyramid-white"></i>
+                </a>
+
+                <a title="Twitter" class="p-2 text-white">
+                    <i class="fab fa-twitter text-[16px] text-pyramid-white"></i>
+                </a>
+
+                <a title="LinkedIn" class="p-2 text-white">
+                    <i class="fab fa-linkedin text-[16px] text-pyramid-white"></i>
+                </a>
+
+                <a title="Youtube" class="p-2 text-white">
+                    <i class="fab fa-youtube text-[16px] text-pyramid-white"></i>
+                </a>
+
+                <a title="Instagram" class="p-2 text-white">
+                    <i class="fab fa-instagram text-[16px] text-pyramid-white"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="p-5 mx-2">
+
+            <h5 class="text-white fs-1 fw-bold text-uppercase">
+                About the pyramid
+            </h5>
+            <div class="hoverHandler">
+                <div class="py-2">
+                    About Us
+                </div>
+                <div class="py-2">
+                    Careers
+                </div>
+                <div class="py-2">
+                    FAQs
+                </div>
+                <div class="py-2">
+                    Contact Us
+                </div>
+                <div class="py-2">
+                    Search Jobs
+                </div>
+                <div class="py-2">
+                    Browse Companies
+                </div>
+                <div class="py-2">
+                    Terms of Use
+                </div>
+                <div class="py-2">
+                    Privacy Policy
+                </div>
+            </div>
+        </div>
+
+        <div class="p-5 mx-2">
+
+            <h5 class="text-white fs-1 fw-bold text-uppercase">
+                Popular jobs
+            </h5>
+            <div class="hoverHandler">
+                <div class="py-2">
+                    New York Jobs
+                </div>
+                <div class="py-2">
+                    San Francisco Jobs
+                </div>
+                <div class="py-2">
+                    Seattle Jobs
+                </div>
+                <div class="py-2">
+                    Engineering Jobs
+                </div>
+                <div class="py-2">
+                    Marketing Jobs
+                </div>
+                <div class="py-2">
+                    Information Technology Jobs
+                </div>
+            </div>
+        </div>
+
+        <div class="p-5 mx-2">
+
+            <h5 class="text-white fs-1 fw-bold text-uppercase">
+                get involved
+            </h5>
+            <div class="hoverHandler">
+                <div class="py-2">
+                    For Employers
+                </div>
+                <div class="py-2">
+                    For Career Coaches
+                </div>
+                <div class="py-2">
+                    Send Feedback About Pyramid
+                </div>
+                <div class="py-2">
+                    Tell A Friend
+                </div>
+            </div>
+        </div>
+
+        <div class="p-5 mx-2">
+            <div>
+                <form>
+                    <div class="mb-2">
+                        <div class="label d-flex align-items-center">
+                            <div class="relative">
+                                <input id="email" type="email" class="footerInput" required placeholder="E-mail" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="submit-form flex justify-start items-center">
+                <div>
+                    <button class="p-2">
+                        Keep Me Posted
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+{{{ output.standard_end_of_body_html }}}
+
+{{#js}}
+require(['theme_boost/footer-popover'], function(FooterPopover) {
+FooterPopover.init();
+});
+{{/js}}

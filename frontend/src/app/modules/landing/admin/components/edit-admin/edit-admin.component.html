@@ -1,0 +1,81 @@
+<div class="flex flex-col space-y-4 text-center mt-4">
+    <div class="text-center">
+        <h1 class="mt-4 text-3xl font-bold">Edit Admin Profile</h1>
+    </div>
+
+    <form
+        [formGroup]="myForm"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col w-80 sm:w-160 md:w-180 xl:w-200 mx-auto pb-8"
+    >
+        <div class="flex flex-col">
+            <div class="input-container mb-4">
+                <label
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    for="first_name"
+                    >First Name*</label
+                >
+                <input
+                    type="text"
+                    id="first_name"
+                    required
+                    placeholder="First Name"
+                    formControlName="first_name"
+                    [(ngModel)]="EditAdmin.first_name"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                />
+            </div>
+
+            <div class="input-container mb-2">
+                <label
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    for="last_name"
+                    >Last Name*</label
+                >
+                <input
+                    type="text"
+                    id="last_name"
+                    required
+                    placeholder="Last Name"
+                    formControlName="last_name"
+                    [(ngModel)]="EditAdmin.last_name"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                />
+            </div>
+
+            <div class="input-container mb-4">
+                <label
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    for="phone"
+                    >Phone*</label
+                >
+                <input
+                    type="text"
+                    id="phone"
+                    required
+                    placeholder="Phone"
+                    formControlName="phone"
+                    [(ngModel)]="EditAdmin.phone"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                />
+            </div>
+        </div>
+        <div class="flex flex-wrap justify-center">
+            <button
+                class="
+            mt-5 w-1/2 mx-auto text-white font-medium py-2 px-4 rounded
+            bg-[#363154fc] hover:bg-[#28243efc]
+            {{
+                    myForm.invalid
+                        ? '!bg-gray-300 hover:!bg-gray-300 cursor-not-allowed rounded'
+                        : ''
+                }}"
+                [disabled]="myForm.invalid"
+                type="submit"
+                class="w-1/2 mx-auto text-white font-medium py-2 px-4 rounded bg-[#363154fc] hover:bg-[#28243efc]"
+            >
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

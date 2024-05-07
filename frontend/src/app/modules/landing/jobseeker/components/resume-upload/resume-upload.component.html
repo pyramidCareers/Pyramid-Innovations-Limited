@@ -1,0 +1,55 @@
+<div class="parent-container mx-auto min-h-screen my-8">
+    <div class="sidebar">
+        <app-profile-sidebar class="sticky top-6"></app-profile-sidebar>
+    </div>
+
+    <div class="main-container">
+        <div class="flex justify-center md:mx-auto">
+            <div class="flex flex-col md:mt-10 text-center">
+                <h1 class="font-bold text-3xl text-center mb-3">
+                    Upload New Resume
+                </h1>
+                <input
+                    name="profile_pic"
+                    type="file"
+                    class="px-auto mt-2 text-center"
+                    (change)="onResumeUpload($event)"
+                />
+
+                <button
+                    *ngIf="!loading"
+                    class="mt-5 sigin text-white font-semibold py-2 px-3 rounded bg-pyramid-default-primary"
+                    (click)="submit()"
+                >
+                    SUBMIT
+                </button>
+
+                <!-- Download Profile As PDF Button-->
+
+                <button
+                    *ngIf="!loading"
+                    class="mt-5 sigin text-white font-semibold py-2 px-3 rounded bg-pyramid-default-primary"
+                    (click)="DownloadResume()"
+                >
+                    Save Profile As Resume
+                </button>
+
+                <div *ngIf="loading" class="absolute top-1/2 left-1/2">
+                    <app-loader></app-loader>
+                </div>
+            </div>
+        </div>
+
+        <h1
+            class="font-bold text-3xl text-center mb-5 mx-0 px-0 mt-12"
+            *ngIf="resume"
+        >
+            Current Resume
+        </h1>
+        <div
+            class="flex flex-col justify-center items-center resume-section text-center mx-auto"
+        >
+            <iframe id="pdfViewer" class="md:w-200" height="800"></iframe>
+        </div>
+    </div>
+</div>

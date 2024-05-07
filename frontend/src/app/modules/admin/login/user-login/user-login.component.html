@@ -1,0 +1,72 @@
+<div class="min-h-screen flex items-center justify-center">
+    <div class="flex flex-col text-center">
+        <div class="text-center">
+            <h1 class="heading">Sign In</h1>
+        </div>
+
+        <div class="mb-4 mt-5 alert-section mx-auto px-auto py-3" *ngIf="showAlert">
+            <fuse-alert [appearance]="'outline'" [showIcon]="true" [type]="alert.type" [@shake]="alert.type === 'error'"
+                class="mx-auto">
+                <p class="font-semibold">{{ errorMessage }}</p>
+            </fuse-alert>
+        </div>
+
+        <div class="flex flex-col w-60 sm:w-80 mx-auto mt-5">
+            <div class="flex flex-col">
+                <button class="py-2 flex items-center text-white font-semibold px-4 bg-[#0166C2] hover:bg-[#00569C]"
+                    *ngIf="!loading" (click)="redirectToOAuthURL('linkedin')">
+                    <i class="fab fa-linkedin text-[24px] text-vumi-white mr-2 social-logo"></i>
+                    <span class="align-middle">LINKEDIN</span>
+                </button>
+
+                <button class="py-2 mt-2 flex items-center text-[#0166C2] font-semibold px-4 bg-white hover:bg-[#00569C] hover:text-white"
+                    *ngIf="!loading" (click)="redirectToOAuthURL('google')">
+                    <i class="fab fa-google fa-10x text-[24px] text-[#0166C2] mr-2 social-logo"></i>
+                    <span class="align-middle">GOOGLE</span>
+                </button>
+
+                <h1 class="font-semibold py-2">OR</h1>
+
+                <input type="email" [(ngModel)]="email" placeholder="Your Email" class="px-4 py-2 placeholder-italic" />
+                <div class="relative">
+                    <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" placeholder="Password"
+                        class="mt-5 w-full px-4 py-2 placeholder-italic" />
+                    <mat-icon *ngIf="!showPassword" class="icon-size-5 absolute right-2 top-1/2 cursor-pointer"
+                        [svgIcon]="'heroicons_solid:eye'" (click)="togglePasswordVisibility()"></mat-icon>
+                    <mat-icon *ngIf="showPassword" class="icon-size-5 absolute right-2 top-1/2 cursor-pointer"
+                        [svgIcon]="'heroicons_solid:eye-off'" (click)="togglePasswordVisibility()"></mat-icon>
+                </div>
+            </div>
+
+            <button class="mt-5 sigin text-white font-semibold py-2 px-4 bg-[#222222] hover:bg-pyramid-default-primary"
+                *ngIf="!(email == '' || password == '') && !loading" (click)="submit()">
+                SIGN IN
+            </button>
+
+            <button class="mt-5 signin-disabled text-white font-semibold py-2 px-4"
+                *ngIf="(email == '' || password == '') && !loading" [disabled]="true">
+                SIGN IN
+            </button>
+
+            <div class="text-center mt-4 mb-4">
+                <p (click)="resetPass()"
+                    class="cursor-pointer font-medium text-pyramid-default-primary hover:underline">
+                    Forgot Password?
+                </p>
+            </div>
+
+            <div *ngIf="loading" class="flex justify-center items-center mt-4">
+                <app-loader></app-loader>
+            </div>
+        </div>
+
+        <div class="text-center p-6 mx-auto">
+            <button
+                class="bg-white border border-black hover:border-white hover:bg-pyramid-default-primary py-3 px-2 sm:px-5 hover:text-white"
+                (click)="goTo('user/register')">
+                <span class="text-sm">Not a member?</span>
+                <span class="ml-2 font-semibold text-sm">CREATE AN ACCOUNT</span>
+            </button>
+        </div>
+    </div>
+</div>

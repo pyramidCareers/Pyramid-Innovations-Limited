@@ -1,0 +1,58 @@
+db/data
+# frontend/src/environments/environment.ts
+# frontend/src/environments/environment.prod.ts
+moodledata
+.env
+moodle/config.php
+app_envs/config.php
+app_envs/laravel.env
+laravel_project/.env
+/laravel_project/vendor/
+laravel_project/public/storage
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+# frontend/dist
+# frontend/tmp
+# frontend/out-tsc
+# Only exists if Bazel was run
+frontend/bazel-out
+
+# dependencies
+frontend/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+
+# IDEs and editors
+frontend/.idea
+frontend/.project
+frontend/.classpath
+frontend/.c9/
+frontend/*.launch
+frontend/.settings/
+frontend/*.sublime-workspace
+
+# IDE - VSCode
+frontend/.vscode/*
+frontend/!.vscode/settings.json
+frontend/!.vscode/tasks.json
+frontend/!.vscode/launch.json
+frontend/!.vscode/extensions.json
+frontend/.history/*
+
+# misc
+frontend/.angular/cache
+frontend/.sass-cache
+frontend/connect.lock
+frontend/coverage
+frontend/libpeerconnection.log
+frontend/npm-debug.log
+frontend/yarn-error.log
+frontend/testem.log
+frontend/typings
+
+# System Files
+frontend/.DS_Store
+frontend/Thumbs.db

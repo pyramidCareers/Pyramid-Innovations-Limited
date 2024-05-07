@@ -1,0 +1,117 @@
+<div class="parent-container mx-auto min-h-screen my-6">
+    <div class="sidebar">
+        <app-profile-sidebar class="sticky top-6"></app-profile-sidebar>
+    </div>
+
+    <div class="main-container">
+        <div *ngIf="loading" class="absolute top-1/2 left-1/2">
+            <app-loader></app-loader>
+        </div>
+
+        <div
+            *ngIf="favoriteJobs.length == 0 && !loading"
+            class="text-center mt-8 md:mt-4 text-red-600 font-bold text-2xl md:text-3xl"
+        >
+            <h1>No Favourite jobs Available</h1>
+        </div>
+
+        <div class="mt-8">
+            <h1
+                *ngIf="favoriteJobs.length != 0 && !loading"
+                class="font-bold text-3xl text-center mb-6"
+            >
+                My Favorite Jobs
+            </h1>
+            <div
+                *ngFor="let job of favoriteJobs"
+                class="mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0"
+            >
+                <div class="bg-[#fff] hover:shadow-md">
+                    <div class="sm:flex justify-between items-center p-4">
+                        <div
+                            (click)="displayJobDetails(job.id)"
+                            class="flex items-center justify-between cursor-pointer"
+                        >
+                            <div class="border border-[#338f3a] rounded">
+                                <img
+                                    [src]="job.logo"
+                                    class="h-20 w-20 object-contain"
+                                />
+                            </div>
+
+                            <div class="ml-5 -mt-1">
+                                <h1 class="text-2xl font-medium">
+                                    {{ job.title }}
+                                </h1>
+                                <h3
+                                    *ngIf="job.location !== null"
+                                    class="py-2 text-sm"
+                                >
+                                    At {{ job.company_name }} -
+                                    {{ job.location }}
+                                </h3>
+                                <h2 class="text-sm">
+                                    Posted on {{ job.createdDate | date }}
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex justify-between gap-x-2 infxs:mt-6 sm:mt-0"
+                        >
+                            <div
+                                (click)="displayJobDetails(job.id)"
+                                class="cursor-pointer view-btn px-6 py-3 text-md hover:bg-[#86de8cc4] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-pyramid-black text-[#338f3a] uppercase"
+                            >
+                                View Job
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            *ngIf="favoriteJobs.length > 0"
+            class="mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+        >
+            <div class="flex items-center justify-center my-4">
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-white text-[#338f3a]"
+                    (click)="previousPage()"
+                    [disabled]="currentPage === 1"
+                >
+                    Prev
+                </button>
+
+                <div *ngIf="!isMobileView()">
+                    <ng-container
+                        *ngFor="let page of getPageRange(); let i = index"
+                    >
+                        <button
+                            class="inline-flex items-center px-4 py-2 mr-3 rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                            [ngClass]="{
+                                'hover:bg-[#338f3a] hover:text-white':
+                                    currentPage !== page,
+                                'bg-[#338f3a] !text-white buttonColor':
+                                    currentPage === page
+                            }"
+                            (click)="goToPage(page)"
+                            [disabled]="currentPage === page"
+                        >
+                            {{ page }}
+                        </button>
+                    </ng-container>
+                </div>
+
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                    (click)="nextPage()"
+                    [disabled]="currentPage === totalPages"
+                >
+                    Next
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+.top-message {
+    font-size: 20px;
+    font-weight: 500;
+    color: #a7a9aa !important;
+    font-style: italic;
+}
+
+.intro {
+    font-weight: 600;
+    font-size: 32px;
+    min-width: 100px;
+    color: #040708;
+}
+
+.direction {
+    font-size: 14px;
+    font-weight: 400;
+    color: #040708;
+}
+
+input:focus,
+input:hover {
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
+    border-bottom: 2px solid #86de8cc4 !important;
+}
+
+.highlighted {
+    color: #338f3a !important;
+}
+
+.continue-btn {
+    background-color: #338f3a !important;
+}
+.continue-btn:hover {
+    background-color: #256a2a !important;
+}
+
+::ng-deep .input-style::placeholder {
+    font-size: 2xl !important; /* Adjust the font size as needed */
+}
+
+@media only screen and (max-width: 599px) {
+    .input-style::placeholder {
+        font-size: 15px !important; /* Adjust the font size as needed */
+    }
+}
+
+body,
+.parent-container {
+    overflow-x: hidden !important;
+}
+
+.dropdown {
+    margin-left: 12px !important;
+    width: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-industry,
+.dropdown-speciality {
+    margin-left: 12px !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-skills2 {
+    margin-left: 12px !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu {
+    padding: 0;
+}
+
+.dropdown-industry-menu,
+.dropdown-speciality-menu {
+    margin-right: 10px !important;
+}
+
+.dropdown-item {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 5px 4px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.dropdown-item:hover {
+    background-color: #338f3a;
+    color: white !important;
+}

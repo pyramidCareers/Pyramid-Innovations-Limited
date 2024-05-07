@@ -1,0 +1,11 @@
+/* Default height for screens below 1920px width */
+.map {
+    height: 480px;
+}
+
+/* Media query for screens with a width of 1920px or more */
+@media screen and (min-width: 1920px) {
+    .map {
+        min-height: 810px;
+    }
+}

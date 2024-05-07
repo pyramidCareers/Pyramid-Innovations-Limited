@@ -1,0 +1,26 @@
+<div>
+        <img [src]="course.courseimage" alt="Course Image"
+           class="course-image cursor-pointer h-50"
+           (click)=" gotoCourse(course.id)" 
+        >
+        <div class="course-details  flex  items-center cursor-pointer"  (click)=" gotoCourse(course.id)">
+            <div>
+                    <div class="px-2.5">
+                        <h3 class="text-lg font-[700] mt-3">{{ course.fullname }}</h3>
+                        <p [innerHTML]="course.summary" class="h-36 mt-3"></p>
+                    </div>
+                
+                    
+            </div>
+            
+        </div>
+        <div  class="text-center mb-3">
+            <button *ngIf="course.alreadyAdded == false"  type="submit"  class="bg-green-600 text-white px-6 py-1 rounded"
+                (click)="addCourse(course)"
+            >
+                 ADD COURSE
+           </button>
+
+           <h1 *ngIf="course.alreadyAdded == true" class="font-bold uppercase">Added</h1>
+        </div>
+</div>

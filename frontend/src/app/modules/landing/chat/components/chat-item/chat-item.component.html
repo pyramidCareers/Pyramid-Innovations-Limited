@@ -1,0 +1,14 @@
+<div class="parent-container flex hover:bg-[#f1f5f9] hover:cursor-pointer">
+    <div class="my-auto py-4 px-2 flex justify-between items-center w-full">
+        <h1 class="font-normal text-lg ml-1">
+            {{ chat.firstname }} {{ chat.lastname }}
+        </h1>
+        <ng-container *ngIf="chat.max_created_at">
+            <span
+                class="text-gray-600 text-xs xl:text-sm"
+                style="white-space: nowrap"
+                >{{ formatTime(chat.max_created_at) }}</span
+            >
+        </ng-container>
+    </div>
+</div>

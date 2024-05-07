@@ -1,0 +1,21 @@
+<div class="flex items-center md:min-w-80">
+
+  <div>
+      <h1 class="font-bold text-2xl text-center">Confirm The Action</h1>
+      <p class="text-xl mt-4">Do you really want to delete the data?</p>
+      <div class="flex justify-center mt-6 gap-x-3">
+            <div *ngIf="loading">
+                <app-loader></app-loader>
+            </div>
+            <button  *ngIf="!loading" class="bg-pyramid-white rounded hover:bg-pyramid-green hover:text-pyramid-white text-green-600 border border-green-600 font-bold py-2 px-4 ml-2"
+                  (click)="cancelModal()"
+            >Cancel</button>
+            <button   *ngIf="!loading"  class="  text-white rounded font-bold py-2 px-4 hover:bg-red-900"
+                  (click)="remove()"
+                  style="background-color: #b8001c;"
+            >Confirm</button>
+      
+      </div>
+  </div>
+
+</div>

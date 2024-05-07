@@ -1,0 +1,43 @@
+#page-footer {
+    margin: 0 -15px;
+    background-color: #010101;
+    color: #fff;
+.footerInput{
+    background-color: #010101;
+    outline: none;
+    padding: 6px !important;
+    border: 2px solid white !important;
+    color: white;
+    width: 100%;
+}
+.social a:hover{
+ 
+    background-color: rgb(110, 110, 110);
+    cursor: pointer;
+    border-radius: 100%;
+    padding: 0px 3px;
+}
+.hoverHandler div{
+    color: rgb(155, 155, 155);
+
+}
+.hoverHandler div:hover{
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+}
+
+@include media-breakpoint-down(sm) {
+    #page-footer {
+        .column-right,
+        .column-left {
+            text-align: center;
+        }
+
+        .column-center,
+        .column-right {
+            margin-top: 1rem;
+        }
+    }
+}
+

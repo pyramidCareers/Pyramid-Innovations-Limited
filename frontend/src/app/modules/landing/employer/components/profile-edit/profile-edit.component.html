@@ -1,0 +1,366 @@
+<div class="min-h-screen flex justify-center">
+    <div *ngIf="loading" class="absolute top-1/2 left-1/2">
+        <app-loader></app-loader>
+    </div>
+    <div class="flex flex-col space-y-4 text-center mt-4" *ngIf="!loading">
+        <div class="text-center">
+            <h1 *ngIf="isProfileCompleted" class="mt-4 text-3xl font-bold">
+                Employer Profile
+            </h1>
+            <h1
+                *ngIf="!isProfileCompleted"
+                class="mt-4 text-3xl font-bold text-red-600"
+            >
+                *You Must Need To Complete Your Employer Profile
+            </h1>
+        </div>
+        <div *ngIf="userType === 'admin'">
+            <div class="text-center">
+                <h1>Name: {{ Name }}</h1>
+                <h1>Email: {{ Email }}</h1>
+                <h1>Phone: {{ Phone }}</h1>
+            </div>
+        </div>
+
+        <form
+            #myForm="ngForm"
+            (ngSubmit)="onSubmit()"
+            class="flex flex-col w-80 sm:w-160 md:w-180 xl:w-200 mx-auto pb-8"
+        >
+            <div class="flex flex-col">
+                <div class="input-container mb-4">
+                    <label
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        for="organization-name"
+                        >Organization Name*</label
+                    >
+                    <input
+                        type="text"
+                        id="location"
+                        required="true"
+                        placeholder="Organization Name"
+                        [(ngModel)]="ProfileEdit.organization_name"
+                        name="organization_name"
+                        class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                    />
+                </div>
+
+                <div
+                    *ngIf="
+                        myForm.controls.organization_name?.touched &&
+                        myForm.controls.organization_name.invalid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Organization Name is required
+                </div>
+
+                <div class="input-container mb-2">
+                    <label
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        for="organization-details"
+                        >Organization Details*</label
+                    >
+                    <textarea
+                        type="text"
+                        id="organization_details"
+                        required="true"
+                        placeholder="Organization Details"
+                        [(ngModel)]="ProfileEdit.organization_details"
+                        name="organization_details"
+                        class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                    ></textarea>
+                </div>
+
+                <div
+                    *ngIf="
+                        myForm.controls.organization_details?.touched &&
+                        myForm.controls.organization_details.invalid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Organization Deatils is required
+                </div>
+
+                <div class="input-container mb-4">
+                    <div class="flex flex-wrap justify-between">
+                        <label
+                            class="flex justify-start font-semibold text-lg mb-1"
+                            for="logo"
+                            >Logo*</label
+                        >
+                        <div class="text-gray-500 mt-1" *ngIf="showFileMessage">
+                            Choose a logo file (max size: 2MB).
+                        </div>
+                    </div>
+
+                    <input
+                        type="file"
+                        id="logo"
+                        accept="image/*"
+                        (change)="validateLogo($event)"
+                        [(ngModel)]="ProfileEdit.logo"
+                        name="logo"
+                        class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                    />
+                    <div *ngIf="logoError" class="text-left text-red-600 mb-3">
+                        *Please upload a valid logo file (max size: 2MB).
+                    </div>
+
+                    <div *ngIf="selectedFile && !logoError" class="mt-4">
+                        <img
+                            [src]="selectedFile"
+                            alt="Logo isn't loaded"
+                            class="h-30 w-40 object-contain"
+                        />
+                    </div>
+                </div>
+
+                <div
+                    *ngIf="
+                        myForm.controls.logo?.touched &&
+                        myForm.controls.logo.invalid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Logo is required
+                </div>
+
+                <div class="input-container mb-4">
+                    <label
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        for="industry"
+                        >Industry*</label
+                    >
+                    <input
+                        type="text"
+                        id="industry"
+                        required="true"
+                        placeholder="Industry"
+                        [(ngModel)]="ProfileEdit.industry"
+                        name="industry"
+                        class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                    />
+                </div>
+
+                <div
+                    *ngIf="
+                        myForm.controls.industry?.touched &&
+                        myForm.controls.industry.invalid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Industry is required
+                </div>
+                <div class="input-container mb-4">
+                    <label
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        for="location"
+                        >Location*</label
+                    >
+                    <input
+                        type="text"
+                        id="location"
+                        required="true"
+                        placeholder="Location"
+                        [(ngModel)]="ProfileEdit.location"
+                        name="location"
+                        class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                    />
+                </div>
+
+                <div
+                    *ngIf="
+                        myForm.controls.location?.touched &&
+                        myForm.controls.location.invalid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Location is required
+                </div>
+
+                <div class="input-container mb-4">
+                    <label
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        for="address_1"
+                        >Address 1*</label
+                    >
+                    <input
+                        type="text"
+                        id="address_1"
+                        required="true"
+                        placeholder="Address 1"
+                        [(ngModel)]="ProfileEdit.address_1"
+                        name="address_1"
+                        class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                    />
+                </div>
+
+                <div
+                    *ngIf="
+                        myForm.controls.address_1?.touched &&
+                        myForm.controls.address_1.invalid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Address 1 is required
+                </div>
+
+                <div class="input-container mb-4">
+                    <label
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        for="address_2"
+                        >Address 2*</label
+                    >
+                    <input
+                        type="text"
+                        id="address_2"
+                        required="true"
+                        placeholder="Address 2"
+                        [(ngModel)]="ProfileEdit.address_2"
+                        name="address_2"
+                        class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                    />
+                </div>
+
+                <div
+                    *ngIf="
+                        myForm.controls.address_2?.touched &&
+                        myForm.controls.address_2.invalid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Address 2 is required
+                </div>
+
+                <div class="input-container mb-4">
+                    <label
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        for="organization_website_url"
+                        >Organization Website URL*</label
+                    >
+                    <input
+                        type="text"
+                        id="organization_website_url"
+                        required="true"
+                        placeholder="Organization Website URL"
+                        [(ngModel)]="ProfileEdit.organization_website_url"
+                        name="organization_website_url"
+                        class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                    />
+                </div>
+
+                <div
+                    *ngIf="
+                        myForm.controls.organization_website_url?.touched &&
+                        myForm.controls.organization_website_url.invalid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Organization Website URL is required
+                </div>
+
+                <div class="input-container">
+                    <label
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        for="organization_lower_limit"
+                        >Organization size Lower limit*</label
+                    >
+                    <input
+                        type="number"
+                        id="organization_lower_limit"
+                        placeholder="Organization size Lower limit"
+                        required
+                        [(ngModel)]="ProfileEdit.organization_lower_limit"
+                        name="organization_lower_limit"
+                        class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                </div>
+
+                <div
+                    *ngIf="
+                        myForm.controls.organization_lower_limit?.touched &&
+                        myForm.controls.organization_lower_limit.invalid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Organization size Lower Limit is required
+                </div>
+
+                <div class="input-container mt-4">
+                    <label
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        for="organization_upper_limit"
+                        >Organization size Upper limit*</label
+                    >
+                    <input
+                        type="number"
+                        id="organization_upper_limit"
+                        placeholder="Organization size Upper limit"
+                        required
+                        [(ngModel)]="ProfileEdit.organization_upper_limit"
+                        name="organization_upper_limit"
+                        class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                </div>
+
+                <div
+                    *ngIf="
+                        +ProfileEdit.organization_lower_limit >
+                            +ProfileEdit.organization_upper_limit &&
+                        myForm.controls.organization_upper_limit.valid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Upper limit is must be greater than Lower limit
+                </div>
+
+                <div
+                    *ngIf="
+                        myForm.controls.organization_upper_limit?.touched &&
+                        myForm.controls.organization_upper_limit.invalid
+                    "
+                    class="text-left text-red-600 mb-3"
+                >
+                    *Organization size Upper Limit is required
+                </div>
+            </div>
+            <div class="flex flex-wrap">
+                <button
+                    class="
+                  mt-5 w-1/2 mx-auto text-white font-medium py-2 px-4 rounded
+                  bg-[#363154fc] hover:bg-[#28243efc]
+                  {{
+                        myForm.invalid ||
+                        +ProfileEdit.organization_lower_limit >
+                            +ProfileEdit.organization_upper_limit ||
+                        logoError
+                            ? '!bg-gray-300 hover:!bg-gray-300 cursor-not-allowed rounded'
+                            : ''
+                    }}"
+                    [disabled]="
+                        myForm.invalid ||
+                        +ProfileEdit.organization_lower_limit >
+                            +ProfileEdit.organization_upper_limit ||
+                        logoError
+                    "
+                >
+                    Submit
+                </button>
+
+                <button
+                    *ngIf="userType === 'admin'"
+                    type="submit"
+                    class="bg-[#222222] hover:bg-pyramid-default-primary text-pyramid-white !px-2 !py-1 mt-5 rounded"
+                    (click)="goToPrev()"
+                >
+                    Cancel
+                </button>
+            </div>
+
+            <div *ngIf="loading" class="flex justify-center items-center mt-3">
+                <app-loader></app-loader>
+            </div>
+        </form>
+    </div>
+</div>

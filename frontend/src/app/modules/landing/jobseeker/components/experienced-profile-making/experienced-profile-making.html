@@ -1,0 +1,224 @@
+<div class="min-h-screen flex justify-center items-center bg-[#fff] px-2">
+    <div class="w-full text-center mx-auto">
+        <p *ngIf="!skillSection" class="top-message mb-5">
+            Hello, {{firstName}}! Help us get to know you better by sharing with
+            us your work experience.
+        </p>
+
+        <div
+            *ngIf="!skillSection"
+            class="md:flex md:flex-row justify-center mt-4"
+        >
+            <h1 class="intro">I am a</h1>
+            <div class="relative" *ngIf="!showSecondPart">
+                <input
+                    (keyup)="callProfessionAPI()"
+                    [(ngModel)]="jobTitle"
+                    (keyup.enter)="toggleSecondPart()"
+                    type="text"
+                    class="w-full ml-3 bg-transparent border-b border-gray-300 py-3 text-2xl placeholder-gray-700 input-style"
+                    placeholder="Insert Job Title Here..."
+                />
+                <div
+                    class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                ></div>
+                <ul
+                    class="dropdown"
+                    *ngIf="resultsProfession.length > 0 || jobTitle.length > 0"
+                >
+                    <li
+                        *ngFor="let result of resultsProfession"
+                        (click)="selectResult(result)"
+                        class="dropdown-item"
+                    >
+                        {{ result }}
+                    </li>
+                </ul>
+            </div>
+
+            <div *ngIf="showSecondPart" class="md:flex md:flex-row">
+                <span class="font-bold text-4xl highlighted ml-2"
+                    >{{ jobTitle }}</span
+                >
+                <span class="intro">, working in the</span>
+                <div class="relative">
+                    <input
+                        *ngIf="!showThirdPart"
+                        (keyup)="callIndustryAPI()"
+                        [(ngModel)]="companyIndustry"
+                        (keyup.enter)="toggleThirdPart()"
+                        type="text"
+                        class="ml-3 bg-transparent border-b border-gray-300 py-3 text-2xl placeholder-gray-700 w-90 input-style"
+                        placeholder="Insert Your Company Industry Here..."
+                    />
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                    ></div>
+                    <ul
+                        class="dropdown-industry"
+                        [ngClass]="{'hidden': showThirdPart}"
+                        *ngIf="
+                        resultsIndustry.length
+                    >
+                        0 || companyIndustry.length > 0"
+                    >
+                        <li
+                            *ngFor="let result of resultsIndustry"
+                            (click)="selectResultIndustry(result)"
+                            class="dropdown-item"
+                        >
+                            {{ result }}
+                        </li>
+                    </ul>
+                </div>
+                <span
+                    *ngIf="showThirdPart"
+                    class="font-bold text-4xl highlighted ml-3"
+                    >{{ companyIndustry }}</span
+                >
+                <span class="intro md:mt-0 ml-3">industry,</span>
+            </div>
+        </div>
+
+        <div
+            *ngIf="!skillSection && showThirdPart"
+            class="md:flex md:flex-row justify-center mt-6"
+        >
+            <h1 class="intro">specialising in</h1>
+            <div class="relative" *ngIf="!showFourthdPart">
+                <input
+                    (keyup)="callSpecialityAPI()"
+                    [(ngModel)]="specialisation"
+                    (keyup.enter)="toggleFourthPart()"
+                    type="text"
+                    class="w-96 ml-3 bg-transparent border-b border-gray-300 py-3 text-2xl placeholder-gray-700 input-style"
+                    placeholder="Insert Your Current Specialisation Here..."
+                />
+                <div
+                    class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                ></div>
+                <ul
+                    class="dropdown-speciality"
+                    [ngClass]="{'hidden': showFourthdPart}"
+                    *ngIf="
+                resultsSpeciality.length
+            >
+                0 || specialisation.length > 0"
+                >
+                    <li
+                        *ngFor="let result of resultsSpeciality"
+                        (click)="selectResultSpeciality(result)"
+                        class="dropdown-item"
+                    >
+                        {{ result }}
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="showFourthdPart">
+                <h1 class="font-bold text-4xl highlighted ml-3">
+                    {{ specialisation }}
+                </h1>
+            </div>
+        </div>
+
+        <button
+            *ngIf="!skillSection && showFourthdPart"
+            class="continue-btn text-white text-lg font-bold mt-8 mb-8 py-2 px-8"
+            (click)="displaySkillSection()"
+        >
+            Continue
+        </button>
+
+        <p *ngIf="skillSection" class="top-message mb-5">
+            Fantastic! Let’s make your account stand out to potential employers
+            by letting us know what you’re skilled in.
+            <span
+                class="cursor-pointer text-pyramid-jobs-primary"
+                (click)="goTo('jobseeker/uploading-cv')"
+                >Not now</span
+            >
+        </p>
+        <div
+            *ngIf="skillSection"
+            class="md:flex md:flex-row justify-center mt-6"
+        >
+            <h1 class="intro">I am skilled in</h1>
+            <div class="relative" *ngIf="!showSkill1">
+                <input
+                    (keyup)="callSkills1API()"
+                    [(ngModel)]="skill1"
+                    (keyup.enter)="toggleSkill1()"
+                    type="text"
+                    class="w-full ml-3 bg-transparent border-b border-gray-300 py-3 text-2xl placeholder-gray-700 input-style"
+                    placeholder="Insert Skill Here..."
+                />
+                <div
+                    class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                ></div>
+                <ul
+                    class="dropdown-industry"
+                    [ngClass]="{'hidden': showSkill2}"
+                    *ngIf="
+                    resultsSkills1.length
+                    >
+                        0 || skill1.length > 0"
+                >
+                    <li
+                        *ngFor="let result of resultsSkills1"
+                        (click)="selectResultSkills1(result)"
+                        class="dropdown-item"
+                    >
+                        {{ result }}
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="showSkill1" class="md:flex md:flex-row">
+                <span class="font-bold text-4xl highlighted ml-3 mr-2"
+                    >{{skill1}},</span
+                >
+                <div class="relative">
+                    <input
+                        (keyup)="callSkills2API()"
+                        *ngIf="!showSkill2"
+                        [(ngModel)]="skill2"
+                        (keyup.enter)="toggleSkill2()"
+                        type="text"
+                        class="ml-3 bg-transparent border-b border-gray-300 py-3 text-2xl placeholder-gray-700 w-90 input-style"
+                        placeholder="Insert Another Skill  Here..."
+                    />
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                    ></div>
+                    <ul
+                        class="dropdown-skills2"
+                        [ngClass]="{'hidden': hideError}"
+                        *ngIf="
+            resultsSkills2.length
+            >
+                0 || skill2.length > 0"
+                    >
+                        <li
+                            *ngFor="let result of resultsSkills2"
+                            (click)="selectResultSkills2(result)"
+                            class="dropdown-item"
+                        >
+                            {{ result }}
+                        </li>
+                    </ul>
+                </div>
+
+                <span *ngIf="showSkill2" class="font-bold text-4xl highlighted"
+                    >{{ skill2 }}</span
+                >
+            </div>
+        </div>
+
+        <button
+            *ngIf="showSkill2"
+            class="continue-btn mt-8 text-white text-lg font-bold mb-8 py-2 px-8"
+            (click)="goTo('jobseeker/uploading-cv')"
+        >
+            Continue
+        </button>
+    </div>
+</div>

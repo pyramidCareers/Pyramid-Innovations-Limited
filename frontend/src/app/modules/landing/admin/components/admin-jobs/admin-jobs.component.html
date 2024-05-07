@@ -1,0 +1,104 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div *ngIf="!loading">
+    <div class="py-6 flex justify-center">
+        <button
+            (click)="goToCreateNewJobPage()"
+            class="uppercase px-6 py-2 xl:py-3 bg-[#338f3a] hover:bg-[#256a2a] border rounded text-white font-medium"
+        >
+            Create a job
+        </button>
+    </div>
+    <div class="bg-[#fff] hover:shadow-md mb-4" *ngFor="let jobs of allJobs">
+        <div class="sm:flex justify-between items-center p-4 mb-5">
+            <div
+                class="flex items-start cursor-pointer"
+                (click)="displayJobDetails(jobs.id)"
+            >
+                <div class="border border-[#338f3a] rounded">
+                    <img
+                        [src]="jobs?.companyinfo.logo"
+                        class="h-20 w-20 object-contain"
+                    />
+                </div>
+                <div class="ml-5 -mt-1">
+                    <h1 class="text-2xl font-medium">{{ jobs.title }}</h1>
+                    <h3 class="py-2 text-sm">At {{ jobs.location }}</h3>
+                    <h2 class="text-sm">
+                        Posted on {{ jobs.created_at | date }}
+                    </h2>
+                </div>
+            </div>
+            <div class="flex justify-end gap-x-5 infxs:mt-3 sm:mt-0">
+                <ng-container *ngIf="jobs.published === 0">
+                    <span
+                        class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"
+                        >Draft</span
+                    >
+                </ng-container>
+                <ng-container *ngIf="jobs.published === 1">
+                    <span
+                        class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
+                        >Published</span
+                    >
+                </ng-container>
+
+                <i
+                    title="Edit"
+                    class="fas fa-edit"
+                    style="cursor: pointer"
+                    (click)="goToJobEditPage(jobs.id, jobs.employer_user_id)"
+                ></i>
+
+                <i
+                    title="Applicants"
+                    class="fas fa-users"
+                    style="cursor: pointer"
+                    (click)="goToApplicantsPage(jobs.id)"
+                ></i>
+                <i
+                    title="Delete"
+                    class="fas fa-trash"
+                    style="cursor: pointer"
+                    (click)="openDialog(jobs.id, currentPage)"
+                ></i>
+            </div>
+        </div>
+    </div>
+    <div
+        class="md:max-w-4xl mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+    >
+        <div class="flex items-center justify-center my-4">
+            <button
+                class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-white text-[#338f3a]"
+                (click)="previousPage()"
+                [disabled]="currentPage === 1"
+            >
+                Prev
+            </button>
+            <ng-container *ngFor="let page of getPageRange(); let i = index">
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                    [ngClass]="{
+                        'hover:bg-[#338f3a] hover:text-white':
+                            currentPage !== page,
+                        'bg-[#338f3a] !text-white buttonColor':
+                            currentPage === page
+                    }"
+                    (click)="goToPage(page)"
+                    [disabled]="currentPage === page"
+                >
+                    {{ page }}
+                </button>
+            </ng-container>
+            <button
+                class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                (click)="nextPage()"
+                [disabled]="currentPage === totalPages"
+            >
+                Next
+            </button>
+        </div>
+    </div>
+</div>

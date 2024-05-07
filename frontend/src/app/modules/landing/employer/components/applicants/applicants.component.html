@@ -1,0 +1,530 @@
+<div
+    class="min-h-screen container infxs:my-4 sm:my-6 md:my-6 infxs:mx-4 sm:mx-8 md:mx-16"
+>
+    <div class="">
+        <!-- Filter Card -->
+        <div
+            class="bg-white shadow-md pt-5 pb-2 px-4 mb-4 md:min-w-[720px] fcard"
+        >
+            <div class="flex flex-wrap -mx-2 f1">
+                <div class="w-full relative sm:w-1/2 md:w-1/4 px-2 mb-4">
+                    <input
+                        type="text"
+                        placeholder="Institution"
+                        class="block w-full rounded py-2 px-3"
+                        (keyup)="callInstitutionSearchAPI($event)"
+                        [(ngModel)]="jobseekerFilter.institution"
+                        name="institution"
+                        #institutionIssueInputField
+                    />
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                    ></div>
+                    <ul
+                        class="dropdown ml-2"
+                        *ngIf="resultsAllSearchInstituition.length > 0"
+                    >
+                        <li
+                            *ngFor="let result of resultsAllSearchInstituition"
+                            class="dropdown-item"
+                            (click)="
+                                selectInstitutionResult(
+                                    result,
+                                    institutionIssueInputField
+                                )
+                            "
+                        >
+                            {{ result }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w-full relative sm:w-1/2 md:w-1/4 px-2 mb-4">
+                    <input
+                        type="text"
+                        placeholder="Specialty"
+                        class="block w-full rounded py-2 px-3"
+                        (keyup)="callSpecialitySearchAPI($event)"
+                        [(ngModel)]="jobseekerFilter.speciality"
+                        name="specialty"
+                        #specialityIssueInputField
+                    />
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                    ></div>
+                    <ul
+                        class="dropdown ml-2"
+                        *ngIf="resultsAllSearchSpeciality.length > 0"
+                    >
+                        <li
+                            *ngFor="let result of resultsAllSearchSpeciality"
+                            class="dropdown-item"
+                            (click)="
+                                selectSpecialityResult(
+                                    result,
+                                    specialityIssueInputField
+                                )
+                            "
+                        >
+                            {{ result }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w-full relative sm:w-1/2 md:w-1/4 px-2 mb-4">
+                    <input
+                        type="text"
+                        placeholder="Field of Study"
+                        class="block w-full rounded py-2 px-3"
+                        (keyup)="callFieldOfStudySearchAPI($event)"
+                        [(ngModel)]="jobseekerFilter.field_of_study"
+                        name="field_of_study"
+                        #fieldOfStudyIssueInputField
+                    />
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                    ></div>
+                    <ul
+                        class="dropdown ml-2"
+                        *ngIf="resultsAllSearchFieldOfStudy.length > 0"
+                    >
+                        <li
+                            *ngFor="let result of resultsAllSearchFieldOfStudy"
+                            class="dropdown-item"
+                            (click)="
+                                selectFieldOfStudyResult(
+                                    result,
+                                    fieldOfStudyIssueInputField
+                                )
+                            "
+                        >
+                            {{ result }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w-full relative sm:w-1/2 md:w-1/4 px-2 mb-4">
+                    <input
+                        type="text"
+                        placeholder="Certificate Name"
+                        class="block w-full rounded py-2 px-3"
+                        (keyup)="callCertificateSearchAPI($event)"
+                        [(ngModel)]="jobseekerFilter.certificate_name"
+                        name="certificate_name"
+                        #certificateIssueInputField
+                    />
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                    ></div>
+                    <ul
+                        class="dropdown ml-2"
+                        *ngIf="resultsAllSearchCertificate.length > 0"
+                    >
+                        <li
+                            *ngFor="let result of resultsAllSearchCertificate"
+                            class="dropdown-item"
+                            (click)="
+                                selectCertificateResult(
+                                    result,
+                                    certificateIssueInputField
+                                )
+                            "
+                        >
+                            {{ result }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w-full sm:w-1/2 md:w-1/4 px-2 mb-4">
+                    <div class="w-full border border-gray-500 rounded px-1">
+                        <mat-radio-group
+                            class="flex"
+                            [(ngModel)]="jobseekerFilter.gender"
+                            (click)="changeGenderState()"
+                        >
+                            <mat-radio-button class="-ml-2 p-0" value="male">
+                                Male
+                            </mat-radio-button>
+                            <mat-radio-button class="" value="female">
+                                <span class="-ml-2"> Female</span>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <!-- <div
+                        class="bg-white shortlist-sec rounded p-2 flex gap-x-2"
+                    >
+                        <div class="block text-md font-medium shortlisted-text">
+                            Gender
+                        </div>
+                        <select
+                            class="block w-full border rounded px-1"
+                            [(ngModel)]="jobseekerFilter.gender"
+                            name="gender"
+                        >
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                        </select>
+                    </div> -->
+                </div>
+
+                <div class="w-full sm:w-1/2 md:w-1/4 px-2 mb-4">
+                    <input
+                        type="number"
+                        placeholder="Experience"
+                        class="block w-full rounded py-2 px-3 border border-black"
+                        [(ngModel)]="jobseekerFilter.experience"
+                        name="experience"
+                    />
+                </div>
+
+                <div class="w-full relative sm:w-1/2 md:w-1/4 px-2 mb-4">
+                    <input
+                        type="text"
+                        placeholder="Issue Organization"
+                        class="block w-full rounded py-2 px-3"
+                        (keyup)="callOrganizationSearchAPI($event)"
+                        [(ngModel)]="jobseekerFilter.issue_organization"
+                        name="issue_organization"
+                        #organizationIssueInputField
+                    />
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+                    ></div>
+                    <ul
+                        class="dropdown ml-2"
+                        *ngIf="resultsAllSearchOrganization.length > 0"
+                    >
+                        <li
+                            *ngFor="let result of resultsAllSearchOrganization"
+                            class="dropdown-item"
+                            (click)="
+                                selectOrganizationResult(
+                                    result,
+                                    organizationIssueInputField
+                                )
+                            "
+                        >
+                            {{ result }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w-full sm:w-1/2 md:w-1/4 px-2 mb-4">
+                    <mat-radio-group
+                        class="w-full rounded border border-gray-500 flex"
+                        [(ngModel)]="jobseekerFilter.shortlisted"
+                    >
+                        <mat-radio-button
+                            class=""
+                            value="1"
+                            (click)="changeShortlisted()"
+                        >
+                            Shortlisted
+                        </mat-radio-button>
+                    </mat-radio-group>
+                    <!-- <mat-checkbox class="block w-full rounded border border-gray-500" [(ngModel)]="jobseekerFilter.shortlisted">Shortlisted</mat-checkbox> -->
+                    <!-- <div
+                        class="bg-white shortlist-sec rounded p-2 flex gap-x-2"
+                    >
+                        <div class="block text-md font-medium shortlisted-text">
+                            Shortlisted
+                        </div>
+                        <select
+                            class="block w-full border rounded px-1"
+                            [(ngModel)]="jobseekerFilter.shortlisted"
+                            name="shortlisted"
+                        >
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="text-center mt-1 mb-2.5">
+                <div>
+                    <button
+                        class="px-3 py-1 btn rounded text-white cursor-pointer mr-4"
+                        (click)="filterCandidates()"
+                    >
+                        Search
+                    </button>
+
+                    <button
+                        class="px-3 py-1 btn rounded text-white cursor-pointer"
+                        (click)="resetFilter()"
+                    >
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="hasJobReadyProgramme" class="text-center mt-12 mb-6">
+            <div *ngIf="!applicantsAdded" class="mb-4">
+                <button
+                    class="btn text-white rounded px-5 py-2 text-sm"
+                    (click)="addApplicationToJobReady()"
+                >
+                    ADD APPLICANTS TO JOB READY PROGRAMME
+                </button>
+            </div>
+
+            <div *ngIf="!displayReportsJobready" class="text-center">
+                <button
+                    class="btn text-white rounded px-4 py-2 text-sm"
+                    (click)="getReportsJobReadyCourseCompletion()"
+                >
+                    REPORTS OF JOB READY COURSE COMPLETION
+                </button>
+            </div>
+
+            <div *ngIf="displayReportsJobready" class="text-center">
+                <button
+                    class="btn text-white rounded px-26 py-2 text-sm"
+                    (click)="showApplicants()"
+                >
+                    JOB APPLICANTS
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="!loading && !displayReportsJobready">
+            <div
+                class="table-title flex justify-center items-center infxs:text-base sm:text-lg md:text-2xl font-blod py-4"
+            >
+                <span>Apllicants for the post:</span>
+                <strong class="ml-2 cursor-pointer" (click)="goToJobs()">
+                    {{ jobTitle }}</strong
+                >
+            </div>
+
+            <div *ngIf="dataLength !== 0">
+                <div
+                    class="table-container mat-elevation-z8"
+                    class="md:min-w-[720px] overflow-x-auto"
+                >
+                    <table mat-table [dataSource]="dataSource" matSort>
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Applicant's Name
+                            </th>
+                            <td mat-cell *matCellDef="let row">
+                                <!-- <p>{{row | json }}</p> -->
+                                <a
+                                    (click)="goToProfile(row.userId)"
+                                    target="_blank"
+                                    class="cursor-pointer hover:underline"
+                                >
+                                    {{ row.name }}
+                                </a>
+                            </td>
+                        </ng-container>
+
+                        <!-- Email Column -->
+                        <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Applicant's Email
+                            </th>
+                            <td mat-cell *matCellDef="let row">
+                                <a>
+                                    {{ row.email }}
+                                </a>
+                            </td>
+                        </ng-container>
+
+                        <!-- Phone Column -->
+                        <ng-container matColumnDef="phone">
+                            <th mat-header-cell *matHeaderCellDef>Phone</th>
+                            <td mat-cell *matCellDef="let row">
+                                <a>
+                                    {{ row.phone }}
+                                </a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef>Status</th>
+                            <td mat-cell *matCellDef="let row">
+                                <a>
+                                    {{ row.status }}
+                                </a>
+                            </td>
+                        </ng-container>
+
+                        <!-- Action Column -->
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef>Action</th>
+                            <td mat-cell *matCellDef="let row">
+                                <button
+                                    id="statusButton"
+                                    (click)="
+                                        changeStatus(row.job_id, row.userStatus)
+                                    "
+                                    [ngClass]="{
+                                        shortlisted: row.userStatus === 1
+                                    }"
+                                >
+                                    <div
+                                        class="flex items-center"
+                                        title="{{
+                                            row.userStatus === 0
+                                                ? 'Make as shortlisted'
+                                                : 'Make as declined'
+                                        }}"
+                                    >
+                                        <i class="material-icons mr-1">{{
+                                            row.userStatus === 0
+                                                ? "star_border"
+                                                : "star"
+                                        }}</i>
+                                        <span>{{
+                                            row.userStatus === 0
+                                                ? "Applied"
+                                                : "Shortlisted"
+                                        }}</span>
+                                    </div>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <!-- Date Column -->
+                        <!-- <ng-container matColumnDef="date">
+                                            <th
+                                                mat-header-cell
+                                                *matHeaderCellDef
+                                                class="infxs:hidden sm:table-cell"
+                                            >
+                                                Applied On
+                                            </th>
+                                            <td
+                                                mat-cell
+                                                *matCellDef="let row"
+                                                class="infxs:hidden sm:table-cell"
+                                            >
+                                                <a>
+                                                    {{ row.date | date : "dd-MMMM-yyyy" }}
+                                                </a>
+                                            </td>
+                                        </ng-container> -->
+
+                        <tr
+                            mat-header-row
+                            *matHeaderRowDef="displayedColumns"
+                        ></tr>
+                        <tr
+                            mat-row
+                            *matRowDef="let row; columns: displayedColumns"
+                        ></tr>
+                    </table>
+                    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+                </div>
+
+                <div
+                    class="md:max-w-4xl mx-auto infxs:px-4 sm:px-11 md:px-0 flex justify-center pt-5"
+                >
+                    <div class="flex items-center justify-center my-4">
+                        <button
+                            class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                            (click)="previousPage()"
+                            [disabled]="currentPage === 1"
+                        >
+                            Prev
+                        </button>
+                        <ng-container
+                            *ngFor="let page of getPageRange(); let i = index"
+                        >
+                            <button
+                                class="inline-flex items-center px-4 py-2 mr-3"
+                                [ngClass]="{
+                                    'hover:bg-[#28243efc] hover:text-white':
+                                        currentPage !== page,
+                                    'bg-[#28243efc] !text-white buttonColor':
+                                        currentPage === page,
+                                    'rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#28243efc]': true
+                                }"
+                                (click)="goToPage(page)"
+                                [disabled]="currentPage === page"
+                            >
+                                {{ page }}
+                            </button>
+                        </ng-container>
+                        <button
+                            class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                            (click)="nextPage()"
+                            [disabled]="currentPage === totalPages"
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                *ngIf="dataLength == 0"
+                class="flex justify-center items-center"
+            >
+                <h1 class="text-red-600 font-bold text-3xl md:text-4xl">
+                    No applicants for this job.
+                </h1>
+            </div>
+        </div>
+
+        <div *ngIf="!loading && displayReportsJobready">
+            <div
+                class="table-title flex justify-center items-center infxs:text-base sm:text-lg md:text-2xl font-blod py-4"
+            >
+                Reports for the job ready course completion:
+                <strong class="ml-1 cursor-pointer" (click)="goToJobs()">
+                    {{ jobTitle }}</strong
+                >
+            </div>
+
+            <div class="md:min-w-[720px] overflow-x-auto">
+                <table class="w-full table-auto mt-5 border">
+                    <thead>
+                        <tr class="table-heading">
+                            <th
+                                *ngFor="let course of courses"
+                                class="px-2 py-2"
+                            >
+                                {{ course }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let user of users; index as i"
+                            [class.odd:bg-gray-100]="i % 2 === 0"
+                        >
+                            <td
+                                *ngFor="let info of user"
+                                class="border px-2 py-2 text-center"
+                            >
+                                <span *ngIf="info == 1"
+                                    ><mat-icon class="text-green-600 font-bold"
+                                        >done</mat-icon
+                                    ></span
+                                >
+                                <span *ngIf="info == 0"
+                                    ><mat-icon
+                                        class="text-red-600 text-lg font-bold"
+                                        >close</mat-icon
+                                    ></span
+                                >
+                                <span *ngIf="info != 1 && info != 0">{{
+                                    info
+                                }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div *ngIf="loading" class="flex justify-center items-center mt-6">
+            <app-loader></app-loader>
+        </div>
+    </div>
+</div>

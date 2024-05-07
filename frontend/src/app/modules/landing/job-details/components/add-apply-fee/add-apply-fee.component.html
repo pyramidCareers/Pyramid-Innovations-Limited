@@ -1,0 +1,56 @@
+<div class=" flex-col items-center justify-center md:min-w-120">
+    <div class="text-center">
+        <h1 class="heading font-bold text-2xl"> Please Add Application Fee Info </h1>
+    </div>
+
+    <div   class="flex flex-col text-center   mx-auto">
+        
+        <form   class="flex flex-col  mx-auto mt-3" style="width:90% !important;">
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Amount*</h1>
+                <input type="number" 
+                        required
+                        [(ngModel)]="condition_value"
+                        name="condition_value"
+                        maxlength="48"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Currency*</h1>
+                <input type="text" 
+                        required
+                        [(ngModel)]="condition_description"
+                        name="condition_description"
+                        maxlength="12"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+         
+            <div class="flex justify-center items-center">
+                <button *ngIf="!loading && isValidated() == true"
+                    class="mt-5 w-28 rounded mr-4 sigin text-white font-semibold py-2 px-4 bg-pyramid-default-primary" 
+                    (click)="submit()"
+                 >
+                      SUBMIT
+                 </button>
+
+                 <button *ngIf="!loading && isValidated() ==false"
+                     class="mt-5 w-28 rounded mr-4 sigin text-white font-semibold py-2 px-4 bg-gray-300 cursor-not-allowed" 
+                 >
+                       SUBMIT
+                 </button>
+
+                 <div  *ngIf="loading"  class="flex justify-center items-center">
+                      <app-loader></app-loader>
+                 </div>
+
+              
+            </div>
+            
+        </form>
+    </div>
+</div>
+

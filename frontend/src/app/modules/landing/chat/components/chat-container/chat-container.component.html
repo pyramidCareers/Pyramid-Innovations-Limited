@@ -1,0 +1,13 @@
+<div class="parent-container">
+    <div *ngIf="isChatMenuVisible" class="left-sidebar-chat-list bg-gray-200">
+        <app-chat-menu (clickedChat)="openChat($event)"></app-chat-menu>
+    </div>
+
+    <div class="main-container chat-section">
+        <app-chat-section
+            [ngStyle]="{ display: isChatSectionVisible ? 'block' : 'none' }"
+            [chatItem]="openedChatItem"
+            (goBack)="openMenuSmallScreen($event)"
+        ></app-chat-section>
+    </div>
+</div>

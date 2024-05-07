@@ -1,0 +1,103 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div *ngIf="!loading">
+    <div class="py-6 flex justify-center mb-10">
+        <h1 class="text-4xl font-bold">Mentor Profile Update Requests</h1>
+    </div>
+    <div>
+        <div *ngIf="mentors.length > 0">
+            <div
+                *ngFor="let mentor of mentors"
+                class="bg-white w-full cards-container px-6 py-4 hover:shadow-md rounded-sm mb-4"
+            >
+                <div class="card-item md:w-[35%] name-sec">
+                    <h1 class="font-semibold text-2xl whitespace-pre-wrap">
+                        {{
+                            mentor?.user?.firstname +
+                                " " +
+                                mentor?.user?.lastname
+                        }}
+                    </h1>
+                    <p>{{ mentor?.profession }}</p>
+                </div>
+
+                <div class="card-item md:w-[40%] changes-sec">
+                    <p class="font-bold text-xl">Latest Changes</p>
+                    <div class="mt-2">
+                        <p>
+                            <span class="font-semibold">Name: </span>
+                            {{
+                                mentor?.user?.firstname +
+                                    " " +
+                                    mentor?.user?.lastname
+                            }}
+                        </p>
+                        <p>
+                            <span class="font-semibold">profession: </span
+                            >{{ mentor?.profession }}
+                        </p>
+                        <p>
+                            <span class="font-semibold">speciality: </span
+                            >{{ mentor?.specialty }}
+                        </p>
+                        <p>
+                            <span class="font-semibold">Industry: </span>
+                            {{ mentor?.industry }}
+                        </p>
+                    </div>
+                </div>
+                <div class="card-item md:w-[15%]">
+                    <h1 class="font-bold text-2xl">Status</h1>
+                    <p
+                        [class.text-red-500]="mentor?.status !== 'approved'"
+                        [class.text-green-500]="mentor?.status === 'approved'"
+                        class="capitalize text-lg font-semibold"
+                    >
+                        {{ mentor?.status }}
+                    </p>
+                </div>
+
+                <div class="card-item action-sec md:w-[12%]">
+                    <div
+                        (click)="approve(mentor?.user?.id)"
+                        class="flex items-center"
+                    >
+                        <!-- <mat-icon *ngIf="Mentor?.user?.id == id"
+                            class="cursor-pointer text-green-500 text-3xl p-1">check_circle</mat-icon> -->
+
+                        <mat-chip-list class="mat-mdc-chip-set-stacked">
+                            <mat-chip-option
+                                class="text-white"
+                                [ngClass]="{
+                                    'bg-green-500':
+                                        isclick && mentor?.user?.id === id
+                                }"
+                                *ngFor="let chip of availableColors"
+                                [color]="chip.color"
+                            >
+                                {{ chip.name }}
+                            </mat-chip-option>
+                        </mat-chip-list>
+                    </div>
+                </div>
+            </div>
+
+          
+        </div>
+        <div
+        *ngIf="mentors.length == 0"
+        class="flex justify-center items-center"
+    >
+        <h1 class="font-bold text-3xl my-4 text-red-600">
+            No Data Found
+        </h1>
+    </div>
+        <div
+            *ngIf="loading"
+            class="min-h-screen flex justify-center items-center"
+        >
+            <app-loader></app-loader>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+//mobile view
+@media only screen and (max-width: 699px) {
+    .parent-container {
+        margin-left: 3% !important;
+        margin-right: 3% !important;
+    }
+}
+
+//tablet view
+@media only screen and (min-width: 700px) {
+    .parent-container {
+        margin-left: 3% !important;
+        margin-right: 3% !important;
+        display: flex !important;
+        flex-wrap: wrap;
+        column-gap: 2% !important;
+    }
+    .sidebar {
+        width: 23% !important;
+    }
+    .content {
+        width: 74% !important;
+    }
+    .admin-panel{
+        width: 70% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+//laptop & monitor view
+@media only screen and (min-width: 1280px) {
+    .parent-container {
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+        display: flex !important;
+        column-gap: 3% !important;
+    }
+    .sidebar {
+        width: 22% !important;
+    }
+    .content {
+        width: 75% !important;
+    }
+    .admin-panel{
+        width: 70% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}

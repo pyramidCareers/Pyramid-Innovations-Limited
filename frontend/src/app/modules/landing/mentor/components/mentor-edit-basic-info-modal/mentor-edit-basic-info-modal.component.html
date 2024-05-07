@@ -1,0 +1,79 @@
+<div class="flex-col items-center justify-center md:min-w-120">
+    <div class="text-center">
+        <h1 class="heading font-bold text-2xl">Edit Basic Information</h1>
+    </div>
+    <div class="flex flex-col text-center mx-auto">
+        <form class="flex flex-col mx-auto mt-3" style="width: 90% !important">
+            <div class="flex flex-col mt-4">
+                <h1 class="text-left font-bold">Upload Profile Picture  <span class="text-pyramid-green"> [ Minimum Standard Size: 300x300 px ]</span></h1>
+                <input
+                    name="profile_pic"
+                    type="file"
+                    class="mt-2 mb-3 border border-gray-300 px-4 py-2"
+                    (change)="onProfilePicUpload($event)"
+                />
+            </div>
+
+            <div class="flex flex-col mt-4">
+                <h1 class="text-left font-bold">First Name*</h1>
+                <input
+                    type="text"
+                    required
+                    name="firstname"
+                    [(ngModel)]="BasicInfo.firstname"
+                    maxlength="48"
+                    class="mt-2 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col mt-4">
+                <h1 class="text-left font-bold">Last Name*</h1>
+                <input
+                    type="text"
+                    required
+                    name="lastname"
+                    [(ngModel)]="BasicInfo.lastname"
+                    maxlength="48"
+                    class="mt-2 mb-3 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col mt-2">
+                <h1 class="text-left font-bold">Contact Number*</h1>
+                <input
+                    type="text"
+                    required
+                    name="phone"
+                    [(ngModel)]="BasicInfo.phone"
+                    maxlength="16"
+                    class="mt-2 mb-3 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col mt-2">
+                <h1 class="text-left font-bold">Gender*</h1>
+                <select
+                    required
+                    name="gender"
+                    [(ngModel)]="BasicInfo.gender"
+                    class="mt-2 mb-3 border border-gray-300 px-4 py-2"
+                >
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+            <div class="flex justify-center items-center">
+                <button
+                    (click)="edit()"
+                    class="mt-5 w-28 rounded mr-4 sigin text-white font-semibold py-2 px-4"
+                    [class.bg-pyramid-default-primary]="areAllFieldsFilled()"
+                    [class.bg-gray-400]="!areAllFieldsFilled()"
+                    [disabled]="!areAllFieldsFilled()"
+                >
+                    SUBMIT
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

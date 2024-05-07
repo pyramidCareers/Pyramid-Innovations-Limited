@@ -1,0 +1,113 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div
+    *ngIf="!loading"
+    class="flex-col items-center justify-center pt-4 md:min-w-120"
+>
+    <div class="flex flex-col text-center mx-auto">
+        <form
+            (ngSubmit)="submitForm()"
+            [formGroup]="addTimeSlotForm"
+            class="flex flex-col mx-auto"
+            style="width: 90% !important"
+        >
+            <div class="felx justify-center items-center mb-2">
+                <h1 class="text-2xl font-semibold">Webinar</h1>
+            </div>
+
+            <!-- Title input -->
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Title*</h1>
+                <input
+                    type="text"
+                    placeholder="Title"
+                    required
+                    name="title"
+                    formControlName="title"
+                    class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <!-- Description textarea -->
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Description*</h1>
+                <textarea
+                    placeholder="Write a short Description"
+                    required
+                    name="description"
+                    formControlName="description"
+                    class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                ></textarea>
+            </div>
+
+            <!-- Date input with autofill -->
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Date*</h1>
+                <input
+                    type="date"
+                    placeholder="Date"
+                    required
+                    name="date"
+                    formControlName="date"
+                    class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                    [value]="formattedSelectedDay"
+                />
+            </div>
+
+            <!-- Start Time input -->
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Start Time*</h1>
+                <input
+                    type="time"
+                    placeholder="Start Time"
+                    required
+                    name="start_time"
+                    formControlName="start_time"
+                    class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <!-- End Time input -->
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">End Time*</h1>
+                <input
+                    type="time"
+                    placeholder="End Time"
+                    required
+                    name="end_time"
+                    formControlName="end_time"
+                    class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <!-- Button section -->
+            <div class="infxs:gap-3 infxs:mt-4 md:mt-6 flex justify-between">
+                <div>
+                    <button
+                        type="submit"
+                        class="text-white border uppercase rounded px-7 lg:px-9 py-2"
+                        [ngClass]="{
+                            'bg-pyramid-employer-primary hover:bg-pyramid-default-primary':
+                                addTimeSlotForm.valid,
+                            'bg-gray-400': !addTimeSlotForm.valid
+                        }"
+                        [disabled]="!addTimeSlotForm.valid"
+                    >
+                        Create
+                    </button>
+                </div>
+                <div>
+                    <button
+                        type="button"
+                        mat-button
+                        (click)="onNoClick()"
+                        class="text-white bg-pyramid-employer-primary hover:bg-pyramid-default-primary border uppercase rounded px-3 lg:px-5 py-2"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

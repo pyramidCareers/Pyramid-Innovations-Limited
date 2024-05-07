@@ -1,0 +1,60 @@
+<div class="min-h-screen flex items-center justify-center">
+    <div  *ngIf="!showMessage" class="flex flex-col text-center">
+        <div class="text-center">
+            <h1 class="heading">Please Enter Your Email</h1>
+        </div>
+
+
+        <form  [formGroup]="formInfo" (ngSubmit)="onSubmit()" class="flex flex-col w-60 sm:w-80 mx-auto mt-3">
+            <div class="flex flex-col">
+                <input type="email" placeholder="Your Email"
+                        required
+                        formControlName="email"
+                        class="mt-5 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+                <div
+                    *ngIf="formInfo.get('email').invalid && (formInfo.get('email').dirty ||formInfo.get('email').touched)"
+                >
+                    <div
+                        *ngIf="formInfo.get('email').errors?.required" class="error text-left text-red-600 mt-2"
+                    >
+                        *Email is required
+                    </div>
+                    <div
+                        *ngIf="formInfo.get('email').errors?.pattern" class="error text-left text-red-600 mt-2"
+                    >
+                        *Invalid email format
+                    </div>
+                </div>
+              
+            </div>
+
+            <button *ngIf="!formInfo.invalid && !loading"
+                class="mt-5 sigin text-white font-semibold py-2 px-4 bg-pyramid-default-primary" 
+            >
+                SUBMIT
+            </button>
+
+            <button
+                    class="mt-5 signin-disabled text-white font-semibold py-2 px-4"
+                    *ngIf="formInfo.invalid && !loading"
+                    [disabled]="true"
+            >
+                  SUBMIT
+            </button>
+
+            <div *ngIf="loading" class="flex justify-center items-center mt-3">
+                <app-loader></app-loader>
+            </div>
+
+
+          
+        </form>
+
+      
+    </div>
+
+    <div *ngIf="showMessage" class="text-center flex flex-col w-60 md:w-120 mx-auto mt-3">
+        <h1 class="heading">If this is a registerted email, then a mail has been sent to this email with reset password link</h1>
+    </div>
+</div>

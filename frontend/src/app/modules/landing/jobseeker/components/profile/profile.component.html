@@ -1,0 +1,772 @@
+<div *ngIf="isOwnProfile" class="parent-container mx-auto min-h-screen my-8">
+    <div class="sidebar">
+        <app-profile-sidebar class="sticky top-6"></app-profile-sidebar>
+    </div>
+
+    <div class="main-container">
+        <!-- Profile information Section-->
+
+        <div *ngIf="loading" class="absolute top-1/2 left-1/2">
+            <app-loader></app-loader>
+        </div>
+
+        <div *ngIf="!loading">
+            <div *ngIf="!profileCompleted" class="text-center">
+                <h1 class="text-red-600 text-2xl mt-4 font-bold">
+                    Please add contact number to complete profile
+                </h1>
+            </div>
+
+            <div class="p-5 m-5 sm:m-7 bg-white rounded shadow-md">
+                <div *ngIf="isOwnProfile" class="flex flex-row-reverse">
+                    <mat-icon (click)="editBasicInfo()" class="cursor-pointer"
+                        >edit</mat-icon
+                    >
+                </div>
+                <div class="text-center">
+                    <div
+                        *ngIf="
+                            !(
+                                !profile.profile_pic ||
+                                profile.profile_pic == undefined
+                            )
+                        "
+                        class="text-center w-44 h-44 mx-auto flex justify-center items-center"
+                    >
+                        <img
+                            src="{{ profile?.profile_pic }}"
+                            alt=""
+                            class="w-full h-full mb-3 rounded"
+                        />
+                    </div>
+
+                    <div class="information my-auto mt-2">
+                        <h1 class="text-3xl">
+                            <b>{{ fullName }}</b>
+                        </h1>
+                        <button
+                            *ngIf="!isOwnProfile"
+                            (click)="showResume()"
+                            class="mt-5 sigin text-white font-semibold py-2 px-4 bg-pyramid-default-primary"
+                        >
+                            Resume
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-20 my-10">
+                    <div
+                        class="relative h-[1px] mt-4 mb-1 bg-gradient-to-r from-gray-300 to-white"
+                    >
+                        <p
+                            class="absolute uppercase -top-5 lg:left-[10.5%] xl:left-[8%] lg:transform lg:-translate-x-1/2 bg-white px-2 font-bold text-lg text-gray-500"
+                        >
+                            basic information
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pl-3 -mt-3">
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Email:</h1>
+                        <span
+                            *ngIf="
+                                profile.email &&
+                                profile.email !== 'undefined' &&
+                                profile.email !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.email }}</span
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Mobile:</h1>
+                        <span
+                            *ngIf="
+                                profile.phone &&
+                                profile.phone !== 'undefined' &&
+                                profile.phone !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.phone }}</span
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Gender:</h1>
+                        <span
+                            *ngIf="
+                                profile.gender &&
+                                profile.gender !== 'undefined' &&
+                                profile.gender !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.gender }}</span
+                        >
+                    </div>
+                </div>
+
+                <div class="mt-15 mb-5">
+                    <div
+                        class="relative h-[1px] mt-4 mb-1 bg-gradient-to-r from-gray-300 to-white"
+                    >
+                        <p
+                            class="absolute uppercase -top-5 lg:left-[4.5%] xl:left-[3.2%] lg:transform lg:-translate-x-1/2 bg-white px-2 font-bold text-lg text-gray-500"
+                        >
+                            About
+                        </p>
+                    </div>
+                </div>
+                <div class="pl-3 -mt-3">
+                    <div *ngIf="isOwnProfile" class="flex flex-row-reverse">
+                        <mat-icon
+                            (click)="editJobSeekingInfoInfo()"
+                            class="cursor-pointer"
+                            >edit</mat-icon
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Looking For Job:</h1>
+                        <span
+                            class="text-gray-500 font-[500]"
+                            *ngIf="profile.jobseeking_status == 1"
+                            >YES</span
+                        >
+                        <span
+                            class="text-gray-500 font-[500]"
+                            *ngIf="profile.jobseeking_status == 0"
+                            >NO</span
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Expected Salary:</h1>
+                        <span
+                            *ngIf="
+                                profile.expected_salary &&
+                                profile.expected_salary !== 'undefined' &&
+                                profile.expected_salary !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.expected_salary }}</span
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Current Notice Period:</h1>
+                        <span
+                            *ngIf="
+                                profile.current_notice_period &&
+                                profile.current_notice_period !== 'undefined' &&
+                                profile.current_notice_period !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.current_notice_period }} days</span
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Currency:</h1>
+                        <span
+                            *ngIf="
+                                profile.currency &&
+                                profile.currency !== 'undefined' &&
+                                profile.currency !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.currency }}</span
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Current Profession:</h1>
+                        <span
+                            *ngIf="
+                                profile.current_profession &&
+                                profile.current_profession !== 'undefined' &&
+                                profile.current_profession !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.current_profession }}</span
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Industry:</h1>
+                        <span
+                            *ngIf="
+                                profile.industry &&
+                                profile.industry !== 'undefined' &&
+                                profile.industry !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.industry }}</span
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Speciality:</h1>
+                        <span
+                            *ngIf="
+                                profile.speciality &&
+                                profile.speciality !== 'undefined' &&
+                                profile.speciality !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.speciality }}</span
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Field Of Study:</h1>
+                        <span
+                            *ngIf="
+                                profile.field_of_study &&
+                                profile.field_of_study !== 'undefined' &&
+                                profile.field_of_study !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.field_of_study }}</span
+                        >
+                    </div>
+                    <div class="shadow-sm p-3">
+                        <h1 class="font-bold">Years Of Experience:</h1>
+                        <span
+                            *ngIf="
+                                profile.years_of_experience &&
+                                profile.years_of_experience !== 'undefined' &&
+                                profile.years_of_experience !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.years_of_experience }} years</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Work Experience information Section-->
+            <div class="p-5">
+                <div class="flex justify-between">
+                    <h1 class="text-2xl mb-2"><b>Work Experience</b></h1>
+                    <button *ngIf="isOwnProfile" mat-mini-fab class="mb-2">
+                        <mat-icon (click)="addExperience()">add</mat-icon>
+                    </button>
+                </div>
+                <div class="profile p-5 bg-white rounded shadow-md">
+                    <div
+                        *ngFor="let exp of experiences"
+                        class="bg-gray-50 mb-7 mt-4 rounded shadow-md mx-auto"
+                    >
+                        <div
+                            *ngIf="isOwnProfile"
+                            class="flex flex-row-reverse p-3 gap-x-2"
+                        >
+                            <mat-icon
+                                (click)="openDeleteExpModal(exp)"
+                                class="cursor-pointer"
+                                >delete</mat-icon
+                            >
+                            <mat-icon
+                                (click)="editExperience(exp)"
+                                class="cursor-pointer"
+                                >edit</mat-icon
+                            >
+                        </div>
+
+                        <div class="p-3" [class.-mt-7]="isOwnProfile">
+                            <h1 class="font-bold mt-2">Title:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ exp.title }}
+                            </div>
+
+                            <h1 class="font-bold mt-5">Organization:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ exp.organization }}
+                                <div>
+                                    ({{ exp.started_at | date }} -
+                                    {{ exp.ended_at | date }})
+                                </div>
+                            </div>
+
+                            <h1
+                                *ngIf="
+                                    exp.job_description &&
+                                    exp.job_description != 'undefined'
+                                "
+                                class="font-bold mt-5"
+                            >
+                                Job Description:
+                            </h1>
+
+                            <div
+                                *ngIf="
+                                    exp.job_description &&
+                                    exp.job_description != 'undefined'
+                                "
+                                class="text-gray-500 font-[500]"
+                            >
+                                {{ exp.job_description }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Educational information Section-->
+
+            <div class="p-5">
+                <div class="flex justify-between">
+                    <h1 class="text-2xl mb-2"><b>Education</b></h1>
+                    <button *ngIf="isOwnProfile" mat-mini-fab class="mb-2">
+                        <mat-icon (click)="addEducation()">add</mat-icon>
+                    </button>
+                </div>
+                <div class="profile p-5 bg-white rounded shadow-md">
+                    <div
+                        *ngFor="let ed of educations"
+                        class="bg-gray-50 mb-7 rounded shadow-md mx-auto"
+                    >
+                        <div
+                            *ngIf="isOwnProfile"
+                            class="flex flex-row-reverse p-3 gap-x-2"
+                        >
+                            <mat-icon
+                                (click)="openDeleteEduModal(ed)"
+                                class="cursor-pointer"
+                                >delete</mat-icon
+                            >
+                            <mat-icon
+                                (click)="editEducation(ed)"
+                                class="cursor-pointer"
+                                >edit</mat-icon
+                            >
+                        </div>
+
+                        <div class="p-3" [class.-mt-7]="isOwnProfile">
+                            <h1 class="font-bold mt-2">Title:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ ed.title }}
+                            </div>
+
+                            <h1 class="font-bold mt-5">Institution:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ ed.institution }}
+                            </div>
+
+                            <h1 class="font-bold mt-5">Passing Year:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ ed.year }}
+                            </div>
+
+                            <h1 class="font-bold mt-5">Result:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ ed.result }}
+                                <span
+                                    *ngIf="
+                                        ed.grade_type === 'cgpa' &&
+                                        ed.total_cgpa &&
+                                        ed.total_cgpa != 'undefined'
+                                    "
+                                    >out of {{ ed.total_cgpa }}</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills information Section-->
+            <div class="p-5">
+                <div class="flex justify-between">
+                    <h1 class="text-2xl mb-2"><b>Skills</b></h1>
+                    <button *ngIf="isOwnProfile" mat-mini-fab class="mb-2">
+                        <mat-icon (click)="addSkill()">add</mat-icon>
+                    </button>
+                </div>
+                <div
+                    class="flex-col p-5 bg-white rounded shadow-md gap-x-2 md:gap-x-8 flex-wrap"
+                >
+                    <div
+                        *ngFor="let skill of skills"
+                        class="flex items-center justify-between mx-auto mb-3 shadow-md px-3 py-4 rounded"
+                    >
+                        <p class="text-gray-500 font-[500]">
+                            {{ skill.title }}
+                        </p>
+
+                        <div
+                            *ngIf="isOwnProfile"
+                            class="flex flex-row-reverse gap-x-2"
+                        >
+                            <mat-icon
+                                (click)="openDeleteSkillModal(skill)"
+                                class="cursor-pointer"
+                                >delete</mat-icon
+                            >
+                            <mat-icon
+                                (click)="editSkill(skill)"
+                                class="cursor-pointer"
+                                >edit</mat-icon
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <app-certifications
+                [certificates]="certificates"
+                [isOwnProfile]="isOwnProfile"
+            ></app-certifications>
+            <app-extra-curricular
+                [extraCurriCularActivities]="extraCurricularActivities"
+                [isOwnProfile]="isOwnProfile"
+            ></app-extra-curricular>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!isOwnProfile" class="justify-center mx-auto min-h-screen my-8">
+    <div class="other-person-profile">
+        <!-- Profile information Section-->
+
+        <div *ngIf="loading" class="h-screen flex justify-center items-center">
+            <app-loader></app-loader>
+        </div>
+
+        <div *ngIf="!loading">
+            <div *ngIf="!profileCompleted" class="text-center">
+                <h1 class="text-red-600 text-2xl mt-4 font-bold">
+                    Please add contact number to complete profile
+                </h1>
+            </div>
+
+            <div class="p-5 m-5 sm:m-7 bg-white rounded shadow-md">
+                <div *ngIf="isOwnProfile" class="flex flex-row-reverse">
+                    <mat-icon (click)="editBasicInfo()" class="cursor-pointer"
+                        >edit</mat-icon
+                    >
+                </div>
+                <div class="text-center">
+                    <div
+                        *ngIf="
+                            profile.profile_pic == null ||
+                            profile.profile_pic == undefined
+                        "
+                        class="text-center mx-auto w-20 h-20 mb-2"
+                    >
+                        <img
+                            src="https://www.pngkey.com/png/full/73-730477_first-name-profile-image-placeholder-png.png"
+                            alt=""
+                        />
+                    </div>
+
+                    <div
+                        *ngIf="
+                            !(
+                                profile.profile_pic == null ||
+                                profile.profile_pic == undefined
+                            )
+                        "
+                        class="text-center max-w-20 max-h-28 mx-auto flex justify-center items-center"
+                    >
+                        <img
+                            src="{{ profile.profile_pic }}"
+                            alt=""
+                            class="min-w-24 min-h-24 mb-3 rounded"
+                        />
+                    </div>
+
+                    <div class="information my-auto mt-2">
+                        <h1 class="text-3xl">
+                            <b>{{ fullName }}</b>
+                        </h1>
+                        <p class="text-gray-500 mt-2 font-[500]">
+                            {{ profile.email }}
+                        </p>
+                        <p class="text-gray-500 mt-2 font-[500]">
+                            {{ profile.phone }}
+                        </p>
+                        <button
+                            *ngIf="!isOwnProfile"
+                            (click)="showResume()"
+                            class="mt-5 sigin rounded text-white font-semibold py-2 px-4 bg-pyramid-default-primary"
+                        >
+                            Resume
+                        </button>
+                    </div>
+                </div>
+                <hr />
+                <div class="pl-3 -mt-3">
+                    <div *ngIf="isOwnProfile" class="flex flex-row-reverse">
+                        <mat-icon
+                            (click)="editJobSeekingInfoInfo()"
+                            class="cursor-pointer"
+                            >edit</mat-icon
+                        >
+                    </div>
+                    <div>
+                        <h1 class="font-bold">Looking For Job:</h1>
+                        <span
+                            class="text-gray-500 font-[500]"
+                            *ngIf="profile.jobseeking_status == 1"
+                            >YES</span
+                        >
+                        <span
+                            class="text-gray-500 font-[500]"
+                            *ngIf="profile.jobseeking_status == 0"
+                            >NO</span
+                        >
+                    </div>
+                    <div>
+                        <h1 class="font-bold mt-5">Expected Salary:</h1>
+                        <span
+                            *ngIf="
+                                profile.expected_salary &&
+                                profile.expected_salary !== 'undefined' &&
+                                profile.expected_salary !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.expected_salary }}</span
+                        >
+                    </div>
+                    <div>
+                        <h1 class="font-bold mt-5">Current Notice Period:</h1>
+                        <span class="text-gray-500 font-[500]"
+                            >{{ profile.current_notice_period }} days</span
+                        >
+                    </div>
+                    <div>
+                        <h1 class="font-bold mt-5">Currency:</h1>
+                        <span
+                            *ngIf="
+                                profile.currency &&
+                                profile.currency !== 'undefined' &&
+                                profile.currency !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.currency }}</span
+                        >
+                    </div>
+                    <div>
+                        <h1 class="font-bold mt-5">Current Profession:</h1>
+                        <span
+                            *ngIf="
+                                profile.current_profession &&
+                                profile.current_profession !== 'undefined' &&
+                                profile.current_profession !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.current_profession }}</span
+                        >
+                    </div>
+                    <div>
+                        <h1 class="font-bold mt-5">Industry:</h1>
+                        <span
+                            *ngIf="
+                                profile.industry &&
+                                profile.industry !== 'undefined' &&
+                                profile.industry !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.industry }}</span
+                        >
+                    </div>
+                    <div>
+                        <h1 class="font-bold mt-5">Speciality:</h1>
+                        <span
+                            *ngIf="
+                                profile.speciality &&
+                                profile.speciality !== 'undefined' &&
+                                profile.speciality !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.speciality }}</span
+                        >
+                    </div>
+                    <div>
+                        <h1 class="font-bold mt-5">Field Of Study:</h1>
+                        <span
+                            *ngIf="
+                                profile.field_of_study &&
+                                profile.field_of_study !== 'undefined' &&
+                                profile.field_of_study !== 'null'
+                            "
+                            class="text-gray-500 font-[500]"
+                            >{{ profile.field_of_study }}</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Work Experience information Section-->
+            <div class="p-5">
+                <div class="flex justify-between">
+                    <h1 class="text-2xl mb-2"><b>Work Experience</b></h1>
+                    <button *ngIf="isOwnProfile" mat-mini-fab class="mb-2">
+                        <mat-icon (click)="addExperience()">add</mat-icon>
+                    </button>
+                </div>
+                <div class="profile p-5 bg-white rounded shadow-md">
+                    <div
+                        *ngFor="let exp of experiences"
+                        class="bg-gray-50 mb-7 mt-4 rounded shadow-md mx-auto"
+                    >
+                        <div
+                            *ngIf="isOwnProfile"
+                            class="flex flex-row-reverse p-3 gap-x-2"
+                        >
+                            <mat-icon
+                                (click)="openDeleteExpModal(exp)"
+                                class="cursor-pointer"
+                                >delete</mat-icon
+                            >
+                            <mat-icon
+                                (click)="editExperience(exp)"
+                                class="cursor-pointer"
+                                >edit</mat-icon
+                            >
+                        </div>
+
+                        <div class="p-3" [class.-mt-7]="isOwnProfile">
+                            <h1 class="font-bold mt-2">Title:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ exp.title }}
+                            </div>
+
+                            <h1 class="font-bold mt-5">Organization:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ exp.organization }}
+                                <div>
+                                    ({{ exp.started_at | date }} -
+                                    {{ exp.ended_at | date }})
+                                </div>
+                            </div>
+
+                            <h1
+                                *ngIf="
+                                    exp.job_description &&
+                                    exp.job_description != 'undefined'
+                                "
+                                class="font-bold mt-5"
+                            >
+                                Job Description:
+                            </h1>
+
+                            <div
+                                *ngIf="
+                                    exp.job_description &&
+                                    exp.job_description != 'undefined'
+                                "
+                                class="text-gray-500 font-[500]"
+                            >
+                                {{ exp.job_description }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Educational information Section-->
+
+            <div class="p-5">
+                <div class="flex justify-between">
+                    <h1 class="text-2xl mb-2"><b>Education</b></h1>
+                    <button *ngIf="isOwnProfile" mat-mini-fab class="mb-2">
+                        <mat-icon (click)="addEducation()">add</mat-icon>
+                    </button>
+                </div>
+                <div class="profile p-5 bg-white rounded shadow-md">
+                    <div
+                        *ngFor="let ed of educations"
+                        class="bg-gray-50 mb-7 rounded shadow-md mx-auto"
+                    >
+                        <div
+                            *ngIf="isOwnProfile"
+                            class="flex flex-row-reverse p-3 gap-x-2"
+                        >
+                            <mat-icon
+                                (click)="openDeleteEduModal(ed)"
+                                class="cursor-pointer"
+                                >delete</mat-icon
+                            >
+                            <mat-icon
+                                (click)="editEducation(ed)"
+                                class="cursor-pointer"
+                                >edit</mat-icon
+                            >
+                        </div>
+
+                        <div class="p-3" [class.-mt-7]="isOwnProfile">
+                            <h1 class="font-bold mt-2">Title:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ ed.title }}
+                            </div>
+
+                            <h1 class="font-bold mt-5">Institution:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ ed.institution }}
+                            </div>
+
+                            <h1 class="font-bold mt-5">Passing Year:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ ed.year }}
+                            </div>
+
+                            <h1 class="font-bold mt-5">Result:</h1>
+                            <div class="text-gray-500 font-[500]">
+                                {{ ed.result }}
+                                <span
+                                    *ngIf="
+                                        ed.grade_type === 'cgpa' &&
+                                        ed.total_cgpa &&
+                                        ed.total_cgpa != 'undefined'
+                                    "
+                                    >out of {{ ed.total_cgpa }}</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills information Section-->
+            <div class="p-5">
+                <div class="flex justify-between">
+                    <h1 class="text-2xl mb-2"><b>Skills</b></h1>
+                    <button *ngIf="isOwnProfile" mat-mini-fab class="mb-2">
+                        <mat-icon (click)="addSkill()">add</mat-icon>
+                    </button>
+                </div>
+                <div
+                    class="flex-col p-5 bg-white rounded shadow-md gap-x-2 md:gap-x-8 flex-wrap"
+                >
+                    <div
+                        *ngFor="let skill of skills"
+                        class="flex items-center justify-between mx-auto mb-3 shadow-md px-3 py-4 rounded"
+                    >
+                        <p class="text-gray-500 font-[500]">
+                            {{ skill.title }}
+                        </p>
+
+                        <div
+                            *ngIf="isOwnProfile"
+                            class="flex flex-row-reverse gap-x-2"
+                        >
+                            <mat-icon
+                                (click)="openDeleteSkillModal(skill)"
+                                class="cursor-pointer"
+                                >delete</mat-icon
+                            >
+                            <mat-icon
+                                (click)="editSkill(skill)"
+                                class="cursor-pointer"
+                                >edit</mat-icon
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <app-certifications
+                [certificates]="certificates"
+                [isOwnProfile]="isOwnProfile"
+            ></app-certifications>
+            <app-extra-curricular
+                [extraCurriCularActivities]="extraCurricularActivities"
+                [isOwnProfile]="isOwnProfile"
+            ></app-extra-curricular>
+        </div>
+    </div>
+</div>

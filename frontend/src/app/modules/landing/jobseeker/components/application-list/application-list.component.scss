@@ -1,0 +1,84 @@
+.buttonColor {
+    color: white !important;
+  }
+  
+  button.disabled {
+    background-color: #f1f1f1;
+    border-color: #c4c4c4;
+    color: #999999;
+    cursor: not-allowed;
+  }
+  
+  @media only screen and (min-width: 600px) {
+    .pagination {
+      display: flex !important;
+      max-width: 90% !important;
+      flex-wrap: wrap !important;
+    }
+  }
+  
+
+  @media only screen and (max-width: 759px) {
+    .sidebar {
+      margin-left: 3% !important;
+      margin-right: 3% !important;
+    }
+
+}
+
+
+
+
+@media only screen and (min-width: 760px) and (max-width: 1279px){
+    .parent-container{
+        display: flex !important;
+    }
+
+    .main-container{
+        width: 64% !important;
+        margin-left: 2% !important;
+        margin-right: 2% !important;
+    }
+
+    .sidebar{
+       min-width: 30% !important;
+       margin-left: 3% !important;
+    }
+
+    img{
+      min-width: 50px !important;
+      max-width: 50px !important;
+    }
+
+    .view-btn{
+      width: 45px !important;
+      height: 60px !important;
+      padding: 2px !important;
+      padding-top: 10px !important;
+    }
+
+    .date-sec{
+      margin-left: 10px !important;
+      margin-right: 10px !important;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .parent-container{
+        display: flex !important;
+    }
+
+    .main-container{
+        width: 65% !important;
+        margin-left: 3% !important;
+        margin-right: 7% !important;
+    }
+
+    .sidebar{
+       min-width: 18% !important;
+       margin-left: 7% !important;
+    }
+
+}
+
+  

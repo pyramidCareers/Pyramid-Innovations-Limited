@@ -1,0 +1,66 @@
+#chatInput {
+    resize: none;
+    overflow-y: hidden;
+    margin-top: 8x !important;
+    width: 90%;
+    height: 30px;
+}
+
+#chatInput::placeholder {
+    vertical-align: middle;
+}
+
+.chat-typing-section {
+    display: flex;
+    align-items: flex-end;
+}
+
+//mobile view
+@media only screen and (max-width: 759px) {
+    .left-sidebar-chat-list {
+        height: 80vh !important;
+        overflow-y: scroll !important;
+    }
+    .chat-item {
+        width: 80px !important;
+        height: 10px !important;
+    }
+    .chat-section {
+        height: 75vh !important;
+    }
+}
+
+//tablet & laptop view
+@media only screen and (min-width: 760px) {
+    .left-sidebar-chat-list {
+        width: 25% !important;
+        height: 80vh !important;
+        overflow-y: scroll !important;
+    }
+    .chat-section {
+        height: 68vh !important;
+    }
+    .chat-typing-section {
+        height: 8vh !important;
+    }
+}
+
+//monitor view
+@media only screen and (min-width: 1920px) {
+    .left-sidebar-chat-list {
+        width: 15% !important;
+        height: 120vh !important;
+        overflow-y: scroll !important;
+    }
+    .chat-section {
+        height: 78vh !important;
+    }
+    .chat-typing-section {
+        height: 8vh !important;
+    }
+}
+
+//color for typing focus
+textarea:focus {
+    border-bottom: 2px solid #363154fc !important;
+}

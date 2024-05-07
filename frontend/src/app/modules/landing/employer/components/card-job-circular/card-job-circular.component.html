@@ -1,0 +1,59 @@
+<div class="md:max-w-4xl mx-auto infxs:px-4 sm:px-11 md:px-0">
+    <div class="bg-[#fff] hover:shadow-md">
+        <div class="sm:flex justify-between items-center p-4">
+            <div
+                class="flex items-start cursor-pointer"
+                (click)="displayJobDetails()"
+            >
+                <div class="border border-[#363154fc] rounded">
+                    <img
+                        src="{{ jobCard.logo }}"
+                        class="h-20 w-20 object-contain"
+                    />
+                </div>
+                <div class="ml-5 -mt-1">
+                    <h1 class="text-2xl font-medium">
+                        {{ jobCard.title }}
+                    </h1>
+                    <h3
+                        *ngIf="
+                            jobCard.location != null &&
+                            jobCard.location != undefined
+                        "
+                        class="py-2 text-sm"
+                    >
+                        At {{ jobCard.location }}
+                    </h3>
+                    <h2 class="text-sm">Posted on {{ jobCard.date | date }}</h2>
+                </div>
+            </div>
+            <div class="flex justify-end gap-x-5 infxs:mt-3 sm:mt-0">
+                <ng-container *ngIf="jobCard.published !== 1">
+                    <span
+                        class="bg-red-100 status text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"
+                        >Draft</span
+                    >
+                </ng-container>
+                <ng-container *ngIf="jobCard.published === 1">
+                    <span
+                        class=" bg-green-100 status text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 "
+                        >Published</span
+                    >
+                </ng-container>
+                <i
+                    title="Edit"
+                    class="fas fa-edit"
+                    style="cursor: pointer"
+                    (click)="goToJobEditPage()"
+                ></i>
+                
+                <i
+                    title="Applicants"
+                    class="fas fa-users"
+                    style="cursor: pointer"
+                    (click)="goToApplicantsPage()"
+                ></i>
+            </div>
+        </div>
+    </div>
+</div>

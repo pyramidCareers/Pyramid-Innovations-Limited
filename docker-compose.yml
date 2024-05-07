@@ -1,0 +1,47 @@
+version: "3.7"
+services:
+  moodle-app:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: moodle.Dockerfile
+      args:
+        - app_port=${MOODLE_APP_PORT}
+    
+    container_name: ${PROJECT_NAME}_moodle
+    network_mode: host
+    volumes:
+      - ./moodle:/var/www/html
+      - ./moodledata:/var/www/moodledata:rw
+      # - ./.docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    restart: always
+
+  laravel-app:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: laravel.Dockerfile
+      args:
+        - laravel_app_port=${LARAVEL_APP_PORT}
+    
+    container_name: ${PROJECT_NAME}_laravel
+    network_mode: host
+    volumes:
+      - ./laravel_project:/var/www/html:rw
+      
+    restart: always
+  frontend:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+      args:
+        - frontend_port=${FRONTEND_PORT}
+    container_name: ${PROJECT_NAME}_frontend
+    network_mode: host
+    # volumes:
+    #   - ./frontend/package.json:/usr/local/app/package.json
+    restart: always

@@ -1,0 +1,61 @@
+
+@media only screen and (max-width: 759px) {
+    .sidebar {
+      margin-left: 3% !important;
+      margin-right: 3% !important;
+    }
+
+    .other-person-profile{
+        width: 96% !important;
+        margin-left: 2% !important;
+        margin-right: 2% !important;
+    }
+}
+
+
+@media only screen and (min-width: 760px) {
+    .parent-container{
+        display: flex !important;
+    }
+
+    .main-container{
+        width: 64% !important;
+        margin-left: 2% !important;
+        margin-right: 2% !important;
+    }
+
+    .sidebar{
+       min-width: 30% !important;
+       margin-left: 3% !important;
+    }
+
+    .other-person-profile{
+        width: 90% !important;
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .parent-container{
+        display: flex !important;
+    }
+
+    .main-container{
+        width: 65% !important;
+        margin-left: 3% !important;
+        margin-right: 7% !important;
+    }
+
+    .sidebar{
+       min-width: 18% !important;
+       margin-left: 7% !important;
+    }
+
+    .other-person-profile{
+        width: 74% !important;
+        margin-left: 13% !important;
+        margin-right: 13% !important;
+    }
+}
+

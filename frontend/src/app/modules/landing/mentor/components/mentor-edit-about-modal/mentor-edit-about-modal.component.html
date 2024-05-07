@@ -1,0 +1,63 @@
+<div class="flex-col items-center justify-center md:min-w-120">
+    <div class="text-center">
+        <h1 class="heading font-bold text-2xl">Edit About Information</h1>
+    </div>
+    <div class="flex flex-col text-center mx-auto">
+        <form class="flex flex-col mx-auto mt-3" style="width: 90% !important">
+            <div class="flex flex-col mt-4">
+                <h1 class="text-left font-bold">Bio*</h1>
+                <textarea
+                    required
+                    name="bio"
+                    [(ngModel)]="AboutInfo.bio"
+                    class="mt-2 border border-gray-300 px-4 py-2 placeholder-italic"
+                ></textarea>
+            </div>
+
+            <div class="flex flex-col mt-4">
+                <h1 class="text-left font-bold">Profession*</h1>
+                <input
+                    type="text"
+                    required
+                    name="profession"
+                    [(ngModel)]="AboutInfo.profession"
+                    class="mt-2 mb-3 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col mt-2">
+                <h1 class="text-left font-bold">Speciality*</h1>
+                <input
+                    type="text"
+                    required
+                    name="speciality"
+                    [(ngModel)]="AboutInfo.speciality"
+                    class="mt-2 mb-3 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col mt-2">
+                <h1 class="text-left font-bold">Industry*</h1>
+                <input
+                    type="text"
+                    required
+                    name="industry"
+                    [(ngModel)]="AboutInfo.industry"
+                    class="mt-2 mb-3 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex justify-center items-center">
+                <button
+                    (click)="updateAbout()"
+                    class="mt-5 w-28 rounded mr-4 sigin text-white font-semibold py-2 px-4"
+                    [class.bg-pyramid-default-primary]="areAllFieldsFilled()"
+                    [class.bg-gray-400]="!areAllFieldsFilled()"
+                    [disabled]="!areAllFieldsFilled()"
+                >
+                    SUBMIT
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

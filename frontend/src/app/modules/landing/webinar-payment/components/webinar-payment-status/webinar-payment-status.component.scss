@@ -1,0 +1,42 @@
+.container{
+    margin-top: 4% !important;
+    margin-bottom: 4% !important;
+}
+
+.status-pic{
+    font-size: 90px !important;
+    font-weight: bold !important;
+}
+
+.payment-card{
+    max-height: 37rem !important;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .payment-card{
+        width: 70% !important;
+        max-height: 32rem !important;
+    }
+    .payment-info{
+        display: flex !important;
+        justify-content: space-between !important;
+    }
+    .status{
+        font-size: 32px !important;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+
+    .payment-card{
+        width: 33% !important;
+    }
+ 
+    .payment-info{
+        display: flex !important;
+        justify-content: space-between !important;
+        padding-left: 12% !important;
+        padding-right: 12% !important;
+    }
+}

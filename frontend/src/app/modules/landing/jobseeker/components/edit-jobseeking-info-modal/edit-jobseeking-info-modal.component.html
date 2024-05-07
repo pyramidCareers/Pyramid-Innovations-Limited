@@ -1,0 +1,147 @@
+
+<div class=" flex-col items-center justify-center md:min-w-120">
+    <div class="text-center">
+        <h1 class="heading font-bold text-2xl">Please Edit Jobseeking Info</h1>
+    </div>
+    <div   class="flex flex-col text-center   mx-auto">
+        
+
+
+        <form   class="flex flex-col  mx-auto mt-3" style="width:90% !important;">
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Job Seeking Status*</h1>
+                <select [(ngModel)]="profile.jobseeking_status" name="jobseeking_status" class="mb-4 mt-2 border border-gray-300 px-4 py-2">
+                    <option value="0">NO</option>
+                    <option value="1">YES</option>
+                </select>
+                  
+
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Expected  Salary*</h1>
+                <input type="number" 
+                        [(ngModel)]="profile.expected_salary"
+                        name="expected_salary"
+                        class="mb-3 border border-gray-300 px-4 py-2 placeholder-italic"
+                        min="0"
+                        max="100000000" 
+                />
+
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Currency*</h1>
+              
+                <select [(ngModel)]="profile.currency" name="currency" class="mb-4 mt-2 border border-gray-300 px-4 py-2">
+                    <option value="BDT">BDT</option>
+                    <option value="Dollar">Dollar</option>
+                    <option value="Pound">Pound</option>
+                    <option value="Rial">Rial</option>
+                </select>
+
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Current Notice Period*</h1>
+                <input type="number" 
+                       required
+                       [(ngModel)]="profile.current_notice_period"
+                       name="current_notice_period"
+                       class="mb-4 mt-2 border border-gray-300 px-4 py-2 placeholder-italic"
+                       min="0"
+                       max="100000000" 
+                />
+            </div>
+            
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Current Profession</h1>
+                <input type="text" 
+                       
+                        [(ngModel)]="profile.current_profession"
+                        name="current_profession"
+                        class="mb-4 mt-2 border border-gray-300 px-4 py-2 placeholder-italic"
+                        maxlength="48"
+                />
+               
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Industry</h1>
+                <input type="text" 
+                       
+                        [(ngModel)]="profile.industry"
+                        name="industry"
+                        class="mb-4 mt-2 border border-gray-300 px-4 py-2 placeholder-italic"
+                        maxlength="48"
+                />
+               
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Speciality</h1>
+                <input type="text" 
+                       
+                        [(ngModel)]="profile.speciality"
+                        name="speciality"
+                        class="mb-4 mt-2 border border-gray-300 px-4 py-2 placeholder-italic"
+                        maxlength="48"
+                />
+               
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Field of Study</h1>
+                <input type="text" 
+                       
+                        [(ngModel)]="profile.field_of_study"
+                        name="field_of_study"
+                        class="mb-4 mt-2 border border-gray-300 px-4 py-2 placeholder-italic"
+                        maxlength="48"
+                />
+               
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Years Of Experience</h1>
+                <input type="text" 
+                       
+                        [(ngModel)]="profile.years_of_experience"
+                        name="years_of_experience"
+                        class="mb-4 mt-2 border border-gray-300 px-4 py-2 placeholder-italic"
+                        maxlength="48"
+                />
+               
+            </div>
+
+
+            <div class="flex justify-center items-center">
+                <button *ngIf="!loading && isValidated() == true"
+                    class="mt-5 w-28 rounded mr-4 sigin text-white font-semibold py-2 px-4 bg-pyramid-default-primary" 
+                    (click)="edit()"
+                 >
+                      SUBMIT
+                 </button>
+
+                 <button *ngIf="!loading && isValidated() ==false"
+                     class="mt-5 w-28 rounded mr-4 sigin text-white font-semibold py-2 px-4 bg-gray-300 cursor-not-allowed" 
+                 >
+                       SUBMIT
+                 </button>
+
+                 <div  *ngIf="loading"  class="flex justify-center items-center">
+                      <app-loader></app-loader>
+                 </div>
+
+              
+            </div>
+          
+        </form>
+
+      
+    </div>
+
+    
+</div>
+

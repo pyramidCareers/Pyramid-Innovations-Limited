@@ -1,0 +1,170 @@
+<div class="min-h-screen">
+    <div
+        *ngIf="loadingRes"
+        class="min-h-screen flex justify-center items-center"
+    >
+        <app-loader></app-loader>
+    </div>
+    <div class="main-container my-6 md:flex gap-x-1" *ngIf="!loadingRes">
+        <div class="left-side-contect">
+            <div>
+                <h1 class="pt-2 pb-1 font-bold infxs:text-3xl md:text-4xl mb-4">
+                    {{ details?.title | uppercase }}
+                </h1>
+            </div>
+
+            <div class="flex">
+                <p class="font-semibold text-lg">
+                    {{ details?.date | date }}
+                </p>
+            </div>
+
+            <div class="flex mb-6">
+                <p class="font-semibold text-lg">
+                    {{ convertTo12HourFormat(details?.start_time) }} -
+                    {{ convertTo12HourFormat(details?.end_time) }}
+                </p>
+            </div>
+
+            <div
+                class="md:flex rounded bg-[#fff] px-4 shadow-md mt-2 flex justify-between items-center about-us py-4"
+            >
+                <div>
+                    <div
+                        *ngIf="
+                            details?.user?.profile_pic === null &&
+                            details?.user?.gender == 'male'
+                        "
+                        class="flex items-center infxs:block md:hidden mb-2"
+                    >
+                        <img
+                            [src]="male_avater"
+                            class="h-full w-full object-contain rounded"
+                        />
+                    </div>
+                    <div
+                        *ngIf="
+                            details?.user?.profile_pic === null &&
+                            details?.user?.gender == 'female'
+                        "
+                        class="flex items-center infxs:block md:hidden mb-2"
+                    >
+                        <img
+                            [src]="female_avater"
+                            class="h-full w-full object-contain rounded"
+                        />
+                    </div>
+                    <div
+                        *ngIf="details?.user?.profile_pic != null"
+                        class="flex items-center infxs:block md:hidden mb-2"
+                    >
+                        <img
+                            [src]="details?.user?.profile_pic"
+                            class="h-full w-full object-contain rounded"
+                        />
+                    </div>
+                    <h2 class="text-2xl mb-1 text-gray-500 font-bold">
+                        {{ details?.user?.firstname }}
+                        {{ details?.user?.lastname }}
+                    </h2>
+                    <p class="text-justify">{{ details?.user?.mentor?.bio }}</p>
+                </div>
+                <div
+                    *ngIf="
+                        details?.user?.profile_pic === null &&
+                        details?.user?.gender == 'male'
+                    "
+                    class="flex items-center infxs:hidden md:block ml-6"
+                >
+                    <img
+                        [src]="male_avater"
+                        class="h-full w-full object-contain rounded"
+                    />
+                </div>
+                <div
+                    *ngIf="
+                        details?.user?.profile_pic === null &&
+                        details?.user?.gender == 'female'
+                    "
+                    class="flex items-center infxs:hidden md:block ml-6"
+                >
+                    <img
+                        [src]="female_avater"
+                        class="h-full w-full object-contain rounded"
+                    />
+                </div>
+                <div
+                    *ngIf="details?.user?.profile_pic != null"
+                    class="flex items-center infxs:hidden md:block ml-6"
+                >
+                    <img
+                        [src]="details?.user?.profile_pic"
+                        class="h-full w-full object-contain rounded"
+                    />
+                </div>
+            </div>
+
+            <div>
+                <div class="mt-10">
+                    <h1 class="font-bold text-xl">Description:</h1>
+                    <p [innerHTML]="details?.description"></p>
+                </div>
+
+                <div class="mt-4 flex" *ngIf="regFee && regFee > 0">
+                    <h1 class="font-bold text-xl">Registration Fee:</h1>
+                    <p class="mt-1 ml-1">{{ regFee }} BDT</p>
+                </div>
+
+                <div class="mt-4 flex">
+                    <h1 class="font-bold text-xl">Duration :</h1>
+                    <p class="mt-1 ml-1">{{ details?.duration }} Minutes</p>
+                </div>
+
+                <div class="mt-4 flex">
+                    <h1 class="font-bold text-xl">Total Participants:</h1>
+                    <p class="mt-1 ml-1">
+                        {{ details?.particiapnts_count }}
+                    </p>
+                </div>
+            </div>
+
+            <div *ngIf="!isItAdminOrMentor" class="text-center mt-3">
+                <button
+                    *ngIf="isPaidWebinar && !hasJobseekerPaid"
+                    class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-8 py-2 mt-3 text-lg"
+                    (click)="makePayment()"
+                >
+                    PAY NOW
+                </button>
+
+                <button
+                    *ngIf="displayRegisterBtn() == true"
+                    class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-8 py-2 mt-3 text-lg"
+                    (click)="registerWebinar()"
+                >
+                    Register
+                </button>
+
+                <div *ngIf="regCompleted">
+                    <div class="text-center">
+                        <button
+                            (click)="joinWebinar()"
+                            class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-8 py-2 mt-3 text-lg"
+                        >
+                            JOIN WEBINAR
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="isItAdminOrMentor" class="text-center mt-3">
+                <button
+                    (click)="joinWebinar()"
+                    class="bg-[#338f3a] hover:bg-[#256a2a] text-white rounded px-8 py-2 mt-3 text-lg"
+                >
+                    JOIN WEBINAR
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

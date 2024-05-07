@@ -1,0 +1,124 @@
+<div>
+    <div *ngIf="loading" class="absolute top-1/2 left-1/2">
+        <app-loader></app-loader>
+    </div>
+    <div *ngIf="!loading">
+        <div class="mt-2">
+            <h1 class="font-bold text-3xl text-center mb-6">My Webinars</h1>
+            <div class="mb-12 text-center">
+                <select
+                    id="webinarType"
+                    [(ngModel)]="selectedWebinarType"
+                    name="selectedWebinarType"
+                    (ngModelChange)="onWebinarTypeChange()"
+                    class="px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                >
+                    <option value="all" selected>All Webinars</option>
+                    <option value="upcoming">Upcoming Webinars</option>
+                    <option value="past">Past Webinars</option>
+                </select>
+            </div>
+            <div *ngIf="!loading">
+                <div
+                    *ngFor="let wb of webinars"
+                    class="mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0"
+                >
+                    <div class="bg-[#fff] hover:shadow-md">
+                        <div
+                            class="sm:flex justify-between items-center p-4 px-auto"
+                        >
+                            <div
+                                (click)="displayWbDetails(wb.id)"
+                                class="flex items-center justify-between cursor-pointer"
+                            >
+                                <div class="ml-5 -mt-1">
+                                    <h1 class="text-3xl font-medium mb-3">
+                                        {{ wb.title }}
+                                    </h1>
+                                    <span class="font-[700]"
+                                        >Date:
+                                        <span class="font-normal">{{
+                                            wb?.date | date
+                                        }}</span> </span
+                                    ><br />
+                                    <span class="font-[700]"
+                                        >Time:
+                                        <span class="font-normal"
+                                            >{{ wb?.start_time_display }} -
+                                            {{ wb?.end_time_display }}</span
+                                        > </span
+                                    ><br />
+                                </div>
+                            </div>
+
+                            <div
+                                class="infxs:mt-10 sm:mt-0 infxs:text-center flex ml-5"
+                            >
+                                <div
+                                    (click)="editWebinar(wb?.id)"
+                                    class="flex flex-row-reverse items-center cursor-pointer px-3 py-2 mr-2 hover:bg-[#86de8cc4] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-pyramid-black text-[#338f3a]"
+                                >
+                                    <mat-icon class="text-right">edit</mat-icon>
+                                </div>
+                                <btn
+                                    (click)="displayWbDetails(wb?.id)"
+                                    class="cursor-pointer btn-sec px-6 py-3 text-md hover:bg-[#86de8cc4] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-pyramid-black text-[#338f3a] uppercase"
+                                >
+                                    View Webinar
+                                </btn>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            *ngIf="webinars.length > 0"
+            class="mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+        >
+            <div class="flex items-center justify-center my-4">
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-white text-[#338f3a]"
+                    (click)="previousPage()"
+                    [disabled]="currentPage === 1"
+                >
+                    Prev
+                </button>
+
+                <div *ngIf="!isMobileView()">
+                    <ng-container
+                        *ngFor="let page of getPageRange(); let i = index"
+                    >
+                        <button
+                            class="inline-flex items-center px-4 py-2 mr-3 rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                            [ngClass]="{
+                                'hover:bg-[#338f3a] hover:text-white':
+                                    currentPage !== page,
+                                'bg-[#338f3a] !text-white buttonColor':
+                                    currentPage === page
+                            }"
+                            (click)="goToPage(page)"
+                            [disabled]="currentPage === page"
+                        >
+                            {{ page }}
+                        </button>
+                    </ng-container>
+                </div>
+
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                    (click)="nextPage()"
+                    [disabled]="currentPage === totalPages"
+                >
+                    Next
+                </button>
+            </div>
+        </div>
+    </div>
+    <div
+        *ngIf="webinars?.length == 0 && !loading"
+        class="text-center mt-8 md:mt-4 text-red-600 font-bold text-2xl md:text-3xl"
+    >
+        <h1>No Webinars Available</h1>
+    </div>
+</div>

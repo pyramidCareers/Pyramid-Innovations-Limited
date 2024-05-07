@@ -1,0 +1,127 @@
+.mat-mdc-header-cell {
+    background-color: #363154fc !important;
+    color: white !important;
+}
+
+.table-container.mat-elevation-z8 {
+    box-shadow: none !important;
+}
+
+input,
+.shortlist-sec {
+    border: 1px solid rgb(154, 140, 140) !important;
+}
+
+.shortlisted-text {
+    color: #808080 !important;
+}
+
+::placeholder {
+    color: #808080 !important;
+    opacity: 1; /* Firefox */
+}
+
+
+
+.btn, .table-heading{
+    background-color: #363154FC !important;
+    color:white !important; 
+}
+
+.btn:hover{
+    background-color: #08070ffc !important;
+}
+
+
+.dynamic-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+.dynamic-table th,
+.dynamic-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+  
+.dynamic-table th {
+    background-color: #f2f2f2;
+}
+
+@media screen and (max-width: 600px) {
+    .mat-mdc-cell {
+        font-size: 7px !important;
+    }
+    .mat-mdc-header-cell {
+        font-size: 7px !important;
+    }
+    .container {
+        width: 90% !important;
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    .mat-mdc-cell {
+        font-size: 12px !important;
+    }
+    .mat-mdc-header-cell {
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .mat-mdc-cell {
+        font-size: 14px !important;
+    }
+    .mat-mdc-header-cell {
+        font-size: 14px !important;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .mat-mdc-cell {
+        font-size: 16px !important;
+    }
+    .mat-mdc-header-cell {
+        font-size: 16px !important;
+    }
+}
+
+.buttonColor {
+    color: white !important;
+}
+
+.shortlisted {
+    color: #363154fc !important;
+}
+
+.dropdown {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 2px);
+    width: 90%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    background-color: #f1f5f9;
+    border-radius: 5px;
+}
+
+.dropdown-item {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 5px 4px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.dropdown-item:hover {
+    background-color: #363154fc !important;
+    border-radius: 6px !important;
+    color: white !important;
+}

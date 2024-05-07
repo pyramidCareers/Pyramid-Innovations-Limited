@@ -1,0 +1,131 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div class="mx-auto pb-4 infxs:px-2 sm:px-11 md:px-0 parent-container">
+    <div *ngIf="!loading" class="bg-[#fff]">
+        <div class="p-4">
+            <div class="card-container flex mt-5 items-center justify-center">
+                <div
+                    class="flex flex-wrap items-center justify-center gap-6 mx-auto"
+                >
+                    <div
+                        class="flex flex-col justify-center card p-6 text-center items-center infxs:min-w-60 sm:min-w-80 md:min-w-50 xl:min-w-[332px] xl:min-h-44"
+                    >
+                        <h1 class="font-[500] text-gray-600">Posted Jobs</h1>
+                        <h1 class="font-bold text-gray-600 text-2xl my-1">
+                             {{cntPostedJob}} 
+                        </h1>
+                    </div>
+
+                    <div
+                        class="flex flex-col justify-center card p-6 text-center items-center infxs:min-w-60 sm:min-w-80 md:min-w-50 xl:min-w-[332px] xl:min-h-44"
+                    >
+                        <h1 class="font-[500] text-gray-600">
+                            Job Applications
+                        </h1>
+                        <h1 class="font-bold text-gray-600 text-2xl my-1">
+                            {{cntJobApplication}}
+                        </h1>
+                    </div>
+
+                    <div
+                       class="flex flex-col justify-center card p-6 text-center items-center infxs:min-w-60 sm:min-w-80 md:min-w-50 xl:min-w-[332px] xl:min-h-44"
+                    >
+                        <h1 class="font-[500] text-gray-600">
+                            Job Ready Programmes
+                        </h1>
+                        <h1 class="font-bold text-gray-600 text-2xl my-1">
+                            {{cntJobReadyProgramme}}
+                        </h1>
+                    </div>
+
+                    <div
+                       class="flex flex-col justify-center card p-6 text-center items-center infxs:min-w-60 sm:min-w-80 md:min-w-50 xl:min-w-[332px] xl:min-h-44"
+                    >
+                        <h1 class="font-[500] text-gray-600">
+                           Shortlisted Users
+                        </h1>
+                        <h1 class="font-bold text-gray-600 text-2xl my-1">
+                            {{cntShortlisted}}
+                        </h1>
+                    </div>
+
+                   
+                </div>
+            </div>
+        </div>
+
+      
+        <div class="flex justify-center items-center mt-10">
+                <div style="width: 90%;">
+                    <div>
+                        <h1 class="text-2xl font-[700]  text-center mb-4">
+                            Recently Posted Jobs
+                        </h1>
+                    </div>
+
+                    <div *ngFor="let job of jobs" class="mx-auto w-full pb-4 infxs:px-2 ">
+                        <div class="bg-gray-100 hover:shadow-md job-card">
+                            <div class="sm:flex justify-between items-center p-4">
+                                <div
+                                    (click)="displayJobDetails(job.id)"
+                                    class="flex job-info items-center infxs:justify-start justify-between cursor-pointer"
+                                >
+                                    <div
+                                        class="border flex items-center justify-center border-[#338f3a] rounded min-h-20 min-w-20 h-20 w-20"
+                                    >
+                                        <img
+                                            [src]="job?.companyinfo?.logo"
+                                            class="h-auto max-w-full object-contain"
+                                        />
+                                    </div>
+        
+                                    <div class="ml-5 -mt-1">
+                                        <h1 class="text-2xl font-medium">
+                                            {{ job.title }}
+                                        </h1>
+                                        <h3
+                                            *ngIf="job.location !== null"
+                                            class="py-2 text-sm"
+                                        >
+                                            At {{ job?.companyinfo?.org_name }} -
+                                            {{ job.location }}
+                                        </h3>
+                                        <h2 class="text-sm">
+                                            Posted on {{ job.created_at | date }}
+                                        </h2>
+                                    </div>
+                                </div>
+        
+                                <div
+                                    class="flex justify-end gap-x-2 infxs:mt-6 sm:mt-0 view-btn"
+                                >
+                                    
+                                    <div
+                                        (click)="displayJobDetails(job.id)"
+                                        class="cursor-pointer px-6 py-3 text-md hover:bg-[#86de8cc4] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-pyramid-black text-[#338f3a] uppercase"
+                                    >
+                                          View Job
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4 mb-7">
+                            <button
+                                class="bg-[#69C0B3] hover:bg-[#259584] text-white rounded px-4 py-2 text-sm"
+                                (click)="goToJobs()"
+                            >
+                                 VIEW ALL JOBS
+                            </button>
+                    </div>
+                       
+                    
+
+                </div>
+        </div>
+    </div>
+</div>
+
+

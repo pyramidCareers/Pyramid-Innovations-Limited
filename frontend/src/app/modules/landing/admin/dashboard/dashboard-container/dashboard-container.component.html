@@ -1,0 +1,8 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div class="main-container py-7">
+    <div *ngIf="!loading">
+        <app-statistics></app-statistics>
+    </div>
+</div>

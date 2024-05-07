@@ -1,0 +1,77 @@
+<div class="md:flex md:flex-wrap main-container md:min-h-screen">
+    <div
+        class="left-part flex justify-center items-center text-center py-10 px-3 bg-[#fff]"
+    >
+        <div>
+            <h1 class="cngrtz-txt">You made it!</h1>
+            <h1 class="cngrtz-txt mt-8">
+                Thanks for creating an account with us!
+            </h1>
+            <button
+                class="explore-btn !bg-[#338f3a] hover:!bg-[#256a2a]"
+                (click)="continueActionJobs()"
+            >
+                Explore our jobs
+            </button>
+
+            <p class="or-div">OR</p>
+
+            <button
+                class="continue-btn bg-[#338f3a] hover:bg-[#256a2a] my-5 text-white text-lg py-2 px-8"
+                (click)="continueAction()"
+            >
+                Continue
+            </button>
+            <div
+                *ngIf="isFileSelected && showErrorMessage && isSubmitButtonShow"
+                class="text-red-600"
+            >
+                You need to submit the selected file. Please upload the file or
+                choose any button without submitting the resume.
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="right-part flex justify-center items-center text-center py-10 px-3"
+        style="background-color: #f9a971 !important"
+    >
+        <div class="text-center md:w-2/3 mx-auto">
+            <img
+                src="../../../../../../assets/images/cv.png"
+                class="w-56 h-56 mx-auto"
+            />
+            <p class="cv-txt">
+                Upload Your Resume to immediately start applying for jobs.
+            </p>
+
+            <div class="mt-4">
+                <div class="ml-22">
+                    <input
+                        name="resume-file"
+                        type="file"
+                        class="px-auto w-5/6"
+                        (change)="onResumeUpload($event)"
+                        accept=".pdf"
+                    />
+                </div>
+            </div>
+            <button
+                *ngIf="this.profile.resume && !loading && isSubmitButtonShow"
+                class="resume-btn"
+                (click)="uploadCV()"
+            >
+                Submit Resume
+            </button>
+            <div
+                *ngIf="!isSubmitButtonShow"
+                class="text-[#040708] text-lg mt-8"
+            >
+                Resume Submitted Succesfully!
+            </div>
+            <div *ngIf="loading" class="flex justify-center items-center mt-3">
+                <app-loader></app-loader>
+            </div>
+        </div>
+    </div>
+</div>

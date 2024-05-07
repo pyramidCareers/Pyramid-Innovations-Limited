@@ -1,0 +1,48 @@
+<div class=" flex-col items-center justify-center md:min-w-120">
+    <div class="text-center">
+        <h1 class="heading font-bold text-2xl">Please Edit Skill Info</h1>
+    </div>
+    <div   class="flex flex-col text-center   mx-auto">
+        
+        <form  class="flex flex-col  mx-auto mt-3" style="width:90% !important;">
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Name of Skill*</h1>
+                <input type="text" placeholder="Skill"
+                        required
+                        [(ngModel)]="title"
+                        name="skill"
+                        maxlength="48"
+                        class="mt-2 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+               
+              
+            </div>
+
+            <div class="flex justify-center items-center">
+
+                    <div *ngIf="loading" class="mt-5">
+                        <app-loader></app-loader>
+                    </div>
+
+                    <button *ngIf="isValidated() == true && !loading"
+                        class="mt-5 w-28 mr-4 sigin rounded text-white font-semibold py-2 px-4 bg-pyramid-default-primary" 
+                        (click)="edit()"
+                    >
+                        SUBMIT
+                    </button>
+
+                    <button *ngIf="isValidated() ==false && !loading"
+                            class="mt-5 w-28 mr-4 rounded sigin text-white font-semibold py-2 px-4 bg-gray-300 cursor-not-allowed"    
+                    >
+                        SUBMIT
+                    </button>
+            </div>
+          
+          
+        </form>
+
+      
+    </div>
+
+    
+</div>

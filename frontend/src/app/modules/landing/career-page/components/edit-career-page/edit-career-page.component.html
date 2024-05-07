@@ -1,0 +1,375 @@
+<div class="min-h-screen">
+    <div *ngIf="loading" class="absolute top-1/2 left-1/2">
+        <app-loader></app-loader>
+    </div>
+    <div class="flex flex-col space-y-4 text-center mt-4" *ngIf="!loading">
+        <h1 class="mt-4 text-3xl font-bold">Edit Career Page</h1>
+        <div class="flex justify-center">
+            <button
+                *ngIf="showButton"
+                class="px-3 py-2 bg-pyramid-employer-primary hover:bg-[#28243efc] text-white border rounded"
+                (click)="goToCareerPage()"
+            >
+                Go To Career Page
+            </button>
+        </div>
+        <form
+            [formGroup]="careerForm"
+            (ngSubmit)="onSubmit()"
+            class="flex flex-col w-80 sm:w-160 md:w-180 xl:w-200 mx-auto pb-8"
+        >
+            <!-- sub_domain -->
+            <div>
+                <label
+                    for="sub_domain"
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    >Sub Domain*</label
+                >
+                <input
+                    type="text"
+                    id="sub_domain"
+                    formControlName="sub_domain"
+                    required="true"
+                    (keyup)="callDomainAvailabilityAPI($event)"
+                    placeholder="Sub Domain"
+                    [(ngModel)]="CareerPageEdit.sub_domain"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic mb-2"
+                />
+            </div>
+            <div
+                *ngIf="showDomainStatus"
+                class="flex justify-end w-80 sm:w-160 md:w-180 xl:w-200"
+            >
+                <h1
+                    [ngStyle]="{
+                        color:
+                            subDomainStatus === 'This Sub Domain is Available'
+                                ? 'blue'
+                                : 'red'
+                    }"
+                >
+                    *{{ subDomainStatus }}
+                </h1>
+            </div>
+
+            <!-- brandcolor -->
+            <div>
+                <label
+                    for="brandcolor"
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    >Brand Color (Hex code)* e.g:#7ce1ce</label
+                >
+                <input
+                    type="text"
+                    id="brandcolor"
+                    formControlName="brandcolor"
+                    required
+                    placeholder="Brand Color"
+                    [(ngModel)]="CareerPageEdit.brandcolor"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic mb-2"
+                />
+            </div>
+
+            <!-- cover -->
+            <div>
+                <div class="flex flex-wrap justify-between">
+                    <label
+                        for="cover"
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        >Cover Picture*</label
+                    >
+                    <div
+                        class="text-gray-500 mt-1"
+                        *ngIf="!filePreviews['cover']"
+                    >
+                        Choose a file (max size: 5MB).
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="cover"
+                    (change)="onFileChange($event, 'cover')"
+                    accept="image/*"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic mb-2"
+                />
+            </div>
+            <div *ngIf="filePreviews['cover']" class="mt-4 mb-4">
+                <img
+                    [src]="filePreviews['cover']"
+                    alt="Cover Picture Preview"
+                    class="h-30 w-40 object-contain"
+                />
+            </div>
+            <!-- Error message for file size limit -->
+            <div
+                *ngIf="fileSizeErrors['cover']"
+                class="text-red-600 mt-1 text-left"
+            >
+                *File size for Cover Picture must be 5.00 MB or less.
+            </div>
+
+            <!-- galleryimage 1 -->
+            <div>
+                <div class="flex flex-wrap justify-between">
+                    <label
+                        for="galleryimage1"
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        >Gallery Image 1*</label
+                    >
+                    <div
+                        class="text-gray-500 mt-1"
+                        *ngIf="!filePreviews['galleryimage1']"
+                    >
+                        Choose a file (max size: 2MB).
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="galleryimage1"
+                    (change)="onFileChange($event, 'galleryimage1')"
+                    accept="image/*"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic mb-2"
+                />
+            </div>
+            <div *ngIf="filePreviews['galleryimage1']" class="mt-4 mb-4">
+                <img
+                    [src]="filePreviews['galleryimage1']"
+                    alt="Gallery Image 1 Preview"
+                    class="h-30 w-40 object-contain"
+                />
+            </div>
+            <!-- Error message for file size limit -->
+            <div
+                *ngIf="fileSizeErrors['galleryimage1']"
+                class="text-red-600 mt-1 text-left"
+            >
+                *File size for Gallery Image 1 must be 2.00 MB or less.
+            </div>
+
+            <!-- galleryimage 2 -->
+            <div>
+                <div class="flex flex-wrap justify-between">
+                    <label
+                        for="galleryimage2"
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        >Gallery Image 2*</label
+                    >
+                    <div
+                        class="text-gray-500 mt-1"
+                        *ngIf="!filePreviews['galleryimage2']"
+                    >
+                        Choose a file (max size: 2MB).
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="galleryimage2"
+                    (change)="onFileChange($event, 'galleryimage2')"
+                    accept="image/*"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic mb-2"
+                />
+            </div>
+            <div *ngIf="filePreviews['galleryimage2']" class="mt-4 mb-4">
+                <img
+                    [src]="filePreviews['galleryimage2']"
+                    alt="Gallery Image 2 Preview"
+                    class="h-30 w-40 object-contain"
+                />
+            </div>
+            <!-- Error message for file size limit -->
+            <div
+                *ngIf="fileSizeErrors['galleryimage2']"
+                class="text-red-600 mt-1 text-left"
+            >
+                *File size for Gallery Image 2 must be 2.00 MB or less.
+            </div>
+
+            <!-- galleryimage 3 -->
+            <div>
+                <div class="flex flex-wrap justify-between">
+                    <label
+                        for="galleryimage3"
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        >Gallery Image 3*</label
+                    >
+                    <div
+                        class="text-gray-500 mt-1"
+                        *ngIf="!filePreviews['galleryimage3']"
+                    >
+                        Choose a file (max size: 2MB).
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="galleryimage3"
+                    (change)="onFileChange($event, 'galleryimage3')"
+                    accept="image/*"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic mb-2"
+                />
+            </div>
+            <div *ngIf="filePreviews['galleryimage3']" class="mt-4 mb-4">
+                <img
+                    [src]="filePreviews['galleryimage3']"
+                    alt="Gallery Image 3 Preview"
+                    class="h-30 w-40 object-contain"
+                />
+            </div>
+            <!-- Error message for file size limit -->
+            <div
+                *ngIf="fileSizeErrors['galleryimage3']"
+                class="text-red-600 mt-1 text-left"
+            >
+                *File size for Gallery Image 3 must be 2.00 MB or less.
+            </div>
+
+            <!-- galleryimage 4 -->
+            <div>
+                <div class="flex flex-wrap justify-between">
+                    <label
+                        for="galleryimage4"
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        >Gallery Image 4*</label
+                    >
+                    <div
+                        class="text-gray-500 mt-1"
+                        *ngIf="!filePreviews['galleryimage4']"
+                    >
+                        Choose a file (max size: 2MB).
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="galleryimage4"
+                    (change)="onFileChange($event, 'galleryimage4')"
+                    accept="image/*"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic mb-2"
+                />
+            </div>
+            <div *ngIf="filePreviews['galleryimage4']" class="mt-4 mb-4">
+                <img
+                    [src]="filePreviews['galleryimage4']"
+                    alt="Gallery Image 4 Preview"
+                    class="h-30 w-40 object-contain"
+                />
+            </div>
+            <!-- Error message for file size limit -->
+            <div
+                *ngIf="fileSizeErrors['galleryimage4']"
+                class="text-red-600 mt-1 text-left"
+            >
+                *File size for Gallery Image 4 must be 2.00 MB or less.
+            </div>
+
+            <!-- galleryimage 5 -->
+            <div>
+                <div class="flex flex-wrap justify-between">
+                    <label
+                        for="galleryimage5"
+                        class="flex justify-start font-semibold text-lg mb-1"
+                        >Gallery Image 5*</label
+                    >
+                    <div
+                        class="text-gray-500 mt-1"
+                        *ngIf="!filePreviews['galleryimage5']"
+                    >
+                        Choose a file (max size: 2MB).
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="galleryimage5"
+                    (change)="onFileChange($event, 'galleryimage5')"
+                    accept="image/*"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic mb-2"
+                />
+            </div>
+            <div *ngIf="filePreviews['galleryimage5']" class="mt-4 mb-4">
+                <img
+                    [src]="filePreviews['galleryimage5']"
+                    alt="Gallery Image 5 Preview"
+                    class="h-30 w-40 object-contain"
+                />
+            </div>
+            <!-- Error message for file size limit -->
+            <div
+                *ngIf="fileSizeErrors['galleryimage5']"
+                class="text-red-600 mt-1 text-left"
+            >
+                *File size for Gallery Image 5 must be 2.00 MB or less.
+            </div>
+
+            <!-- facebookLink -->
+            <div>
+                <label
+                    for="facebookLink"
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    >Facebook Link*</label
+                >
+                <input
+                    type="text"
+                    id="facebookLink"
+                    formControlName="facebookLink"
+                    required
+                    placeholder="Facebook Link"
+                    [(ngModel)]="CareerPageEdit.fblink"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic mb-2"
+                />
+            </div>
+
+            <!-- linkedInLink -->
+            <div>
+                <label
+                    for="facebookLink"
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    >LinkedIn Link*</label
+                >
+                <input
+                    type="text"
+                    id="linkedInLink"
+                    formControlName="linkedInLink"
+                    required
+                    placeholder="LinkedIn Link"
+                    [(ngModel)]="CareerPageEdit.linkedinlink"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic mb-2"
+                />
+            </div>
+
+            <!-- email -->
+            <div class="mb-6">
+                <label
+                    for="email"
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    >Email*</label
+                >
+                <input
+                    type="text"
+                    id="email"
+                    formControlName="email"
+                    required
+                    placeholder="Email"
+                    [(ngModel)]="CareerPageEdit.email"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                />
+            </div>
+
+            <!-- Submit button -->
+            <div class="text-center">
+                <button
+                    class="
+                mt-5 w-1/2 mx-auto text-white font-medium py-2 px-4 rounded
+                bg-[#363154fc] hover:bg-[#28243efc]
+                {{
+                        careerForm.invalid
+                            ? '!bg-gray-300 hover:!bg-gray-300 cursor-not-allowed rounded'
+                            : ''
+                    }}"
+                    [disabled]="careerForm.invalid"
+                    type="submit"
+                    class="w-1/2 mx-auto text-white font-medium py-2 px-4 rounded bg-[#363154fc] hover:bg-[#28243efc]"
+                >
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+textarea {
+    resize: none; /* Prevents manual resizing of the textarea */
+    overflow-y: hidden; /* Hide vertical scrollbar by default */
+    min-height: 30px; /* Set a minimum height for the input box */
+    max-height: 200px; /* Set a maximum height for the input box */
+    width: 80%; /* Adjust the width as per your requirements */
+    height: 30px;
+}
+
+.chat-typing-section {
+    display: flex;
+    align-items: flex-end;
+}
+
+.search-box {
+    padding: 6px;
+    position: relative;
+    border-radius: 5px !important;
+    background-color: #f1f5f9 !important;
+}
+
+.selected-chat .parent-container {
+    background-color: #f1f5f9 !important;
+}
+
+.dropdown {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 2px);
+    width: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    background-color: #f1f5f9;
+    border-radius: 5px;
+}
+
+.dropdown-item {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 5px 4px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.dropdown-item:hover {
+    background-color: #a3a3a3;
+    color: white !important;
+}

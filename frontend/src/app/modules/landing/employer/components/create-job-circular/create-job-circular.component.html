@@ -1,0 +1,302 @@
+<div
+    class="min-h-screen flex-col justify-center items-center pb-6"
+    (click)="hideDropdown($event)"
+>
+    <h1 class="heading mt-10 font-bold text-3xl text-center mb-10 mx-2">
+        Create a New Job Circular
+    </h1>
+    <div class="flex flex-col !w-80 sm:w-160 md:w-180 xl:w-200 mx-auto mb-12">
+        <div *ngIf="userType == 'admin'">
+            <div class="flex flex-wrap items-center mb-3">
+                <span class="mr-2 infxs:mb-2 sm:mb-0 font-bold"
+                    >Select Employer:</span
+                >
+                <div class="relative">
+                    <input
+                        type="text"
+                        placeholder="Type Employer Name"
+                        class="px-4 py-2 border focus:border-2 focus:border-[#6ec9de]"
+                        (keyup)="callEmployeeSearchAPI($event)"
+                        [(ngModel)]="selectedEmployer"
+                        (input)="clearDropdown()"
+                    />
+                    <div
+                        class="absolute inset-y-0 right-0 flex items-center pr-3"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 feather feather-search"
+                        ></svg>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="showErrorMessage" class="error-msg text-red mt-2">
+                *Employer select is required
+            </div>
+            <div *ngIf="searchResults && searchResults.length > 0">
+                <ul
+                    class="bg-white border shadow-md dropdown sm:ml-[125px] absolute"
+                >
+                    <li
+                        *ngFor="let result of searchResults"
+                        class="px-4 py-2 cursor-pointer dropdown-item"
+                        (click)="selectEmployer(result)"
+                    >
+                        {{ result.org_name }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Job Title*</div>
+            <input
+                type="text"
+                id="title"
+                [(ngModel)]="jobCircular.title"
+                class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+            />
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Job Description*</div>
+            <quill-editor
+                style="max-width: 100%"
+                [styles]="{ height: '300px', backgroundColor: '#faf8f8' }"
+                [(ngModel)]="jobCircular.description"
+            ></quill-editor>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Job Requirements*</div>
+            <quill-editor
+                style="max-width: 100%"
+                [styles]="{ height: '300px', backgroundColor: '#faf8f8' }"
+                [(ngModel)]="jobCircular.requirement_details"
+            ></quill-editor>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2" for="title">
+                Additional Requirements*
+            </div>
+
+            <quill-editor
+                style="max-width: 100%"
+                [styles]="{ height: '300px', backgroundColor: '#faf8f8' }"
+                [(ngModel)]="jobCircular.additional_requirements"
+            ></quill-editor>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Responsibilities*</div>
+            <quill-editor
+                style="max-width: 100%"
+                [styles]="{ height: '300px', backgroundColor: '#faf8f8' }"
+                [(ngModel)]="jobCircular.responsibilities"
+            ></quill-editor>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Other Benefits*</div>
+            <quill-editor
+                style="max-width: 100%"
+                [styles]="{ height: '300px', backgroundColor: '#faf8f8' }"
+                [(ngModel)]="jobCircular.other_benefits"
+            ></quill-editor>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Category*</div>
+            <select
+                id="category"
+                [(ngModel)]="jobCircular.category"
+                name="category"
+                class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+                style="padding-right: 60px !important"
+            >
+                <option value="On-Site">On-Site</option>
+                <option value="Remote">Remote</option>
+                <option value="Hybrid">Hybrid</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Job Type</div>
+            <select
+                id="job_type"
+                [(ngModel)]="jobCircular.job_type"
+                name="job_type"
+                class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+                style="padding-right: 60px !important"
+            >
+                <option value="Full-Time">Full Time</option>
+                <option value="Part-Time">Part Time</option>
+                <option value="Contractual">Contractual</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Experience Level</div>
+            <select
+                id="experience_level"
+                [(ngModel)]="jobCircular.experience_level"
+                name="experience_level"
+                class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+                style="padding-right: 60px !important"
+            >
+                <option value="Intern">Intern Level</option>
+                <option value="Junior">Junior Level</option>
+                <option value="Mid-Level">Mid Level</option>
+                <option value="Senior">Senior Level</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Currency*</div>
+            <select
+                id="currency"
+                [(ngModel)]="jobCircular.currency"
+                name="cuurency"
+                class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+                style="padding-right: 60px !important"
+            >
+                <option value="BDT">BDT</option>
+                <option value="Dollar">Dollar</option>
+                <option value="Pound">Pound</option>
+                <option value="Rial">Rial</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Job Circular Link On Company Site</div>
+            <input
+                type="string"
+                id="company_site_link"
+                placeholder="Job Circular Link"
+                [(ngModel)]="jobCircular.company_site_link"
+                name="company_site_link"
+                class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+            />
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">
+                Minimum Experience Requirements (year)
+            </div>
+            <input
+                type="number"
+                id="experience_lower_limit"
+                placeholder="Experience Lower Limit"
+                [(ngModel)]="jobCircular.experience_lower_limit"
+                name="experience_lower_limit"
+                class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+            />
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">
+                Maximum Experience Requirements (year)
+            </div>
+            <input
+                type="number"
+                id="experience_upper_limit"
+                placeholder="Experience Upper Limit"
+                [(ngModel)]="jobCircular.experience_upper_limit"
+                name="experience_upper_limit"
+                class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+            />
+            <div
+                *ngIf="!experoenceLimitValidated"
+                class="error-msg text-red mt-2"
+            >
+                *Experience upper limit must be greater than or equal to
+                experience lower limit
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Salary Lower Limit*</div>
+            <input
+                type="number"
+                id="salary_lower_limit"
+                placeholder="Salary Lower Limit"
+                [(ngModel)]="jobCircular.salary_lower_limit"
+                name="salary_lower_limit"
+                class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+            />
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Salary Upper Limit*</div>
+            <input
+                type="number"
+                id="salary_upper_limit"
+                placeholder="Salary Upper Limit"
+                [(ngModel)]="jobCircular.salary_upper_limit"
+                name="salary_upper_limit"
+                class="w-full border border-gray-300 px-4 py-2 placeholder-italic"
+            />
+            <div *ngIf="!salaryLimitValidated" class="error-msg text-red mt-2">
+                *Salary upper limit must be greater than salary lower limit
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Location*</div>
+            <input
+                type="text"
+                id="title"
+                [(ngModel)]="jobCircular.location"
+                class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+            />
+        </div>
+
+        <div class="mb-3">
+            <div class="label-cls mb-2">Number Of Vacancies</div>
+            <input
+                type="number"
+                id="number_of_vacancies"
+                [(ngModel)]="jobCircular.number_of_vacancies"
+                class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+            />
+        </div>
+
+        <div>
+            <div class="label-cls mb-2">Application Deadline</div>
+            <input
+                type="date"
+                id="application_deadline"
+                [(ngModel)]="jobCircular.application_deadline"
+                class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+            />
+        </div>
+    </div>
+
+    <div class="mx-auto w-2/3 pb-6 text-center">
+        <button
+            *ngIf="!loading && isFormValidated() == true"
+            class="w-1/2 mx-auto submit-btn text-white font-semibold px-6 py-2 xl:py-3 bg-[#363154fc] hover:bg-[#28243efc]"
+            (click)="onSubmit()"
+        >
+            Submit
+        </button>
+
+        <button
+            *ngIf="!loading && isFormValidated() == false"
+            class="w-1/2 mx-auto cursor-not-allowed submit-btn text-white font-semibold px-6 py-2 xl:py-3 bg-gray-300"
+        >
+            Submit
+        </button>
+
+        <div *ngIf="loading" class="flex justify-center items-center mt-3">
+            <app-loader></app-loader>
+        </div>
+    </div>
+</div>

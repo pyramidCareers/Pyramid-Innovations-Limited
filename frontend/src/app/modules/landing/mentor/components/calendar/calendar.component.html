@@ -1,0 +1,99 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div *ngIf="!loading">
+    <div class="flex justify-between mt-1">
+        <mat-form-field appearance="fill">
+            <mat-label>Month</mat-label>
+            <mat-select
+                [(value)]="selectedMonth"
+                (selectionChange)="updateCalendar()"
+                class="w-100"
+            >
+                <mat-option
+                    *ngFor="let month of months; index as i"
+                    [value]="i"
+                    >{{ month }}</mat-option
+                >
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Year</mat-label>
+            <mat-select
+                [(value)]="selectedYear"
+                (selectionChange)="updateCalendar()"
+            >
+                <mat-option *ngFor="let year of years" [value]="year">{{
+                    year
+                }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="mt-4">
+        <div class="flex flex-col min-h-screen items-center justify-center">
+            <table class="table-fixed w-full flex-1 rounded-lg overflow-hidden">
+                <thead>
+                    <tr>
+                        <th
+                            *ngFor="let day of daysOfWeek"
+                            class="w-1/7 py-2 xl:py-4 border-2 border-gray-200 bg-[#5397bf] text-white"
+                        >
+                            {{ day }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let week of weeks">
+                        <td
+                            *ngFor="let dayData of week"
+                            class="w-1/7 h-1/6 py-2 border border-gray-200 hover:bg-gray-50 hover:transition-all"
+                            [ngStyle]="{ 'background-color': dayData.bgColor }"
+                        >
+                            <div
+                                (click)="
+                                    addTimeSlot(dayData.day, dayData.isPastDate)
+                                "
+                                [ngClass]="{
+                                    'cursor-pointer':
+                                        (userTypeMentor || userTypeAdmin) &&
+                                        !dayData.isPastDate,
+                                    'cursor-not-allowed':
+                                        userTypeMentor && dayData.isPastDate
+                                }"
+                                class="block h-full"
+                            >
+                                {{ dayData.day }}
+
+                                <div
+                                    class="space-y-1 text-white text-sm z-10"
+                                    *ngIf="webinarsAvailable"
+                                >
+                                    <div
+                                        class="rounded"
+                                        (click)="
+                                            timeslotBooking(
+                                                timeSlot.split(',')[0],
+                                                $event
+                                            )
+                                        "
+                                        *ngFor="
+                                            let timeSlot of dayData.timeSlots
+                                        "
+                                        [ngClass]="{
+                                            'cursor-pointer': userTypeJobseeker
+                                        }"
+                                        [style.backgroundColor]="
+                                            timeSlot.split(',')[2]
+                                        "
+                                    >
+                                        {{ timeSlot.split(",")[1] }}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

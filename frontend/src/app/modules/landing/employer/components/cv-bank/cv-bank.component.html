@@ -1,0 +1,128 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div *ngIf="!loading">
+    <div class="py-6 flex justify-center">
+        <button
+            (click)="addCvReq()"
+            class="uppercase px-6 py-2 xl:py-3 bg-[#363154fc] hover:bg-[#28243efc] border rounded text-white font-medium"
+        >
+            Add CV Request
+        </button>
+    </div>
+
+    <div>
+        <div
+            class="bg-[#fff] hover:shadow-md mb-4"
+            *ngFor="let cv of cvReqList; let i = index"
+        >
+            <div
+                class="cv-req-card p-4 min-h-26"
+              
+            >
+
+                    <div *ngIf="innerWidth < 767 ">
+                        <mat-icon 
+                            [ngClass]=" cv.status == 'pending' ? 'cursor-pointer' : 'cursor-not-allowed' "
+                            (click)="editCvReq(cv)"    
+                        >edit</mat-icon>
+                    </div>
+
+                    <div class="cv-filteres">
+                            <h1 class="font-bold text-base mb-3">Filters:</h1>
+                            <div class="flex flex-wrap gap-2">
+                                <div *ngFor="let filter of cv.cvfilters" ngClass="rounded-xl h-8 p-1.5 bg-gray-100">
+                                        {{filter.filter_value}}<span *ngIf="filter.filter_name == 'experience' ">&nbsp;years</span>
+                                </div>
+                            
+                            </div>
+        
+                            <div class="mt-6">
+                                <div>
+                                        <span  class="font-bold text-base mr-2">Requested by:</span>  
+                                        <span class="text-md">{{cv?.user?.firstname + " " + cv?.user?.lastname}}</span> 
+                                </div>
+
+                                <div>
+                                    <span  class="font-bold text-base mr-2">Requested Date:</span>  
+                                    <span class="text-md">{{  cv.created_at | date }}</span> 
+                                </div>
+
+                                <div>
+                                    <span  class="font-bold text-base mr-2">Requested CV:</span>  
+                                    <span class="text-md">{{  cv.number_of_cv }}</span> 
+                                </div>
+            
+                                <div *ngIf=" cv.status != 'pending' ">
+                                    <span  class="font-bold text-base mr-2">Approved by:</span>  
+                                    <span class="text-md">{{ cv.approved_by }}</span> 
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="cv-action">
+
+                            <mat-icon *ngIf="innerWidth >= 767"
+                                       [ngClass]=" cv.status == 'pending' ? 'cursor-pointer' : 'cursor-not-allowed' "
+                                       (click)="editCvReq(cv)" 
+                            >edit
+                            </mat-icon>
+                        
+                            <div *ngIf="cv.status">
+                                <span  class="font-bold text-base mr-2">Status:</span>  
+                                <span class="font-bold text-base uppercase"
+                                    [ngClass]=" cv.status == 'done' ? 'text-green-600' : 'text-red-600' "
+                                    >
+                                    {{cv.status}}
+                                </span>
+                            </div>
+
+                            
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="md:max-w-4xl mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+        *ngIf="cvReqList.length > 0"
+    >
+                    <div class="flex items-center justify-center my-4">
+                        <button
+                            class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-white text-[#338f3a]"
+                            (click)="previousPage()"
+                            [disabled]="currentPage === 1"
+                        >
+                            Prev
+                        </button>
+                        <div *ngIf="!isMobileView()">
+                            <ng-container
+                                *ngFor="let page of getPageRange(); let i = index"
+                            >
+                                <button
+                                    class="inline-flex items-center px-4 py-2 mr-3 rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                                    [ngClass]="{
+                                        'hover:bg-[#338f3a] hover:text-white':
+                                            currentPage !== page,
+                                        'bg-[#338f3a] !text-white buttonColor':
+                                            currentPage === page
+                                    }"
+                                    (click)="goToPage(page)"
+                                    [disabled]="currentPage === page"
+                                >
+                                    {{ page }}
+                                </button>
+                            </ng-container>
+                        </div>
+
+                        <button
+                            class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#338f3a] rounded border border-[#338f3a] hover:border-[#338f3a] hover:text-white text-[#338f3a]"
+                            (click)="nextPage()"
+                            [disabled]="currentPage === totalPages"
+                        >
+                            Next
+                        </button>
+                    </div>
+    </div>
+</div>
+

@@ -1,0 +1,29 @@
+<div *ngIf="loading" class="absolute top-1/2 left-1/2">
+    <app-loader></app-loader>
+</div>
+<div *ngIf="!loading">
+    <div
+        *ngIf="isErrorOccured"
+        class="min-h-screen flex justify-center items-center"
+    >
+        <div
+            class="text-center text-red-600 text-2xl font-semibold flex justify-center items-center"
+        >
+            404 - PAGE NOT FOUND
+        </div>
+    </div>
+    <div
+        *ngIf="!isErrorOccured"
+        class="infxs:mx-4 md:mx-16 xl:mx-52 min-h-screen"
+    >
+        <app-description-career-page
+            [employer_data]="employerData"
+        ></app-description-career-page>
+        <app-life-at-career-page
+            [employer_data]="employerData"
+        ></app-life-at-career-page>
+        <app-open-job-career-page
+            [employer_data]="employerData"
+        ></app-open-job-career-page>
+    </div>
+</div>

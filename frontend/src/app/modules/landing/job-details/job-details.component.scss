@@ -1,0 +1,123 @@
+::ng-deep ul {
+    list-style: inherit !important;
+    margin-left: 24px !important;
+}
+
+::ng-deep ol {
+    list-style-type: style !important;
+    margin-left: 24px !important;
+}
+
+.size_industry {
+    list-style: none !important;
+    margin-left: 0px !important;
+}
+
+.about-us {
+    border-top: 5px solid #338f3a;
+}
+
+.main-container {
+    width: 86% !important;
+    margin-left: 7% !important;
+    margin-right: 7% !important;
+}
+
+.btnLoader {
+    padding-top: 19.5px !important;
+    padding-bottom: 19.5px !important;
+}
+
+toggle-button {
+    margin: 0 auto !important;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #338f3a;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Optional styles to customize appearance */
+.slider:before {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14),
+        0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.slider:active:before {
+    width: 40px;
+}
+
+@media only screen and (min-width: 768px) {
+    .main-container {
+        display: flex !important;
+        column-gap: 4% !important;
+    }
+    .left-side-contect {
+        width: 70% !important;
+    }
+    .right-side-contect {
+        width: 30% !important;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .main-container {
+        display: flex !important;
+        column-gap: 5% !important;
+    }
+
+    .left-side-contect {
+        width: 82% !important;
+    }
+    .right-side-contect {
+        width: 18% !important;
+    }
+
+    .right-side-content {
+        min-width: 22rem !important;
+    }
+}

@@ -1,0 +1,32 @@
+<div class="search-box relative mb-2 py-1 m-2 flex items-center text-gray-500">
+    <i class="material-icons">search</i>
+    <input
+        type="text"
+        class="ml-1 w-full"
+        placeholder="Search"
+        [(ngModel)]="searchValue"
+        (keyup)="callSeacrhAPI($event)"
+    />
+    <div
+        class="absolute inset-x-0 bottom-0 h-px bg-pyramid-blue transform scale-x-0 transition-transform duration-300 hover:scale-x-100"
+    ></div>
+    <ul class="dropdown" *ngIf="resultsAllSearch.length > 0">
+        <li
+            *ngFor="let result of resultsAllSearch"
+            class="dropdown-item"
+            (click)="openSearch(result)"
+        >
+            {{ result.firstname }} {{ result.lastname }}
+        </li>
+    </ul>
+</div>
+
+<!-- Iterate through the chatList and display each chat item -->
+<app-chat-item
+    *ngFor="let chat of chatContacts"
+    class="chat-item"
+    [chat]="chat"
+    (click)="selectChat(chat)"
+    [ngClass]="{ 'selected-chat': selectedChat?.id === chat?.id }"
+>
+</app-chat-item>

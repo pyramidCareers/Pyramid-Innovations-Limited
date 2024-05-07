@@ -1,0 +1,223 @@
+<div class="infxs:w-60 lg:w-100 xl:w-120">
+    <div class="xl:py-8">
+        <div class="flex flex-col space-y-4 text-center mt-4">
+            <form
+                [formGroup]="formInfo"
+                (ngSubmit)="onSubmit()"
+                class="flex flex-col w-60 sm:w-80 mx-auto"
+            >
+                <div class="flex flex-col">
+                    <input
+                        type="text"
+                        placeholder="Employer First Name"
+                        required
+                        formControlName="firstname"
+                        class="border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                    <div
+                        *ngIf="
+                            formInfo.get('firstname').invalid &&
+                            (formInfo.get('firstname').dirty ||
+                                formInfo.get('firstname').touched)
+                        "
+                        class="error text-left text-red mt-2"
+                    >
+                        *First name is required
+                    </div>
+
+                    <input
+                        type="text"
+                        placeholder="Employer Last Name"
+                        required
+                        formControlName="lastname"
+                        class="mt-5 border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                    <div
+                        *ngIf="
+                            formInfo.get('lastname').invalid &&
+                            (formInfo.get('lastname').dirty ||
+                                formInfo.get('lastname').touched)
+                        "
+                        class="error text-left text-red mt-2"
+                    >
+                        *Last name is required
+                    </div>
+
+                    <input
+                        type="email"
+                        placeholder="Employer Email"
+                        required
+                        formControlName="email"
+                        class="mt-5 border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                    <div
+                        *ngIf="
+                            formInfo.get('email').invalid &&
+                            (formInfo.get('email').dirty ||
+                                formInfo.get('email').touched)
+                        "
+                    >
+                        <div
+                            *ngIf="formInfo.get('email').errors?.required"
+                            class="error text-left text-red mt-2"
+                        >
+                            *Email is required
+                        </div>
+                        <div
+                            *ngIf="formInfo.get('email').errors?.pattern"
+                            class="error text-left text-red mt-2"
+                        >
+                            *Invalid email format
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="duplicateMail"
+                        class="error text-left text-red mt-2"
+                    >
+                        *This email has already been taken
+                    </div>
+
+                    <input
+                        type="text"
+                        placeholder="Employer Contact Number"
+                        required
+                        formControlName="phone"
+                        class="mt-5 border border-gray-300 px-4 py-2 placeholder-italic"
+                    />
+                    <div
+                        *ngIf="
+                            formInfo.get('phone').invalid &&
+                            (formInfo.get('phone').dirty ||
+                                formInfo.get('phone').touched)
+                        "
+                    >
+                        <div
+                            *ngIf="formInfo.get('phone').errors?.required"
+                            class="error text-left text-red mt-2"
+                        >
+                            *Contact number is required
+                        </div>
+                        <div
+                            *ngIf="formInfo.get('phone').errors?.minlength"
+                            class="error text-left text-red mt-2"
+                        >
+                            *Contact number must be 11 characters long
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <input
+                            [type]="showPassword ? 'text' : 'password'"
+                            formControlName="password"
+                            placeholder="Password"
+                            class="mt-5 border w-full border-gray-300 px-4 py-2 placeholder-italic"
+                        />
+                        <mat-icon
+                            *ngIf="!showPassword"
+                            class="icon-size-5 absolute right-2 top-1/2 cursor-pointer"
+                            [svgIcon]="'heroicons_solid:eye'"
+                            (click)="togglePasswordVisibility()"
+                        ></mat-icon>
+                        <mat-icon
+                            *ngIf="showPassword"
+                            class="icon-size-5 absolute right-2 top-1/2 cursor-pointer"
+                            [svgIcon]="'heroicons_solid:eye-off'"
+                            (click)="togglePasswordVisibility()"
+                        ></mat-icon>
+                    </div>
+                    <div
+                        *ngIf="
+                            formInfo.get('password').invalid &&
+                            (formInfo.get('password').dirty ||
+                                formInfo.get('password').touched)
+                        "
+                    >
+                        <div
+                            *ngIf="formInfo.get('password').errors?.required"
+                            class="error text-left text-red mt-2"
+                        >
+                            *Password is required
+                        </div>
+                        <div
+                            *ngIf="formInfo.get('password').errors?.pattern"
+                            class="error text-left text-red mt-2"
+                        >
+                            *Password must be have at least one number, one
+                            uppercase, one lowercase and one special character
+                            and 8 characters
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <input
+                            [type]="showConfirmPassword ? 'text' : 'password'"
+                            formControlName="confirmPassword"
+                            placeholder="Confirm Password"
+                            class="mt-5 border w-full border-gray-300 px-4 py-2 placeholder-italic"
+                        />
+                        <mat-icon
+                            *ngIf="!showConfirmPassword"
+                            class="icon-size-5 absolute right-2 top-1/2 cursor-pointer"
+                            [svgIcon]="'heroicons_solid:eye'"
+                            (click)="toggleConfirmPasswordVisibility()"
+                        ></mat-icon>
+                        <mat-icon
+                            *ngIf="showConfirmPassword"
+                            class="icon-size-5 absolute right-2 top-1/2 cursor-pointer"
+                            [svgIcon]="'heroicons_solid:eye-off'"
+                            (click)="toggleConfirmPasswordVisibility()"
+                        ></mat-icon>
+                    </div>
+                    <div
+                        *ngIf="
+                            formInfo.get('confirmPassword').invalid &&
+                            (formInfo.get('confirmPassword').dirty ||
+                                formInfo.get('confirmPassword').touched)
+                        "
+                    >
+                        <div
+                            *ngIf="
+                                formInfo.get('confirmPassword').errors
+                                    ?.matchPassword
+                            "
+                            class="error text-left text-red mt-2"
+                        >
+                            *Confirm Password does not match
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    *ngIf="loading"
+                    class="flex justify-center items-center mt-3"
+                >
+                    <app-loader></app-loader>
+                </div>
+                <div
+                    class="infxs:gap-3 infxs:mt-4 md:mt-6 flex justify-between"
+                >
+                    <div>
+                        <button
+                            mat-button
+                            type="submit"
+                            [disabled]="formInfo.invalid"
+                            class="text-white bg-[#363154fc] hover:bg-[#28243efc] border font-bold uppercase !rounded px-3 lg:px-8 py-3 hover:bg-[#256a2a]"
+                        >
+                            Create
+                        </button>
+                    </div>
+                    <div>
+                        <button
+                            type="button"
+                            mat-button
+                            (click)="onNoClick()"
+                            class="text-white bg-[#363154fc] hover:bg-[#28243efc] border font-bold uppercase !rounded px-3 lg:px-8 py-3 hover:bg-[#256a2a]"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

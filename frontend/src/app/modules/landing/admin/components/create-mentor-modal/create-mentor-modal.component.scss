@@ -1,0 +1,17 @@
+.text-red {
+    color: red !important;
+}
+
+.placeholder-italic:focus {
+    border: 1.5px solid #000000 !important;
+}
+
+::ng-deep .mat-mdc-select-arrow-wrapper {
+    margin-right: 1rem;
+}
+::ng-deep .mat-mdc-select-placeholder {
+    margin-left: 1rem;
+}
+::ng-deep .mat-mdc-select-min-line {
+    margin-left: 1rem;
+}

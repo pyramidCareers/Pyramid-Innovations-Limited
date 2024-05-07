@@ -1,0 +1,151 @@
+.buttonColor {
+    color: white !important;
+}
+
+.radio-group {
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: left !important;
+    padding-left: 0 !important;
+}
+
+.mat-expansion-panel {
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}
+
+/* Custom styles for mat-radio-button */
+.mat-radio-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 12px;
+    margin: 0;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+/* Custom styles for the selected state */
+.mat-radio-button.mat-radio-checked .mat-radio-outer-circle {
+    background-color: #338f3a; /* Set the desired color for the inner circle */
+}
+
+/* Custom styles for the radio button label */
+.mat-radio-button-label {
+    margin-left: 6px; /* Adjust the margin as needed */
+}
+
+::ng-deep .ngx-slider-pointer {
+    width: 10px;
+    height: 15px;
+    top: auto; /* to remove the default positioning */
+    bottom: 0;
+    background-color: #338f3a !important;
+}
+
+::ng-deep .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+    background: white !important;
+}
+
+::ng-deep .ngx-slider .ngx-slider-pointer.ngx-slider-active:after {
+    background: white !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .filterButtonSec {
+        flex-wrap: wrap !important;
+        padding-left: 2% !important;
+        padding-right: 2% !important;
+    }
+
+    .parent-container{
+        padding-left: 2% !important;
+        padding-right: 2% !important;
+    }
+
+    .fld{
+        width: 305px !important;
+        column-gap: 40px !important;
+    }
+  }
+
+
+ //Tablet View 
+@media only screen and (min-width: 768px) and (max-width: 1023px) { 
+    .main-container {
+        display: flex !important;
+        flex-direction: row !important;
+        padding-left: 8% !important;
+        padding-right: 8% !important;
+    }
+
+    .sidebar {
+        width: 25% !important;
+    }
+
+    .jobs-container {
+        width: 80% !important;
+    }
+
+    .fld{
+        width: 90px !important;
+    }
+
+
+    .filterButtonSec{
+       justify-content: left !important;
+       padding-left: 10% !important;
+    }
+
+    .searchBtn{
+        margin-left: 35% !important;
+    }
+
+    .job-type-accr{
+        margin-top: 35% !important;
+    }
+
+    .job-info-sec{
+        width: 70% !important;
+    }
+
+    .view-job-btn{
+        width: 45px !important;
+        padding: 4px 4px !important;
+    }
+    .job-card{
+       margin-left: 6% !important;
+       width: 100% !important;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .main-container {
+        display: flex !important;
+        flex-direction: row !important;
+        padding-left: 12% !important;
+        padding-right: 12% !important;
+    }
+
+    .sidebar {
+        width: 20% !important;
+    }
+
+    .jobs-container {
+        width: 80% !important;
+    }
+
+    .fld{
+        width: 150px !important;
+    }
+    .job-card{
+        margin-left: 5% !important;
+    }
+    .filterButtonSec{
+         margin-left: 3% !important;
+    }
+
+    
+}

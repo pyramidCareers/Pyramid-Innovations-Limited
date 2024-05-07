@@ -1,0 +1,90 @@
+
+@media only screen and (max-width: 759px) {
+    .sidebar {
+      margin-left: 3% !important;
+      margin-right: 3% !important;
+    }
+
+}
+
+
+
+
+@media only screen and (min-width: 760px) {
+    .parent-container{
+        display: flex !important;
+    }
+
+    .main-container{
+        width: 64% !important;
+        margin-left: 2% !important;
+        margin-right: 2% !important;
+    }
+
+    .sidebar{
+       min-width: 30% !important;
+       margin-left: 3% !important;
+    }
+
+   
+}
+
+@media only screen and (min-width: 1280px) {
+    .parent-container{
+        display: flex !important;
+    }
+
+    .main-container{
+        width: 65% !important;
+        margin-left: 3% !important;
+        margin-right: 7% !important;
+    }
+
+    .sidebar{
+       min-width: 18% !important;
+       margin-left: 7% !important;
+    }
+
+}
+
+
+
+.card-item {
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: column;
+    justify-content: center !important;
+    border: 0.5px solid black;
+    max-width: 325px;
+}
+
+.input-area{
+    border: 1px solid white !important;
+    text-align: left !important;
+    padding-left: 4px !important;
+}
+
+.buttonColor {
+    color: white !important;
+}
+
+img{
+   height: 350px !important;
+   width: 325px !important;
+}
+
+
+
+@media only screen and (max-width: 759px) {
+    .card-item {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+}
+
+
+@media only screen and (min-width: 1920px) {
+    .card-item {
+        width: 430px !important;
+    }
+}

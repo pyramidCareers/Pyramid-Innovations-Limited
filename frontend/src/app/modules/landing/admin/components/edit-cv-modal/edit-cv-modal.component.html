@@ -1,0 +1,76 @@
+<div class=" flex-col items-center justify-center md:min-w-120">
+    <div class="text-center">
+        <h1 class="heading font-bold text-2xl"> Edit Resume Template </h1>
+    </div>
+
+    <div   class="flex flex-col text-center   mx-auto">
+        
+        <form   class="flex flex-col  mx-auto mt-3" style="width:90% !important;">
+            <div class="flex flex-col mt-4">
+               
+                <h1 class="text-left font-bold">Upload Template File*</h1> 
+                    <input name="profile_pic" type="file" class="px-auto w-5/6 mt-2 mb-4"
+                     (change)="onPdfUpload($event)" >
+                
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Template Name*</h1>
+                <input type="text" 
+                        required
+                        [(ngModel)]="cv.name"
+                        name="name"
+                        maxlength="40"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Template Tag</h1>
+                <input type="text" 
+                        [(ngModel)]="cv.tag"
+                        name="tag"
+                        maxlength="16"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+
+        
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Template Description</h1>
+                <textarea 
+                     
+                        [(ngModel)]="cv.description"
+                        name="description"
+                        maxlength="1000"
+                        class="mt-2 mb-4 h-36 border border-gray-300 px-4 py-2 placeholder-italic"
+                ></textarea>
+            </div>
+
+            <div class="flex justify-center items-center">
+                <button *ngIf="!loading && isValidated() == true"
+                    class="mt-5 w-28 rounded mr-4 sigin text-white font-semibold py-2 px-4 bg-pyramid-default-primary" 
+                    (click)="edit()"
+                 >
+                      SUBMIT
+                 </button>
+
+                 <button *ngIf="!loading && isValidated() ==false"
+                     class="mt-5 w-28 rounded mr-4 sigin text-white font-semibold py-2 px-4 bg-gray-300 cursor-not-allowed" 
+                 >
+                       SUBMIT
+                 </button>
+
+                 <div  *ngIf="loading"  class="flex justify-center items-center">
+                      <app-loader></app-loader>
+                 </div>
+
+              
+  </div>
+            
+        </form>
+    </div>
+</div>

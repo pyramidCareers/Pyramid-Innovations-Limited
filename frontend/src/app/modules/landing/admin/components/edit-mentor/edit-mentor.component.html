@@ -1,0 +1,159 @@
+<div class="flex flex-col space-y-4 text-center mt-4">
+    <div class="text-center">
+        <h1 class="mt-4 text-3xl font-bold">Edit Mentor Profile</h1>
+    </div>
+
+    <form
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col w-80 sm:w-160 md:w-180 xl:w-200 mx-auto pb-8"
+    >
+        <div class="flex flex-col">
+            <div class="input-container mb-4">
+                <label
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    for="first_name"
+                    >First Name*</label
+                >
+                <input
+                    type="text"
+                    id="first_name"
+                    required
+                    placeholder="First Name"
+                    [(ngModel)]="EditMentor.first_name"
+                    name="first_name"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                />
+            </div>
+
+            <div class="input-container mb-2">
+                <label
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    for="last_name"
+                    >Last Name*</label
+                >
+                <input
+                    type="text"
+                    id="last_name"
+                    required
+                    placeholder="Last Name"
+                    [(ngModel)]="EditMentor.last_name"
+                    name="last_name"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                />
+            </div>
+
+            <div class="input-container mb-4">
+                <label
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    for="phone"
+                    >Phone*</label
+                >
+                <input
+                    type="text"
+                    id="phone"
+                    required
+                    placeholder="Phone"
+                    [(ngModel)]="EditMentor.phone"
+                    name="phone"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                />
+            </div>
+
+            <div class="input-container mb-4">
+                <label
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    for="gender"
+                    >Gender*</label
+                >
+                <div class="border border-gray-300 py-2 placeholder-italic">
+                    <mat-select
+                        type="text"
+                        id="gender"
+                        required
+                        name="gender"
+                        [(ngModel)]="EditMentor.gender"
+                        placeholder="Select Gender"
+                    >
+                        <mat-option value="male"> Male </mat-option>
+                        <mat-option value="female"> Female </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="input-container mb-4">
+                <label
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    for="bio"
+                    >Bio</label
+                >
+                <textarea
+                    type="text"
+                    placeholder="Bio"
+                    [(ngModel)]="EditMentor.bio"
+                    name="bio"
+                    class="border border-gray-300 px-4 py-2 h-26 w-full placeholder-italic whitespace-pre-wrap text-justify"
+                ></textarea>
+            </div>
+
+            <div class="input-container mb-4">
+                <label
+                    class="flex justify-start font-semibold text-lg mb-1"
+                    for="industry"
+                    >Industry</label
+                >
+                <input
+                    type="text"
+                    placeholder="Industry"
+                    [(ngModel)]="EditMentor.industry"
+                    name="industry"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                />
+            </div>
+
+            <div class="input-container mb-4">
+                <label class="flex justify-start font-semibold text-lg mb-1"
+                    >Profession</label
+                >
+                <input
+                    type="text"
+                    placeholder="Profession"
+                    [(ngModel)]="EditMentor.profession"
+                    name="profession"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                />
+            </div>
+
+            <div class="input-container mb-4">
+                <label class="flex justify-start font-semibold text-lg mb-1"
+                    >Speciality</label
+                >
+                <input
+                    type="text"
+                    placeholder="Speciality"
+                    [(ngModel)]="EditMentor.speciality"
+                    name="speciality"
+                    class="border border-gray-300 px-4 py-2 w-full placeholder-italic"
+                />
+            </div>
+        </div>
+        <div class="flex flex-wrap justify-center items-center">
+            <button
+                *ngIf="!submitLoader && isFormValidated() == true"
+                class="mt-5 w-1/2 mx-auto text-white font-medium py-2 px-4 rounded bg-[#363154fc] hover:bg-[#28243efc]"
+                type="submit"
+            >
+                Submit
+            </button>
+
+            <button
+                *ngIf="!submitLoader && isFormValidated() == false"
+                class="mt-5 w-1/2 mx-auto text-white font-medium py-2 px-4 rounded bg-gray-300 cursor-not-allowed"
+                type="submit"
+            >
+                Submit
+            </button>
+
+            <app-loader *ngIf="submitLoader"></app-loader>
+        </div>
+    </form>
+</div>

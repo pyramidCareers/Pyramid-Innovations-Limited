@@ -1,0 +1,26 @@
+<div class="w-60 md:pt-8 md:pb-4 lg:w-100 xl:w-120">
+    <div class="flex flex-row flex-wrap">
+        <div class="text-center modal-content">
+            <h1 class="font-bold text-2xl text-center">Confirm The Action</h1>
+            <h1 class="text-xl mt-4">
+                Do you really want to delete this employers? If you delete once
+                you can't recover this again.
+            </h1>
+            <div class="flex justify-center mt-6 gap-x-3">
+                <button
+                    class="bg-pyramid-white hover:bg-[#28243efc] hover:text-pyramid-white text-[#363154fc] border border-[#363154fc] font-bold py-2 px-4 ml-2"
+                    (click)="cancelBtn()"
+                >
+                    Cancel
+                </button>
+                <button
+                    class="text-white font-bold py-2 px-4 hover:bg-red-900"
+                    (click)="deleteBtn()"
+                    style="background-color: #b8001c"
+                >
+                    Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

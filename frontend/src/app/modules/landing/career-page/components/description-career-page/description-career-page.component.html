@@ -1,0 +1,84 @@
+<div>
+    <div
+        class="infxs:py-2 md:py-4 infxs:my-4 md:my-8 flex items-center rounded"
+        [ngStyle]="{ 'background-color': employer_data?.brandcolor }"
+    >
+        <div
+            class="h-10 w-16 object-contain flex items-center infxs:ml-2 md:ml-6 mr-2"
+        >
+            <img class="rounded" [src]="employer_data?.employer?.logo" />
+        </div>
+        <div class="text-xl font-semibold">
+            {{ employer_data?.employer?.org_name }}
+        </div>
+    </div>
+    <div>
+        <div class="block">
+            <img class="rounded relative -z-10" [src]="employer_data?.cover" />
+        </div>
+        <div
+            class="bg-[#fff] rounded infxs:mx-0 md:mx-10 py-8 infxs:mt-6 md:-mt-12"
+        >
+            <div class="infxs:block md:hidden mx-4 pb-2">
+                <a [href]="employer_data?.employer?.org_url" target="_blank">
+                    <button
+                        class="py-3 px-4 rounded text-md hover:text-white"
+                        [ngStyle]="{
+                            'background-color': employer_data?.brandcolor
+                        }"
+                    >
+                        Explore Company Website
+                    </button>
+                </a>
+            </div>
+            <div
+                class="flex justify-between infxs:mx-4 md:mx-12 infxs:my-2 md:my-6"
+            >
+                <div class="flex infxs:gap-x-2 md:gap-x-6 items-center">
+                    <img
+                        class="h-18 w-18 object-contain rounded border-4 border-gray-200"
+                        [src]="employer_data?.employer?.logo"
+                    />
+                    <div>
+                        <div class="text-xl font-bold">
+                            {{ employer_data?.employer?.org_name }}
+                        </div>
+                        <div class="flex">
+                            <svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 12 16"
+                                class="SearchDropdown_inputIcon__ImeFH SearchInput_inputIcon__NNp1D mt-1 mr-1"
+                            >
+                                <path
+                                    d="M6 16L1.2 9.538c-1.792-2.226-1.554-5.932.557-7.9 2.344-2.184 6.143-2.184 8.486 0 2.11 1.968 2.348 5.674.557 7.9L6 16zM8 5.5a2 2 0 10-4 0 2 2 0 004 0z"
+                                    fill="#000"
+                                    fill-rule="evenodd"
+                                ></path>
+                            </svg>
+                            <p>{{ employer_data?.employer?.org_address1 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="infxs:hidden md:block">
+                    <a
+                        [href]="employer_data?.employer?.org_url"
+                        target="_blank"
+                    >
+                        <button
+                            class="py-3 px-4 rounded text-md hover:text-white"
+                            [ngStyle]="{
+                                'background-color': employer_data?.brandcolor
+                            }"
+                        >
+                            Explore Company Website
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="infxs:mx-4 md:mx-12 my-10">
+                {{ employer_data?.employer?.org_details }}
+            </div>
+        </div>
+    </div>
+</div>

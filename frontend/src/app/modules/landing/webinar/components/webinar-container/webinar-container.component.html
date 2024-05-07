@@ -1,0 +1,41 @@
+<main class="min-h-screen">
+      <div *ngIf="meetingInfo" class="flex justify-center items-center">
+            <div class="text-center">
+                  <h1  class="font-bold mt-6 mb-2 ">
+                        <span class="font-bold text-4xl">{{meetingInfo?.title}}</span>
+                  </h1>
+            
+                  <h1  class="font-bold  mb-1 text-3xl">
+                        <span class="font-medium text-2xl">{{meetingInfo?.date | date}}</span>
+                  </h1>
+            
+                  <h1  class="font-bold  mb-4 text-3xl">
+                         <span class="font-medium text-2xl">{{st_time}} - {{en_time}}</span>
+                  </h1>
+            
+            </div>   
+      </div>
+     
+    
+      <!-- For Component View -->
+      <div class="flex justify-center items-center mx-auto my-3">
+            <div id="meetingSDKElement">
+            <!-- Zoom Meeting SDK Component View Rendered Here -->
+            </div>
+      </div>
+      
+      
+      
+      <div *ngIf="meetingEnded" class="flex justify-center items-center">
+            <h1 class="text-2xl my-4 font-bold text-red-600">Meeting has Ended</h1>
+      </div>
+      
+      <button *ngIf="height == 0 && isHost" 
+            (click)="startMeeting()" class="my-5 bg-pyramid-default-secondary" 
+      >Start Meeting</button>
+      <button *ngIf="height == 0 && !isHost" 
+            (click)="startMeeting()" class="my-5 bg-pyramid-default-secondary" 
+      >Join Meeting</button>
+
+    
+</main>

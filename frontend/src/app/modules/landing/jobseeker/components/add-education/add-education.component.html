@@ -1,0 +1,123 @@
+<div class=" flex-col items-center justify-center md:min-w-120">
+    <div class="text-center">
+        <h1 class="heading font-bold text-2xl">Please Add Education Info</h1>
+    </div>
+    <div   class="flex flex-col text-center   mx-auto">
+        
+
+
+        <form   class="flex flex-col  mx-auto mt-3" style="width:90% !important;">
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Title*</h1>
+                <input type="text" 
+                        required
+                        [(ngModel)]="education.title"
+                        name="title"
+                        maxlength="64"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Institution*</h1>
+                <input type="text"
+                        required
+                        [(ngModel)]="education.institution"
+                        name="institution"
+                        maxlength="64"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+               
+              
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Passing Year*</h1>
+                <input type="text" 
+                        required
+                        [(ngModel)]="education.year"
+                        name="year"
+                        maxlength="6"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+               
+            </div>
+
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Grade Type*</h1>
+                <select [(ngModel)]="education.grade_type" name="grade_type" class="mb-4 mt-2 border border-gray-300 px-4 py-2">
+                    <option value="cgpa">CGPA</option>
+                    <option value="division">DIVISION</option>
+                </select> 
+            </div>
+
+            <div  *ngIf="education.grade_type == 'cgpa' "   class="flex flex-col">
+                <h1 class="text-left font-bold">Total CGPA:</h1>
+                <input type="text" 
+                      
+                        [(ngModel)]="education.total_cgpa"
+                        name="total_cgpa"
+                        maxlength="6"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+               
+            </div>
+
+            <div  *ngIf="education.grade_type == 'division' "   class="flex flex-col">
+                <h1 class="text-left font-bold">Letter Marks</h1>
+                <input type="text" 
+                      
+                        [(ngModel)]="education.letter_marks"
+                        name="letter_marks"
+                        maxlength="24"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+               
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="text-left font-bold">Result*</h1>
+                <input type="text"
+                        required
+                        [(ngModel)]="education.result"
+                        name="result"
+                        maxlength="6"
+                        class="mt-2 mb-4 border border-gray-300 px-4 py-2 placeholder-italic"
+                />
+               
+            </div>
+
+          
+
+
+
+            <div class="flex justify-center items-center">
+                <button *ngIf="!loading && isValidated() == true"
+                    class="mt-5 w-28 mr-4 rounded sigin text-white font-semibold py-2 px-4 bg-pyramid-default-primary" 
+                    (click)="submit()"
+                 >
+                      SUBMIT
+                 </button>
+
+                 <button *ngIf="!loading && isValidated() ==false"
+                     class="mt-5 w-28 mr-4 rounded sigin text-white font-semibold py-2 px-4 bg-gray-300 cursor-not-allowed" 
+                 >
+                       SUBMIT
+                 </button>
+
+                 <div  *ngIf="loading"  class="flex justify-center items-center">
+                      <app-loader></app-loader>
+                 </div>
+
+              
+            </div>
+          
+     
+        </form>
+
+      
+    </div>
+
+    
+</div>

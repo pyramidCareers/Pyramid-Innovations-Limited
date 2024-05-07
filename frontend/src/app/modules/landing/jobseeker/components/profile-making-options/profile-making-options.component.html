@@ -1,0 +1,21 @@
+
+<div class="min-h-screen flex justify-center items-center bg-[#fff]">
+    <div class="text-center">
+      <h1 class="welcome-message">Welcome to Pyramid, {{firstName}}!</h1>
+      <p class="subheading mx-2">Before we get started, help us find out why you’re here.</p>   
+      <div class="card-container md:flex w-full md:w-2/3 mx-auto"> <!-- Adjusted sizing of the card container -->
+        
+          <div class="mb-8 md:mb-0 card bg-white mx-4 py-5  px-2 cursor-pointer" (click)="goTo('jobseeker/experienced/profile-making')">
+            <h2 class="text-lg font-bold mb-2 card-text">I have work experience</h2>
+            <p class="text-gray-600 card-text">I am looking for a new job in my field/open to explore different options.</p>
+          </div>
+          
+          <div class="mb-8 md:mb-0 card bg-white mx-4 py-5 px-2 cursor-pointer" (click)="goTo('jobseeker/fresher/profile-making')">
+            <h2 class="text-lg font-bold mb-2 card-text">Recently Graduated</h2>
+            <p class="text-gray-600 card-text">I am looking for my first internship or entry-level job</p>
+          </div>
+        
+      </div> 
+    </div>
+  </div>
+  

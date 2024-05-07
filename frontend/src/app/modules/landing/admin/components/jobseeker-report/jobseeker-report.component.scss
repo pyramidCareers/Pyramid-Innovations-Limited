@@ -1,0 +1,23 @@
+.buttonColor {
+    color: white !important;
+}
+
+td, th{
+    width: 10px !important;
+}
+
+@media screen and (min-width: 960px) and (max-width: 1360px) {
+  .nes-hub{
+      .g1{
+        width: auto !important; 
+        
+        .g2{
+          margin-left: -4px !important;
+        }
+        .g3{
+          margin-left: -6px !important;
+        }
+      }
+  }   
+}
+

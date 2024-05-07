@@ -1,0 +1,471 @@
+<!-- Header start -->
+<nav [ngClass]="currentBackground">
+    <div class="infxs:px-2 md:px-12 mx-auto">
+        <div class="flex justify-between items-center flex-wrap">
+            <div class="flex items-center">
+                <div (click)="navigateToHome()" class="cursor-pointer">
+                    <img
+                        class="w-36 h-18 object-contain"
+                        [src]="currentLogo"
+                        alt=""
+                    />
+                </div>
+                <div
+                    class="hidden md:flex text-pyramid-black space-x-2 text-sm font-semibold ml-3"
+                >
+                    <a
+                        [ngClass]="currentHover"
+                        [routerLink]="['jobs']"
+                        class="px-4 py-3 xl:py-4 hover:text-pyramid-white cursor-pointer transition-colors transition-border-b duration-300"
+                        >JOBS</a
+                    >
+                    <a
+                        [ngClass]="currentHover"
+                        [routerLink]="['courses']"
+                        class="px-4 py-3 xl:py-4 hover:text-pyramid-white cursor-pointer transition-colors transition-border-b duration-300"
+                        >COURSES</a
+                    >
+                    <a
+                        class="px-4 py-3 xl:py-4 hover:bg-[#CCCC] transition-colors transition-border-b duration-300"
+                        title="Coming Soon"
+                        >HR SOLUTIONS</a
+                    >
+                    <a
+                        class="px-4 py-3 xl:py-4 hover:bg-[#CCCC] transition-colors transition-border-b duration-300"
+                        title="Coming Soon"
+                        >ABOUT PYRAMID</a
+                    >
+                </div>
+            </div>
+
+            <div
+                class="hidden md:flex text-pyramid-black space-x-2 text-sm font-semibold"
+            >
+                <a
+                    (click)="goToButton()"
+                    [ngClass]="currentHover"
+                    class="px-6 xl:px-8 py-3 xl:py-4 border rounded border-pyramid-black hover:text-pyramid-white cursor-pointer uppercase transition-colors transition-border-b duration-300"
+                    >Employers</a
+                >
+
+                <button
+                    *ngIf="!isLoggedIn"
+                    [ngClass]="currentHover"
+                    class="px-4 xl:px-6 hover:text-pyramid-white transition-colors transition-border-b duration-300"
+                    (click)="goTo('user/login')"
+                >
+                    SIGN IN
+                </button>
+
+                <ng-container *ngIf="isLoggedIn">
+                    <button mat-button [matMenuTriggerFor]="menu">
+                        <i class="material-icons text-pyramid-footer mt-1"
+                            >person</i
+                        >
+                    </button>
+                    <mat-menu
+                        #menu="matMenu"
+                        class="px-0 py-0 mx-0 my-0 flex justify-center overflow-hidden"
+                    >
+                        <button mat-menu-item (click)="goToProfileEditPage()">
+                            <button
+                                *ngIf="!isAdmin && !isMentor"
+                                (click)="goToProfileEditPage()"
+                                class="mx-1 md:mx-2 inline-block px-4 py-1 text-pyramid-footer font-medium text-base"
+                            >
+                                PROFILE
+                            </button>
+                            <button
+                                *ngIf="isAdmin"
+                                (click)="goToProfileEditPage()"
+                                class="mx-1 md:mx-2 inline-block px-2 py-1 text-pyramid-footer font-medium text-base"
+                            >
+                                DASHBOARD
+                            </button>
+                            <button
+                                *ngIf="isMentor"
+                                (click)="goToProfileEditPage()"
+                                class="mx-1 md:mx-2 inline-block px-2 py-1 text-pyramid-footer font-medium text-base"
+                            >
+                                DASHBOARD
+                            </button>
+                        </button>
+
+                        <button
+                            mat-menu-item
+                            *ngIf="!isAdmin && !isMentor"
+                            (click)="goToDashBoard()"
+                        >
+                            <button
+                                class="mx-1 md:mx-2 inline-block px-4 py-1 text-pyramid-footer font-medium text-base"
+                            >
+                                DASHBOARD
+                            </button>
+                        </button>
+
+                        <button mat-menu-item>
+                            <button
+                                [routerLink]="['chat']"
+                                class="mx-1 md:mx-2 inline-block px-4 py-1 text-pyramid-footer font-medium text-base"
+                            >
+                                INBOX
+                            </button>
+                        </button>
+
+                        <button mat-menu-item (click)="logout()">
+                            <button
+                                class="mx-1 md:mx-2 inline-block px-4 py-1 text-pyramid-footer font-medium text-base"
+                            >
+                                LOG OUT
+                            </button>
+                        </button>
+                    </mat-menu>
+                </ng-container>
+            </div>
+
+            <!-- mobile menu button start -->
+            <div
+                class="mobile-menu md:hidden flex flex-col justify-around items-end"
+            >
+                <div class="flex">
+                    <div class="flex items-center">
+                        <ng-container *ngIf="!isLoggedIn">
+                            <button
+                                class="px-4 xl:px-6 text-pyramid-black"
+                                (click)="goTo('user/login')"
+                            >
+                                SIGN IN
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="isLoggedIn">
+                            <button mat-button [matMenuTriggerFor]="menu">
+                                <i
+                                    class="material-icons text-pyramid-footer mt-1"
+                                    >person</i
+                                >
+                            </button>
+                            <mat-menu
+                                #menu="matMenu"
+                                class="px-0 py-0 mx-0 my-0 flex justify-center overflow-hidden"
+                            >
+                                <button
+                                    mat-menu-item
+                                    (click)="goToProfileEditPage()"
+                                >
+                                    <button
+                                        *ngIf="isJobseeker || isEmployer"
+                                        class="mx-1 md:mx-2 inline-block px-4 py-1 text-pyramid-footer font-medium text-base"
+                                    >
+                                        PROFILE
+                                    </button>
+                                    <button
+                                        *ngIf="isAdmin || isMentor"
+                                        class="mx-1 md:mx-2 inline-block px-2 py-1 text-pyramid-footer font-medium text-base"
+                                    >
+                                        DASHBOARD
+                                    </button>
+                                </button>
+
+                                <button
+                                    mat-menu-item
+                                    *ngIf="isJobseeker || isEmployer"
+                                >
+                                    <button
+                                        (click)="goToDashBoard()"
+                                        class="mx-1 md:mx-2 inline-block px-4 py-1 text-pyramid-footer font-medium text-base"
+                                    >
+                                        DASHBOARD
+                                    </button>
+                                </button>
+
+                                <button mat-menu-item>
+                                    <button
+                                        [routerLink]="['chat']"
+                                        class="mx-1 md:mx-2 inline-block px-4 py-1 text-pyramid-footer font-medium text-base"
+                                    >
+                                        INBOX
+                                    </button>
+                                </button>
+
+                                <button mat-menu-item (click)="logout()">
+                                    <button
+                                        class="mx-1 md:mx-2 inline-block px-4 py-1 text-pyramid-footer font-medium text-base"
+                                    >
+                                        LOG OUT
+                                    </button>
+                                </button>
+                            </mat-menu>
+                        </ng-container>
+                        <mat-icon
+                            (click)="expandMenu()"
+                            class="mr-2 ml-2 text-pyramid-black"
+                            [svgIcon]="menuIcon"
+                        ></mat-icon>
+                    </div>
+                </div>
+            </div>
+            <!-- mobile menu button end -->
+        </div>
+    </div>
+
+    <!-- mobile expand menu start -->
+    <div
+        class="mobile-menus text-pyramid-black"
+        [ngClass]="{ hidden: !isExpand }"
+    >
+        <a
+            [routerLink]="['jobs']"
+            class="flex py-3 px-4 uppercase"
+            (click)="expandMenu()"
+        >
+            Jobs
+        </a>
+        <a
+            [routerLink]="['courses']"
+            class="flex py-3 px-4 uppercase"
+            (click)="expandMenu()"
+            >COURSES</a
+        >
+        <a class="flex py-3 px-4 uppercase" (click)="expandMenu()">
+            Hr Solutions
+        </a>
+        <a class="flex py-3 px-4 uppercase" (click)="expandMenu()">
+            About Pyramid
+        </a>
+        <div class="flex justify-center p-5">
+            <a
+                (click)="goToButton()"
+                class="rounded border border-pyramid-black uppercase px-18 py-2"
+                (click)="expandMenu()"
+            >
+                Employers
+            </a>
+        </div>
+    </div>
+    <!-- mobile expand menu end -->
+</nav>
+<!-- Header end -->
+
+<div class="flex flex-col flex-auto w-full">
+    <!-- Content -->
+    <div class="flex flex-col flex-auto">
+        <router-outlet *ngIf="true"></router-outlet>
+    </div>
+</div>
+
+<!-- Footer start -->
+<footer class="bg-welcomeToTheJungle-footer text-pyramid-grey">
+    <div
+        class="infxs:px-4 md:px-12 mx-auto flex flex-wrap infxs:pt-4 md:pt-14 infxs:flex-col md:flex-row"
+    >
+        <div class="infxs:flex md:flex-1 flex-col items-center md:mr-3">
+            <div
+                (click)="navigateToHome()"
+                class="text-pyramid-white font-medium text-5xl cursor-pointer"
+            >
+                <img
+                    class="infxs:w-40"
+                    src="assets/images/home/PC-White.png"
+                    alt="pyramid logo"
+                />
+            </div>
+            <div class="infxs:mt-2 md:mt-8">
+                <ul class="inline-flex justify-between social_icon">
+                    <li>
+                        <a
+                            href="https://www.facebook.com/pyramid.career"
+                            title="Facebook"
+                            target="_blank"
+                            class="hover:bg-[#ffffff] hover:bg-opacity-12 hover:rounded-full px-2 py-2 cursor-pointer"
+                        >
+                            <i
+                                class="fab fa-facebook text-[16px] text-pyramid-white"
+                            ></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.linkedin.com/company/pyramidcareer/"
+                            title="LinkedIn"
+                            target="_blank"
+                            class="hover:bg-[#ffffff] hover:bg-opacity-12 hover:rounded-full px-2 py-2 cursor-pointer"
+                        >
+                            <i
+                                class="fab fa-linkedin text-[16px] text-pyramid-white"
+                            ></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.instagram.com/pyramid.career"
+                            title="Instagram"
+                            target="_blank"
+                            class="hover:bg-[#ffffff] hover:bg-opacity-12 hover:rounded-full px-2 py-2 cursor-pointer"
+                        >
+                            <i
+                                class="fab fa-instagram text-[16px] text-pyramid-white"
+                            ></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flex-auto infxs:mt-8 md:mt-0 md:ml-12 xl:-ml-16">
+            <div class="flex justify-between">
+                <div>
+                    <div
+                        class="text-pyramid-white infxs:text-md md:text-lg font-bold uppercase"
+                    >
+                        About the pyramid
+                    </div>
+                    <div>
+                        <ul
+                            class="hover:text-pyramid-white cursor-pointer py-2 infxs:text-sm md:text-lg ml-0"
+                            (click)="goToLink('/about-us')"
+                        >
+                            About Us
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            Careers
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            FAQs
+                        </ul>
+                        <ul
+                            class="hover:text-pyramid-white cursor-pointer py-2 infxs:text-sm md:text-lg ml-0"
+                            (click)="goToLink('/contact-us')"
+                        >
+                            Contact Us
+                        </ul>
+                        <ul
+                            class="hover:text-pyramid-white cursor-pointer py-2 infxs:text-sm md:text-lg ml-0"
+                            (click)="goToLink('/refund-policy')"
+                        >
+                            Return and Refund Policy
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            Browse Companies
+                        </ul>
+                        <ul
+                            class="hover:text-pyramid-white cursor-pointer py-2 infxs:text-sm md:text-lg ml-0"
+                            (click)="goToLink('/terms-and-conditions')"
+                        >
+                            Terms and Conditions
+                        </ul>
+                        <ul
+                            class="hover:text-pyramid-white cursor-pointer py-3 infxs:text-sm md:text-lg ml-0"
+                            (click)="goToLink('/privacy-policy')"
+                        >
+                            Privacy Policy
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div
+                        class="text-pyramid-white infxs:text-md md:text-lg font-bold uppercase"
+                    >
+                        Popular jobs
+                    </div>
+                    <div>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            New York Jobs
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            San Francisco Jobs
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            Seattle Jobs
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            Engineering Jobs
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            Marketing Jobs
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            Information Technology Jobs
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div
+                        class="text-pyramid-white infxs:text-md md:text-lg font-bold uppercase"
+                    >
+                        get involved
+                    </div>
+                    <div>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            For Employers
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            For Career Coaches
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            Send Feedback About Pyramid
+                        </ul>
+                        <ul class="py-2 infxs:text-sm md:text-lg ml-0">
+                            Tell A Friend
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div
+            class="flex flex-1 flex-col infxs:items-center md:items-start infxs:mt-6 md:mt-0 md:ml-7 xl:ml-14"
+        >
+            <div>
+                <form
+                    [formGroup]="SubmitForm"
+                    (ngSubmit)="onSubmit()"
+                    #submitNgForm="ngForm"
+                >
+                    <div class="mb-2">
+                        <div class="label flex items-center">
+                            <div class="relative">
+                                <input
+                                    id="email"
+                                    type="email"
+                                    [formControlName]="'email'"
+                                    class="peer border border-gray-300 px-1 py-2 w-[260px]"
+                                    required
+                                    placeholder="E-mail"
+                                    (input)="onEmailInput()"
+                                    [ngClass]="{
+                                        'border-red-500': showEmailError
+                                    }"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="submit-form flex justify-start items-center">
+                <div>
+                    <button
+                        class="bg-[#3e3d48fc] hover:bg-welcomeToTheJungle-footer hover:border hover:border-pyramid-white text-white p-2 font-bold mr-2"
+                        (click)="onSubmit()"
+                    >
+                        Keep Me Posted
+                    </button>
+                </div>
+                <div *ngIf="showEmailError" class="text-red-500">
+                    Email is not valid.
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div
+        class="text-pyramid-white font-medium text-5xl cursor-pointer"
+    >
+        <img
+            class=""
+            src="assets/images/home/sslcommerz_payment.jpg"
+            alt="sslcommerz payment"
+        />
+    </div>
+</footer>
+<!-- Footer end -->

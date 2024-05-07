@@ -1,0 +1,126 @@
+<div>
+    <div *ngIf="loading" class="absolute top-1/2 left-1/2">
+        <app-loader></app-loader>
+    </div>
+    <div *ngIf="!loading">
+        <div class="py-6 flex justify-center">
+            <button
+                (click)="createMentor()"
+                class="uppercase px-6 py-2 xl:py-3 bg-[#363154fc] hover:bg-[#28243efc] border rounded text-white font-medium"
+            >
+                Create Mentor
+            </button>
+        </div>
+
+        <div class="mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0">
+            <div
+                class="bg-[#fff] hover:shadow-md mb-4"
+                *ngFor="let mentor of mentors; let i = index"
+            >
+                <div
+                    class="sm:flex justify-between items-center p-4 gap-x-56 xl:gap-x-90"
+                >
+                    <div
+                        class="flex items-start justify-around cursor-pointer"
+                        (click)="goToMentor(mentor?.user_id)"
+                        title="View Profile"
+                    >
+                        <div class="inline-flex items-center">
+                            <img
+                                *ngIf="
+                                    mentor?.user?.profile_pic == null &&
+                                    mentor?.user?.gender === 'male'
+                                "
+                                [src]="male_avater"
+                                class="h-16 w-16 rounded-full"
+                            />
+                            <img
+                                *ngIf="
+                                    mentor?.user?.profile_pic == null &&
+                                    mentor?.user?.gender === 'female'
+                                "
+                                [src]="female_avater"
+                                class="h-16 w-16 rounded-full"
+                            />
+                            <img
+                                *ngIf="mentor?.user?.profile_pic != null"
+                                src="{{ mentor?.user?.profile_pic }}"
+                                class="h-16 w-16 rounded-full"
+                            />
+                        </div>
+                        <div class="ml-5 -mt-1">
+                            <h1 class="text-2xl font-medium">
+                                {{ mentor?.user?.firstname }}
+                                {{ mentor?.user?.lastname }}
+                            </h1>
+                            <p>{{ mentor?.profession }}</p>
+                            <div class="border border-gray-200 px-1 mt-1">
+                                <span class="text-sm">
+                                    {{ mentor?.user?.phone }}
+                                </span>
+                                |
+                                <span class="text-sm font-semibold">
+                                    {{ mentor?.user?.email }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-x-2 infxs:mt-6 sm:mt-0">
+                        <div
+                            (click)="goToEdit(mentor?.user?.id, i)"
+                            class="flex flex-row-reverse items-center cursor-pointer px-3 py-2 mr-2 hover:bg-[#86de8cc4] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-pyramid-black text-[#338f3a]"
+                        >
+                            <mat-icon class="text-right">edit</mat-icon>
+                        </div>
+                        <btn
+                            (click)="goto(mentor?.user?.id)"
+                            class="cursor-pointer btn-sec px-6 py-3 text-md hover:bg-[#86de8cc4] rounded border border-[#338f3a] hover:border-[#86de8cc4] hover:text-pyramid-black text-[#338f3a] uppercase"
+                        >
+                            View Calendar
+                        </btn>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="md:max-w-4xl mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+        >
+            <div class="flex items-center justify-center my-4">
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                    (click)="previousPage()"
+                    [disabled]="currentPage === 1"
+                >
+                    Prev
+                </button>
+                <ng-container
+                    *ngFor="let page of getPageRange(); let i = index"
+                >
+                    <button
+                        class="inline-flex items-center px-4 py-2 mr-3 text-white"
+                        [ngClass]="{
+                            'hover:bg-[#28243efc] hover:text-white':
+                                currentPage !== page,
+                            'bg-[#28243efc] !text-white buttonColor':
+                                currentPage === page,
+                            'rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#28243efc]': true
+                        }"
+                        (click)="goToPage(page)"
+                        [disabled]="currentPage === page"
+                    >
+                        {{ page }}
+                    </button>
+                </ng-container>
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                    (click)="nextPage()"
+                    [disabled]="currentPage === totalPages"
+                >
+                    Next
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

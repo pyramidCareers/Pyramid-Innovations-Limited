@@ -1,0 +1,64 @@
+<div class="min-h-screen">
+    <div *ngIf="loading" class="absolute top-1/2 left-1/2">
+        <app-loader></app-loader>
+    </div>
+    <div *ngIf="!loading">
+        <div class="py-6 flex justify-center">
+            <button
+                (click)="goToCreateNewJobPage()"
+                class="uppercase px-6 py-2 xl:py-3 bg-[#363154fc] hover:bg-[#28243efc] text-white font-medium border rounded"
+            >
+                Post A Job
+            </button>
+        </div>
+
+        <div *ngFor="let job of jobCards; let i = index" class="pb-6">
+            <app-card-job-circular [jobCard]="job"></app-card-job-circular>
+        </div>
+        <div *ngIf="jobCardsLength == 0" class="flex justify-center">
+            <h1 class="text-xl xl:text-2xl font-semibold">
+                You haven't posted any job yet.
+            </h1>
+        </div>
+
+        <div
+            *ngIf="jobCardsLength !== 0"
+            class="md:max-w-4xl mx-auto pb-4 infxs:px-4 sm:px-11 md:px-0 flex justify-center"
+        >
+            <div class="flex items-center justify-center my-4">
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                    (click)="previousPage()"
+                    [disabled]="currentPage === 1"
+                >
+                    Prev
+                </button>
+                <ng-container
+                    *ngFor="let page of getPageRange(); let i = index"
+                >
+                    <button
+                        class="inline-flex items-center px-4 py-2 mr-3"
+                        [ngClass]="{
+                            'hover:bg-[#28243efc] hover:text-white':
+                                currentPage !== page,
+                            'bg-[#28243efc] !text-white buttonColor':
+                                currentPage === page,
+                            'rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#28243efc]': true
+                        }"
+                        (click)="goToPage(page)"
+                        [disabled]="currentPage === page"
+                    >
+                        {{ page }}
+                    </button>
+                </ng-container>
+                <button
+                    class="inline-flex items-center px-4 py-2 mr-3 hover:bg-[#28243efc] rounded border border-[#28243efc] hover:border-[#28243efc] hover:text-white text-[#363154fc]"
+                    (click)="nextPage()"
+                    [disabled]="currentPage === totalPages"
+                >
+                    Next
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

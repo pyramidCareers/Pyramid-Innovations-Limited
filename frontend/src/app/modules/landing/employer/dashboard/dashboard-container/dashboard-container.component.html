@@ -1,0 +1,12 @@
+<div class="main-container py-7">
+       
+        <div *ngIf="loading" class="h-screen flex justify-center items-center">
+            <app-loader></app-loader>
+        </div>
+
+        <div *ngIf="!loading">
+            <app-statistics></app-statistics>
+        </div>
+</div>
+
+

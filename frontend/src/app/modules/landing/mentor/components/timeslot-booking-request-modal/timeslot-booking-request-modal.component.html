@@ -1,0 +1,99 @@
+<div
+    class="flex-col items-center justify-center pt-4 md:min-w-90 md:w-80 sm:min-w-120"
+>
+    <div
+        class="absolute left-0 top-0 text-center w-full font-semibold py-4 block border border-b-gray-100"
+    >
+        <h1 class="text-2xl px-3">{{ resposeData?.title }}</h1>
+    </div>
+    <div class="flex flex-col text-center mx-auto mt-4">
+        <div
+            class="flex justify-center items-center text-base font-normal text-gray-500 mt-4 text-justify mb-4"
+        >
+            <h1>{{ resposeData?.description | slice : 0 : 140 }}</h1>
+        </div>
+
+        <div
+            class="text-xl font-semibold border-2 border-gray-100 rounded-md mt-2"
+        >
+            <div class="-mt-4">
+                <span class="text-center font-semibold text-xl bg-white p-1">
+                    <!-- <h1 class="mr-1">Date:</h1> -->
+                    {{ resposeData?.date | date : "EEEE, MMMM d, yyyy" }}
+                </span>
+            </div>
+            <div class="flex justify-around items-center">
+                <!-- <h1>Time:</h1> -->
+                <div class="">
+                    <h2 class="font-semibold text-gray-400 text-md">START</h2>
+                    <p class="ml-1 text-lg">
+                        {{ convertTo12HourFormat(resposeData?.start_time) }}
+                    </p>
+                </div>
+                <p
+                    class="bg-gradient-to-b from-white via-gray-100 to-white h-20 w-[2.5px]"
+                ></p>
+                <div class="">
+                    <h2 class="font-semibold text-gray-400 text-md">END</h2>
+                    <p class="ml-1 text-lg">
+                        {{ convertTo12HourFormat(resposeData?.end_time) }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Instructor Info -->
+
+        <div class="flex mt-2 bg-gray-50 -w-5 py-2">
+            <div class="max-w-20 flex items-center">
+                <img
+                    *ngIf="
+                        resposeData?.user?.profile_pic === null &&
+                        resposeData?.user?.gender == 'male'
+                    "
+                    [src]="male_avater"
+                    class="rounded-full h-16 w-16 mx-2"
+                />
+                <img
+                    *ngIf="
+                        resposeData?.user?.profile_pic === null &&
+                        resposeData?.user?.gender == 'female'
+                    "
+                    [src]="female_avater"
+                    class="rounded-full h-16 w-16 mx-2"
+                />
+                <img
+                    *ngIf="resposeData?.user?.profile_pic != null"
+                    src="{{ resposeData?.user?.profile_pic }}"
+                    class="rounded-full h-16 w-16 mx-2"
+                />
+            </div>
+            <div class="ml-5 text-left mt-1">
+                <h1 class="font-bold text-pyramid-employer-primary">HOST</h1>
+                <p
+                    class="bg-gradient-to-r from-pyramid-employer-primary to-gray-100 h-[1px] mb-1 w-12"
+                ></p>
+                <h2 class="text-lg font-semibold">
+                    {{
+                        resposeData?.user?.firstname +
+                            " " +
+                            resposeData?.user?.lastname
+                    }}
+                </h2>
+                <p>{{ resposeData?.user?.mentor?.profession }}</p>
+            </div>
+        </div>
+
+        <!-- button section -->
+        <div class="infxs:gap-3 infxs:mt-4 md:mt-4 flex justify-center">
+            <div>
+                <button
+                    (click)="goTo()"
+                    type="submit"
+                    class="text-white infxs:text-xs md:text-sm bg-pyramid-employer-primary hover:bg-pyramid-default-primary border uppercase rounded px-3 lg:px-5 py-2"
+                >
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
